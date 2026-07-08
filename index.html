@@ -595,7 +595,18 @@
       text-align: left;
     }
 
+    .select-trigger {
+      padding-right: 52px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
     .text-input::placeholder {
+      color: #b8c0cc;
+    }
+
+    .filters .select:not(.has-value) .select-trigger {
       color: #b8c0cc;
     }
 
@@ -629,6 +640,31 @@
     .select.open .caret {
       top: 15px;
       transform: rotate(225deg);
+    }
+
+    .select-clear {
+      position: absolute;
+      top: 8px;
+      right: 28px;
+      z-index: 2;
+      width: 16px;
+      height: 16px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #9aa4b1;
+      border-radius: 50%;
+      font-size: 15px;
+      line-height: 16px;
+    }
+
+    .select.has-value .select-clear {
+      display: flex;
+    }
+
+    .select-clear:hover {
+      color: #4f5b6b;
+      background: #edf1f6;
     }
 
     .select-options {
@@ -665,6 +701,13 @@
     .select-option.selected {
       color: var(--blue);
       background: #edf6ff;
+    }
+
+    .select[data-multiple-select] .select-option.selected::after {
+      content: "✓";
+      float: right;
+      color: var(--blue);
+      font-weight: 600;
     }
 
     .date-field {
@@ -799,7 +842,7 @@
     }
 
     .merchant-table table {
-      min-width: 1530px;
+      min-width: 1680px;
     }
 
     .merchant-table th:last-child,
@@ -1080,6 +1123,10 @@
       min-width: 0;
     }
 
+    .config-field.hidden {
+      display: none;
+    }
+
     .amount-input {
       display: block;
     }
@@ -1264,26 +1311,39 @@
             <section class="filters">
               <div class="filter-grid">
                 <label>
-                  <span class="field-label">企业名称</span>
-                  <input class="text-input" type="text" placeholder="请输入企业名称">
+                  <input class="text-input" type="text" placeholder="请输入企业名称" aria-label="企业名称">
                 </label>
                 <label>
-                  <span class="field-label">商户名称</span>
-                  <input class="text-input" type="text" placeholder="请输入商户名称">
+                  <input class="text-input" type="text" placeholder="请输入商户名称" aria-label="商户名称">
                 </label>
                 <label>
-                  <span class="field-label">商户号ID</span>
-                  <input class="text-input" type="text" placeholder="请输入商户号ID">
+                  <input class="text-input" type="text" placeholder="请输入商户号ID" aria-label="商户号ID">
                 </label>
                 <label>
-                  <span class="field-label">商户类型</span>
-                  <span class="select" data-select>
-                    <button class="select-trigger" type="button">全部类型</button>
+                  <span class="select" data-select data-multiple-select data-placeholder="请选择商户类型">
+                    <button class="select-trigger" type="button" aria-label="商户类型">请选择商户类型</button>
+                    <button class="select-clear" type="button" aria-label="清除商户类型">×</button>
                     <span class="caret"></span>
                     <span class="select-options">
-                      <button class="select-option selected" type="button">全部类型</button>
                       <button class="select-option" type="button">收款商户</button>
                       <button class="select-option" type="button">退款商户</button>
+                    </span>
+                  </span>
+                </label>
+                <label>
+                  <span class="select" data-select data-placeholder="请选择转账场景">
+                    <button class="select-trigger" type="button" aria-label="转账场景">请选择转账场景</button>
+                    <button class="select-clear" type="button" aria-label="清除转账场景">×</button>
+                    <span class="caret"></span>
+                    <span class="select-options">
+                      <button class="select-option" type="button">现金营销</button>
+                      <button class="select-option" type="button">行政补贴</button>
+                      <button class="select-option" type="button">保险理赔</button>
+                      <button class="select-option" type="button">佣金报酬</button>
+                      <button class="select-option" type="button">采购货款</button>
+                      <button class="select-option" type="button">二手回收</button>
+                      <button class="select-option" type="button">企业赔付</button>
+                      <button class="select-option" type="button">公益补助</button>
                     </span>
                   </span>
                 </label>
@@ -1308,6 +1368,7 @@
                     <th style="width: 160px;">商户名称</th>
                     <th style="width: 150px;">商户号ID</th>
                     <th style="width: 120px;">商户类型</th>
+                    <th style="width: 150px;">转账场景</th>
                     <th style="width: 150px;">账户余额（元）</th>
                     <th style="width: 170px;">每日可转账金额上限（元）</th>
                     <th style="width: 150px;">今日已转账金额（元）</th>
@@ -1322,6 +1383,7 @@
                     <td>星图直营网关</td>
                     <td>MCH20260708001</td>
                     <td class="merchant-type-cell">收款商户</td>
+                    <td class="transfer-scene-cell"></td>
                     <td>
                       <span class="balance-cell">
                         <span>¥128,450.36</span>
@@ -1332,13 +1394,14 @@
                     <td class="today-transfer-cell">¥12,860.00</td>
                     <td class="single-limit-cell">¥10,000.00</td>
                     <td>2026-07-08 14:20</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="星图科技有限公司" data-merchant-name="星图直营网关" data-merchant-id="MCH20260708001" data-merchant-type="收款商户" data-balance="¥128,450.36" data-updated="2026-07-08 14:20" data-daily-limit="50000.00" data-today-transfer="12860.00" data-single-limit="10000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="星图科技有限公司" data-merchant-name="星图直营网关" data-merchant-id="MCH20260708001" data-merchant-type="收款商户" data-transfer-scene="" data-balance="¥128,450.36" data-updated="2026-07-08 14:20" data-daily-limit="50000.00" data-today-transfer="12860.00" data-single-limit="10000.00">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>云桥数字服务</td>
                     <td>云桥企业收款</td>
                     <td>MCH20260708002</td>
                     <td class="merchant-type-cell">收款商户</td>
+                    <td class="transfer-scene-cell"></td>
                     <td>
                       <span class="balance-cell">
                         <span>¥86,230.18</span>
@@ -1349,13 +1412,14 @@
                     <td class="today-transfer-cell">¥8,420.00</td>
                     <td class="single-limit-cell">¥6,000.00</td>
                     <td>2026-07-08 13:58</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="云桥数字服务" data-merchant-name="云桥企业收款" data-merchant-id="MCH20260708002" data-merchant-type="收款商户" data-balance="¥86,230.18" data-updated="2026-07-08 13:58" data-daily-limit="30000.00" data-today-transfer="8420.00" data-single-limit="6000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="云桥数字服务" data-merchant-name="云桥企业收款" data-merchant-id="MCH20260708002" data-merchant-type="收款商户" data-transfer-scene="" data-balance="¥86,230.18" data-updated="2026-07-08 13:58" data-daily-limit="30000.00" data-today-transfer="8420.00" data-single-limit="6000.00">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>北辰供应链</td>
                     <td>北辰退款专户</td>
                     <td>MCH20260708003</td>
                     <td class="merchant-type-cell">退款商户</td>
+                    <td class="transfer-scene-cell">保险理赔</td>
                     <td>
                       <span class="balance-cell">
                         <span>¥24,905.00</span>
@@ -1366,13 +1430,14 @@
                     <td class="today-transfer-cell">¥4,500.00</td>
                     <td class="single-limit-cell">¥5,000.00</td>
                     <td>2026-07-08 12:41</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="北辰供应链" data-merchant-name="北辰退款专户" data-merchant-id="MCH20260708003" data-merchant-type="退款商户" data-balance="¥24,905.00" data-updated="2026-07-08 12:41" data-daily-limit="20000.00" data-today-transfer="4500.00" data-single-limit="5000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="北辰供应链" data-merchant-name="北辰退款专户" data-merchant-id="MCH20260708003" data-merchant-type="退款商户" data-transfer-scene="保险理赔" data-balance="¥24,905.00" data-updated="2026-07-08 12:41" data-daily-limit="20000.00" data-today-transfer="4500.00" data-single-limit="5000.00">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>恒启智能制造</td>
                     <td>恒启结算商户</td>
                     <td>MCH20260708004</td>
                     <td class="merchant-type-cell">收款商户</td>
+                    <td class="transfer-scene-cell"></td>
                     <td>
                       <span class="balance-cell">
                         <span>¥310,762.90</span>
@@ -1383,13 +1448,14 @@
                     <td class="today-transfer-cell">¥32,000.00</td>
                     <td class="single-limit-cell">¥20,000.00</td>
                     <td>2026-07-08 11:35</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="恒启智能制造" data-merchant-name="恒启结算商户" data-merchant-id="MCH20260708004" data-merchant-type="收款商户" data-balance="¥310,762.90" data-updated="2026-07-08 11:35" data-daily-limit="100000.00" data-today-transfer="32000.00" data-single-limit="20000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="恒启智能制造" data-merchant-name="恒启结算商户" data-merchant-id="MCH20260708004" data-merchant-type="收款商户" data-transfer-scene="" data-balance="¥310,762.90" data-updated="2026-07-08 11:35" data-daily-limit="100000.00" data-today-transfer="32000.00" data-single-limit="20000.00">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>启航运营服务</td>
                     <td>启航售后退款</td>
                     <td>MCH20260708005</td>
                     <td class="merchant-type-cell">退款商户</td>
+                    <td class="transfer-scene-cell">企业赔付</td>
                     <td>
                       <span class="balance-cell">
                         <span>¥12,608.72</span>
@@ -1400,7 +1466,7 @@
                     <td class="today-transfer-cell">¥3,100.00</td>
                     <td class="single-limit-cell">¥3,000.00</td>
                     <td>2026-07-08 10:26</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="启航运营服务" data-merchant-name="启航售后退款" data-merchant-id="MCH20260708005" data-merchant-type="退款商户" data-balance="¥12,608.72" data-updated="2026-07-08 10:26" data-daily-limit="15000.00" data-today-transfer="3100.00" data-single-limit="3000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="启航运营服务" data-merchant-name="启航售后退款" data-merchant-id="MCH20260708005" data-merchant-type="退款商户" data-transfer-scene="企业赔付" data-balance="¥12,608.72" data-updated="2026-07-08 10:26" data-daily-limit="15000.00" data-today-transfer="3100.00" data-single-limit="3000.00">商户号配置</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -1446,10 +1512,6 @@
             <input class="text-input" id="configMerchantId" type="text" disabled>
           </label>
           <label class="config-field">
-            <span class="field-label">商户类型</span>
-            <input class="text-input" id="configReadonlyType" type="text" disabled>
-          </label>
-          <label class="config-field">
             <span class="field-label">账户余额（元）</span>
             <input class="text-input" id="configBalance" type="text" disabled>
           </label>
@@ -1466,17 +1528,6 @@
         <div class="config-section-title">配置项</div>
         <div class="config-grid">
           <label class="config-field">
-            <span class="field-label required">商户类型</span>
-            <span class="select" id="configMerchantTypeSelect" data-select>
-              <button class="select-trigger" type="button">收款商户</button>
-              <span class="caret"></span>
-              <span class="select-options">
-                <button class="select-option selected" type="button">收款商户</button>
-                <button class="select-option" type="button">退款商户</button>
-              </span>
-            </span>
-          </label>
-          <label class="config-field">
             <span class="field-label required">每日可转账金额上限（元）</span>
             <span class="amount-input">
               <input class="text-input" id="configDailyLimit" type="text" inputmode="decimal" data-decimal-input placeholder="请输入金额">
@@ -1490,11 +1541,41 @@
             </span>
             <span class="field-hint">单笔转账金额上限为0.1元-200元</span>
           </label>
+          <label class="config-field">
+            <span class="field-label required">商户类型</span>
+            <span class="select has-value" id="configMerchantTypeSelect" data-select data-multiple-select data-placeholder="请选择商户类型">
+              <button class="select-trigger" type="button">收款商户</button>
+              <button class="select-clear" type="button" aria-label="清除商户类型">×</button>
+              <span class="caret"></span>
+              <span class="select-options">
+                <button class="select-option selected" type="button">收款商户</button>
+                <button class="select-option" type="button">退款商户</button>
+              </span>
+            </span>
+          </label>
+          <label class="config-field hidden" id="configTransferSceneField">
+            <span class="field-label required">转账场景</span>
+            <span class="select" id="configTransferSceneSelect" data-select data-placeholder="请选择转账场景">
+              <button class="select-trigger" type="button">请选择转账场景</button>
+              <button class="select-clear" type="button" aria-label="清除转账场景">×</button>
+              <span class="caret"></span>
+              <span class="select-options">
+                <button class="select-option" type="button">现金营销</button>
+                <button class="select-option" type="button">行政补贴</button>
+                <button class="select-option" type="button">保险理赔</button>
+                <button class="select-option" type="button">佣金报酬</button>
+                <button class="select-option" type="button">采购货款</button>
+                <button class="select-option" type="button">二手回收</button>
+                <button class="select-option" type="button">企业赔付</button>
+                <button class="select-option" type="button">公益补助</button>
+              </span>
+            </span>
+          </label>
         </div>
 
         <div class="dialog-actions">
           <button class="btn btn-gray" type="button" id="merchantConfigCancel">取消</button>
-          <button class="btn btn-primary" type="button" id="merchantConfigSave">保存配置</button>
+          <button class="btn btn-primary" type="button" id="merchantConfigSave">保存</button>
         </div>
       </div>
     </section>
@@ -1563,16 +1644,152 @@
         });
       }
 
-      function setConfigMerchantType(value) {
-        var select = document.getElementById("configMerchantTypeSelect");
-        select.querySelector(".select-trigger").textContent = value;
-        select.querySelectorAll(".select-option").forEach(function (option) {
-          option.classList.toggle("selected", option.textContent === value);
-        });
+      function getOptionValue(option) {
+        return (option.dataset.value || option.textContent || "").trim();
       }
 
-      function getConfigMerchantType() {
-        return document.querySelector("#configMerchantTypeSelect .select-trigger").textContent.trim();
+      function parseSelectValues(value) {
+        return String(value || "")
+          .split(/[、,，]/)
+          .map(function (item) {
+            return item.trim();
+          })
+          .filter(Boolean);
+      }
+
+      function getMultiSelectValues(select) {
+        return Array.prototype.slice.call(select.querySelectorAll(".select-option.selected"))
+          .filter(function (option) {
+            return !option.hasAttribute("data-all-option");
+          })
+          .map(getOptionValue);
+      }
+
+      function updateMultiSelectTrigger(select) {
+        var trigger = select.querySelector(".select-trigger");
+        var allOption = select.querySelector("[data-all-option]");
+        var values = getMultiSelectValues(select);
+
+        if (values.length) {
+          trigger.textContent = values.join("、");
+          select.classList.add("has-value");
+          return;
+        }
+
+        select.classList.remove("has-value");
+
+        if (allOption) {
+          allOption.classList.add("selected");
+          trigger.textContent = getOptionValue(allOption);
+          return;
+        }
+
+        trigger.textContent = select.dataset.placeholder || "请选择";
+      }
+
+      function setMultiSelectValues(select, values) {
+        var selectedValues = Array.isArray(values) ? values : parseSelectValues(values);
+        var hasSelectedValue = false;
+        var allOption = select.querySelector("[data-all-option]");
+
+        select.querySelectorAll(".select-option").forEach(function (option) {
+          if (option.hasAttribute("data-all-option")) {
+            option.classList.remove("selected");
+            return;
+          }
+
+          var selected = selectedValues.indexOf(getOptionValue(option)) !== -1;
+          option.classList.toggle("selected", selected);
+          hasSelectedValue = hasSelectedValue || selected;
+        });
+
+        if (!hasSelectedValue && allOption) {
+          allOption.classList.add("selected");
+        }
+
+        updateMultiSelectTrigger(select);
+      }
+
+      function toggleMultiSelectOption(select, option) {
+        var allOption = select.querySelector("[data-all-option]");
+
+        if (option.hasAttribute("data-all-option")) {
+          select.querySelectorAll(".select-option").forEach(function (item) {
+            item.classList.toggle("selected", item === option);
+          });
+          updateMultiSelectTrigger(select);
+          return;
+        }
+
+        if (allOption) {
+          allOption.classList.remove("selected");
+        }
+
+        option.classList.toggle("selected");
+        updateMultiSelectTrigger(select);
+      }
+
+      function setSingleSelectValue(select, value) {
+        var matchedOption = null;
+
+        select.querySelectorAll(".select-option").forEach(function (option) {
+          var matched = value && getOptionValue(option) === value;
+          option.classList.toggle("selected", matched);
+          if (matched) {
+            matchedOption = option;
+          }
+        });
+
+        if (matchedOption) {
+          select.querySelector(".select-trigger").textContent = getOptionValue(matchedOption);
+          select.classList.add("has-value");
+          return;
+        }
+
+        select.querySelector(".select-trigger").textContent = select.dataset.placeholder || "请选择";
+        select.classList.remove("has-value");
+      }
+
+      function clearSelectValue(select) {
+        select.querySelectorAll(".select-option").forEach(function (option) {
+          option.classList.remove("selected");
+        });
+
+        select.querySelector(".select-trigger").textContent = select.dataset.placeholder || "请选择";
+        select.classList.remove("has-value");
+        select.classList.remove("open");
+      }
+
+      function getSingleSelectValue(select) {
+        var selectedOption = select.querySelector(".select-option.selected");
+        return selectedOption ? getOptionValue(selectedOption) : "";
+      }
+
+      function setConfigMerchantTypes(value) {
+        setMultiSelectValues(document.getElementById("configMerchantTypeSelect"), value);
+        toggleTransferSceneField();
+      }
+
+      function getConfigMerchantTypes() {
+        return getMultiSelectValues(document.getElementById("configMerchantTypeSelect"));
+      }
+
+      function setConfigTransferScene(value) {
+        setSingleSelectValue(document.getElementById("configTransferSceneSelect"), value);
+      }
+
+      function getConfigTransferScene() {
+        return getSingleSelectValue(document.getElementById("configTransferSceneSelect"));
+      }
+
+      function toggleTransferSceneField() {
+        var field = document.getElementById("configTransferSceneField");
+        var shouldShow = getConfigMerchantTypes().indexOf("退款商户") !== -1;
+        field.classList.toggle("hidden", !shouldShow);
+
+        if (!shouldShow) {
+          setConfigTransferScene("");
+        }
       }
 
       function openMerchantConfig(button) {
@@ -1580,13 +1797,14 @@
         setInputValue("configEnterprise", button.dataset.enterprise);
         setInputValue("configMerchantName", button.dataset.merchantName);
         setInputValue("configMerchantId", button.dataset.merchantId);
-        setInputValue("configReadonlyType", button.dataset.merchantType);
         setInputValue("configBalance", button.dataset.balance);
         setInputValue("configUpdated", button.dataset.updated);
         setInputValue("configDailyLimit", button.dataset.dailyLimit);
         setInputValue("configTodayTransfer", button.dataset.todayTransfer);
         setInputValue("configSingleLimit", button.dataset.singleLimit);
-        setConfigMerchantType(button.dataset.merchantType || "收款商户");
+        setConfigMerchantTypes(button.dataset.merchantType || "收款商户");
+        setConfigTransferScene(button.dataset.transferScene || "");
+        toggleTransferSceneField();
         merchantConfigMask.classList.remove("hidden");
       }
 
@@ -1595,12 +1813,19 @@
       }
 
       function saveMerchantConfig() {
-        var merchantType = getConfigMerchantType();
+        var merchantTypes = getConfigMerchantTypes();
+        var merchantType = merchantTypes.join("、");
+        var transferScene = merchantTypes.indexOf("退款商户") !== -1 ? getConfigTransferScene() : "";
         var dailyLimit = document.getElementById("configDailyLimit").value.trim();
         var singleLimit = document.getElementById("configSingleLimit").value.trim();
 
-        if (!merchantType || !dailyLimit || !singleLimit || !isValidDecimal(dailyLimit) || !isValidDecimal(singleLimit)) {
+        if (!merchantTypes.length || !dailyLimit || !singleLimit || !isValidDecimal(dailyLimit) || !isValidDecimal(singleLimit)) {
           showToast("请填写正确的必填项");
+          return;
+        }
+
+        if (merchantTypes.indexOf("退款商户") !== -1 && !transferScene) {
+          showToast("请选择转账场景");
           return;
         }
 
@@ -1617,9 +1842,11 @@
         if (activeMerchantRow) {
           var configButton = activeMerchantRow.querySelector("[data-open-merchant-config]");
           activeMerchantRow.querySelector(".merchant-type-cell").textContent = merchantType;
+          activeMerchantRow.querySelector(".transfer-scene-cell").textContent = transferScene;
           activeMerchantRow.querySelector(".daily-limit-cell").textContent = formatMoney(dailyLimit);
           activeMerchantRow.querySelector(".single-limit-cell").textContent = formatMoney(singleLimit);
           configButton.dataset.merchantType = merchantType;
+          configButton.dataset.transferScene = transferScene;
           configButton.dataset.dailyLimit = dailyLimit;
           configButton.dataset.singleLimit = singleLimit;
         }
@@ -1711,6 +1938,16 @@
         });
       });
 
+      document.querySelectorAll("[data-select]").forEach(function (select) {
+        if (select.hasAttribute("data-multiple-select")) {
+          updateMultiSelectTrigger(select);
+          return;
+        }
+
+        var selectedOption = select.querySelector(".select-option.selected");
+        setSingleSelectValue(select, selectedOption ? getOptionValue(selectedOption) : "");
+      });
+
       document.addEventListener("click", function (event) {
         var select = event.target.closest("[data-select]");
         if (!select) {
@@ -1718,12 +1955,26 @@
           return;
         }
 
+        if (event.target.closest(".select-clear")) {
+          clearSelectValue(select);
+
+          if (select.id === "configMerchantTypeSelect") {
+            toggleTransferSceneField();
+          }
+          return;
+        }
+
         if (event.target.classList.contains("select-option")) {
-          select.querySelector(".select-trigger").textContent = event.target.textContent;
-          select.querySelectorAll(".select-option").forEach(function (option) {
-            option.classList.remove("selected");
-          });
-          event.target.classList.add("selected");
+          if (select.hasAttribute("data-multiple-select")) {
+            toggleMultiSelectOption(select, event.target);
+
+            if (select.id === "configMerchantTypeSelect") {
+              toggleTransferSceneField();
+            }
+            return;
+          }
+
+          setSingleSelectValue(select, getOptionValue(event.target));
           select.classList.remove("open");
           return;
         }
