@@ -799,7 +799,7 @@
     }
 
     .merchant-table table {
-      min-width: 1740px;
+      min-width: 1530px;
     }
 
     .merchant-table th:last-child,
@@ -1081,19 +1081,7 @@
     }
 
     .amount-input {
-      position: relative;
-    }
-
-    .amount-input .text-input {
-      padding-right: 38px;
-    }
-
-    .input-unit {
-      position: absolute;
-      top: 7px;
-      right: 12px;
-      color: #657182;
-      pointer-events: none;
+      display: block;
     }
 
     .field-hint {
@@ -1324,7 +1312,6 @@
                     <th style="width: 170px;">每日可转账金额上限（元）</th>
                     <th style="width: 150px;">今日已转账金额（元）</th>
                     <th style="width: 170px;">单笔转账金额上限（元）</th>
-                    <th style="width: 270px;">回调地址</th>
                     <th style="width: 160px;">更新时间</th>
                     <th style="width: 120px;">操作</th>
                   </tr>
@@ -1344,9 +1331,8 @@
                     <td class="daily-limit-cell">¥50,000.00</td>
                     <td class="today-transfer-cell">¥12,860.00</td>
                     <td class="single-limit-cell">¥10,000.00</td>
-                    <td>https://api.xingtu.example.com/pay/callback</td>
                     <td>2026-07-08 14:20</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="星图科技有限公司" data-merchant-name="星图直营网关" data-merchant-id="MCH20260708001" data-merchant-type="收款商户" data-balance="¥128,450.36" data-callback="https://api.xingtu.example.com/pay/callback" data-updated="2026-07-08 14:20" data-daily-limit="50000.00" data-today-transfer="12860.00" data-single-limit="10000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="星图科技有限公司" data-merchant-name="星图直营网关" data-merchant-id="MCH20260708001" data-merchant-type="收款商户" data-balance="¥128,450.36" data-updated="2026-07-08 14:20" data-daily-limit="50000.00" data-today-transfer="12860.00" data-single-limit="10000.00">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>云桥数字服务</td>
@@ -1362,9 +1348,8 @@
                     <td class="daily-limit-cell">¥30,000.00</td>
                     <td class="today-transfer-cell">¥8,420.00</td>
                     <td class="single-limit-cell">¥6,000.00</td>
-                    <td>https://merchant.yunqiao.example.com/notify/payment</td>
                     <td>2026-07-08 13:58</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="云桥数字服务" data-merchant-name="云桥企业收款" data-merchant-id="MCH20260708002" data-merchant-type="收款商户" data-balance="¥86,230.18" data-callback="https://merchant.yunqiao.example.com/notify/payment" data-updated="2026-07-08 13:58" data-daily-limit="30000.00" data-today-transfer="8420.00" data-single-limit="6000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="云桥数字服务" data-merchant-name="云桥企业收款" data-merchant-id="MCH20260708002" data-merchant-type="收款商户" data-balance="¥86,230.18" data-updated="2026-07-08 13:58" data-daily-limit="30000.00" data-today-transfer="8420.00" data-single-limit="6000.00">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>北辰供应链</td>
@@ -1380,9 +1365,8 @@
                     <td class="daily-limit-cell">¥20,000.00</td>
                     <td class="today-transfer-cell">¥4,500.00</td>
                     <td class="single-limit-cell">¥5,000.00</td>
-                    <td>https://finance.beichen.example.com/refund/callback</td>
                     <td>2026-07-08 12:41</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="北辰供应链" data-merchant-name="北辰退款专户" data-merchant-id="MCH20260708003" data-merchant-type="退款商户" data-balance="¥24,905.00" data-callback="https://finance.beichen.example.com/refund/callback" data-updated="2026-07-08 12:41" data-daily-limit="20000.00" data-today-transfer="4500.00" data-single-limit="5000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="北辰供应链" data-merchant-name="北辰退款专户" data-merchant-id="MCH20260708003" data-merchant-type="退款商户" data-balance="¥24,905.00" data-updated="2026-07-08 12:41" data-daily-limit="20000.00" data-today-transfer="4500.00" data-single-limit="5000.00">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>恒启智能制造</td>
@@ -1398,9 +1382,8 @@
                     <td class="daily-limit-cell">¥100,000.00</td>
                     <td class="today-transfer-cell">¥32,000.00</td>
                     <td class="single-limit-cell">¥20,000.00</td>
-                    <td>https://open.hengqi.example.com/callback/pay</td>
                     <td>2026-07-08 11:35</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="恒启智能制造" data-merchant-name="恒启结算商户" data-merchant-id="MCH20260708004" data-merchant-type="收款商户" data-balance="¥310,762.90" data-callback="https://open.hengqi.example.com/callback/pay" data-updated="2026-07-08 11:35" data-daily-limit="100000.00" data-today-transfer="32000.00" data-single-limit="20000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="恒启智能制造" data-merchant-name="恒启结算商户" data-merchant-id="MCH20260708004" data-merchant-type="收款商户" data-balance="¥310,762.90" data-updated="2026-07-08 11:35" data-daily-limit="100000.00" data-today-transfer="32000.00" data-single-limit="20000.00">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>启航运营服务</td>
@@ -1416,9 +1399,8 @@
                     <td class="daily-limit-cell">¥15,000.00</td>
                     <td class="today-transfer-cell">¥3,100.00</td>
                     <td class="single-limit-cell">¥3,000.00</td>
-                    <td>https://ops.qihang.example.com/refund/notify</td>
                     <td>2026-07-08 10:26</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="启航运营服务" data-merchant-name="启航售后退款" data-merchant-id="MCH20260708005" data-merchant-type="退款商户" data-balance="¥12,608.72" data-callback="https://ops.qihang.example.com/refund/notify" data-updated="2026-07-08 10:26" data-daily-limit="15000.00" data-today-transfer="3100.00" data-single-limit="3000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="启航运营服务" data-merchant-name="启航售后退款" data-merchant-id="MCH20260708005" data-merchant-type="退款商户" data-balance="¥12,608.72" data-updated="2026-07-08 10:26" data-daily-limit="15000.00" data-today-transfer="3100.00" data-single-limit="3000.00">商户号配置</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -1479,10 +1461,6 @@
             <span class="field-label">更新时间</span>
             <input class="text-input" id="configUpdated" type="text" disabled>
           </label>
-          <label class="config-field">
-            <span class="field-label">回调地址</span>
-            <input class="text-input" id="configCallback" type="text" disabled>
-          </label>
         </div>
 
         <div class="config-section-title">配置项</div>
@@ -1502,7 +1480,6 @@
             <span class="field-label required">每日可转账金额上限（元）</span>
             <span class="amount-input">
               <input class="text-input" id="configDailyLimit" type="text" inputmode="decimal" data-decimal-input placeholder="请输入金额">
-              <span class="input-unit">元</span>
             </span>
             <span class="field-hint">每日可转账金额上限为0.1元-50000元</span>
           </label>
@@ -1510,7 +1487,6 @@
             <span class="field-label required">单笔转账金额上限（元）</span>
             <span class="amount-input">
               <input class="text-input" id="configSingleLimit" type="text" inputmode="decimal" data-decimal-input placeholder="请输入金额">
-              <span class="input-unit">元</span>
             </span>
             <span class="field-hint">单笔转账金额上限为0.1元-200元</span>
           </label>
@@ -1606,7 +1582,6 @@
         setInputValue("configMerchantId", button.dataset.merchantId);
         setInputValue("configReadonlyType", button.dataset.merchantType);
         setInputValue("configBalance", button.dataset.balance);
-        setInputValue("configCallback", button.dataset.callback);
         setInputValue("configUpdated", button.dataset.updated);
         setInputValue("configDailyLimit", button.dataset.dailyLimit);
         setInputValue("configTodayTransfer", button.dataset.todayTransfer);
