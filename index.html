@@ -1390,11 +1390,11 @@
                         <button class="refresh-balance" type="button" data-refresh-balance aria-label="刷新账户余额">↻</button>
                       </span>
                     </td>
-                    <td class="daily-limit-cell">¥50,000.00</td>
-                    <td class="today-transfer-cell">¥12,860.00</td>
-                    <td class="single-limit-cell">¥10,000.00</td>
+                    <td class="daily-limit-cell"></td>
+                    <td class="today-transfer-cell"></td>
+                    <td class="single-limit-cell"></td>
                     <td>2026-07-08 14:20</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="星图科技有限公司" data-merchant-name="星图直营网关" data-merchant-id="MCH20260708001" data-merchant-type="收款商户" data-transfer-scene="" data-balance="¥128,450.36" data-updated="2026-07-08 14:20" data-daily-limit="50000.00" data-today-transfer="12860.00" data-single-limit="10000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="星图科技有限公司" data-merchant-name="星图直营网关" data-merchant-id="MCH20260708001" data-merchant-type="收款商户" data-transfer-scene="" data-balance="¥128,450.36" data-updated="2026-07-08 14:20" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>云桥数字服务</td>
@@ -1408,11 +1408,11 @@
                         <button class="refresh-balance" type="button" data-refresh-balance aria-label="刷新账户余额">↻</button>
                       </span>
                     </td>
-                    <td class="daily-limit-cell">¥30,000.00</td>
-                    <td class="today-transfer-cell">¥8,420.00</td>
-                    <td class="single-limit-cell">¥6,000.00</td>
+                    <td class="daily-limit-cell"></td>
+                    <td class="today-transfer-cell"></td>
+                    <td class="single-limit-cell"></td>
                     <td>2026-07-08 13:58</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="云桥数字服务" data-merchant-name="云桥企业收款" data-merchant-id="MCH20260708002" data-merchant-type="收款商户" data-transfer-scene="" data-balance="¥86,230.18" data-updated="2026-07-08 13:58" data-daily-limit="30000.00" data-today-transfer="8420.00" data-single-limit="6000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="云桥数字服务" data-merchant-name="云桥企业收款" data-merchant-id="MCH20260708002" data-merchant-type="收款商户" data-transfer-scene="" data-balance="¥86,230.18" data-updated="2026-07-08 13:58" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>北辰供应链</td>
@@ -1444,11 +1444,11 @@
                         <button class="refresh-balance" type="button" data-refresh-balance aria-label="刷新账户余额">↻</button>
                       </span>
                     </td>
-                    <td class="daily-limit-cell">¥100,000.00</td>
-                    <td class="today-transfer-cell">¥32,000.00</td>
-                    <td class="single-limit-cell">¥20,000.00</td>
+                    <td class="daily-limit-cell"></td>
+                    <td class="today-transfer-cell"></td>
+                    <td class="single-limit-cell"></td>
                     <td>2026-07-08 11:35</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="恒启智能制造" data-merchant-name="恒启结算商户" data-merchant-id="MCH20260708004" data-merchant-type="收款商户" data-transfer-scene="" data-balance="¥310,762.90" data-updated="2026-07-08 11:35" data-daily-limit="100000.00" data-today-transfer="32000.00" data-single-limit="20000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="恒启智能制造" data-merchant-name="恒启结算商户" data-merchant-id="MCH20260708004" data-merchant-type="收款商户" data-transfer-scene="" data-balance="¥310,762.90" data-updated="2026-07-08 11:35" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>启航运营服务</td>
@@ -1515,7 +1515,7 @@
             <span class="field-label">账户余额（元）</span>
             <input class="text-input" id="configBalance" type="text" disabled>
           </label>
-          <label class="config-field">
+          <label class="config-field" id="configTodayTransferField">
             <span class="field-label">今日已转账金额（元）</span>
             <input class="text-input" id="configTodayTransfer" type="text" disabled>
           </label>
@@ -1527,14 +1527,14 @@
 
         <div class="config-section-title">配置项</div>
         <div class="config-grid">
-          <label class="config-field">
+          <label class="config-field" id="configDailyLimitField">
             <span class="field-label required">每日可转账金额上限（元）</span>
             <span class="amount-input">
               <input class="text-input" id="configDailyLimit" type="text" inputmode="decimal" data-decimal-input placeholder="请输入金额">
             </span>
             <span class="field-hint">每日可转账金额上限为0.1元-50000元</span>
           </label>
-          <label class="config-field">
+          <label class="config-field" id="configSingleLimitField">
             <span class="field-label required">单笔转账金额上限（元）</span>
             <span class="amount-input">
               <input class="text-input" id="configSingleLimit" type="text" inputmode="decimal" data-decimal-input placeholder="请输入金额">
@@ -1774,6 +1774,10 @@
         return getMultiSelectValues(document.getElementById("configMerchantTypeSelect"));
       }
 
+      function isCollectionOnlyMerchantTypes(merchantTypes) {
+        return merchantTypes.length === 1 && merchantTypes[0] === "收款商户";
+      }
+
       function setConfigTransferScene(value) {
         setSingleSelectValue(document.getElementById("configTransferSceneSelect"), value);
       }
@@ -1783,11 +1787,23 @@
       }
 
       function toggleTransferSceneField() {
-        var field = document.getElementById("configTransferSceneField");
-        var shouldShow = getConfigMerchantTypes().indexOf("退款商户") !== -1;
-        field.classList.toggle("hidden", !shouldShow);
+        var merchantTypes = getConfigMerchantTypes();
+        var collectionOnly = isCollectionOnlyMerchantTypes(merchantTypes);
+        var hasRefundMerchant = merchantTypes.indexOf("退款商户") !== -1;
 
-        if (!shouldShow) {
+        ["configDailyLimitField", "configTodayTransferField", "configSingleLimitField"].forEach(function (id) {
+          document.getElementById(id).classList.toggle("hidden", collectionOnly);
+        });
+
+        document.getElementById("configTransferSceneField").classList.toggle("hidden", !hasRefundMerchant);
+
+        if (collectionOnly) {
+          setInputValue("configDailyLimit", "");
+          setInputValue("configTodayTransfer", "");
+          setInputValue("configSingleLimit", "");
+        }
+
+        if (!hasRefundMerchant) {
           setConfigTransferScene("");
         }
       }
@@ -1815,11 +1831,18 @@
       function saveMerchantConfig() {
         var merchantTypes = getConfigMerchantTypes();
         var merchantType = merchantTypes.join("、");
+        var collectionOnly = isCollectionOnlyMerchantTypes(merchantTypes);
         var transferScene = merchantTypes.indexOf("退款商户") !== -1 ? getConfigTransferScene() : "";
         var dailyLimit = document.getElementById("configDailyLimit").value.trim();
+        var todayTransfer = document.getElementById("configTodayTransfer").value.trim();
         var singleLimit = document.getElementById("configSingleLimit").value.trim();
 
-        if (!merchantTypes.length || !dailyLimit || !singleLimit || !isValidDecimal(dailyLimit) || !isValidDecimal(singleLimit)) {
+        if (!merchantTypes.length) {
+          showToast("请填写正确的必填项");
+          return;
+        }
+
+        if (!collectionOnly && (!dailyLimit || !singleLimit || !isValidDecimal(dailyLimit) || !isValidDecimal(singleLimit))) {
           showToast("请填写正确的必填项");
           return;
         }
@@ -1829,12 +1852,12 @@
           return;
         }
 
-        if (!isAmountInRange(dailyLimit, 0.1, 50000)) {
+        if (!collectionOnly && !isAmountInRange(dailyLimit, 0.1, 50000)) {
           showToast("每日可转账金额上限为0.1元-50000元");
           return;
         }
 
-        if (!isAmountInRange(singleLimit, 0.1, 200)) {
+        if (!collectionOnly && !isAmountInRange(singleLimit, 0.1, 200)) {
           showToast("单笔转账金额上限为0.1元-200元");
           return;
         }
@@ -1843,12 +1866,14 @@
           var configButton = activeMerchantRow.querySelector("[data-open-merchant-config]");
           activeMerchantRow.querySelector(".merchant-type-cell").textContent = merchantType;
           activeMerchantRow.querySelector(".transfer-scene-cell").textContent = transferScene;
-          activeMerchantRow.querySelector(".daily-limit-cell").textContent = formatMoney(dailyLimit);
-          activeMerchantRow.querySelector(".single-limit-cell").textContent = formatMoney(singleLimit);
+          activeMerchantRow.querySelector(".daily-limit-cell").textContent = collectionOnly ? "" : formatMoney(dailyLimit);
+          activeMerchantRow.querySelector(".today-transfer-cell").textContent = collectionOnly || !todayTransfer ? "" : formatMoney(todayTransfer);
+          activeMerchantRow.querySelector(".single-limit-cell").textContent = collectionOnly ? "" : formatMoney(singleLimit);
           configButton.dataset.merchantType = merchantType;
           configButton.dataset.transferScene = transferScene;
-          configButton.dataset.dailyLimit = dailyLimit;
-          configButton.dataset.singleLimit = singleLimit;
+          configButton.dataset.dailyLimit = collectionOnly ? "" : dailyLimit;
+          configButton.dataset.todayTransfer = collectionOnly ? "" : todayTransfer;
+          configButton.dataset.singleLimit = collectionOnly ? "" : singleLimit;
         }
 
         closeMerchantConfig();
