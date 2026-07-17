@@ -1514,7 +1514,7 @@
             </span>
           </label>
           <label class="config-field hidden" id="configBalanceField">
-            <span class="field-label">商户余额（元）</span>
+            <span class="field-label required">商户余额（元）</span>
             <span class="amount-input">
               <input class="text-input" id="configBalance" type="text" inputmode="decimal" data-decimal-input placeholder="请输入商户余额">
             </span>
@@ -1861,7 +1861,7 @@
           return;
         }
 
-        if (hasRefundMerchant && balance && !isValidDecimal(balance)) {
+        if (hasRefundMerchant && (!balance || !isValidDecimal(balance))) {
           showToast("请填写正确的商户余额");
           return;
         }
