@@ -1336,14 +1336,7 @@
                     <button class="select-clear" type="button" aria-label="清除转账场景">×</button>
                     <span class="caret"></span>
                     <span class="select-options">
-                      <button class="select-option" type="button">现金营销</button>
-                      <button class="select-option" type="button">行政补贴</button>
-                      <button class="select-option" type="button">保险理赔</button>
-                      <button class="select-option" type="button">佣金报酬</button>
-                      <button class="select-option" type="button">采购货款</button>
-                      <button class="select-option" type="button">二手回收</button>
                       <button class="select-option" type="button">企业赔付</button>
-                      <button class="select-option" type="button">公益补助</button>
                     </span>
                   </span>
                 </label>
@@ -1369,7 +1362,7 @@
                     <th style="width: 150px;">商户号ID</th>
                     <th style="width: 120px;">商户类型</th>
                     <th style="width: 150px;">转账场景</th>
-                    <th style="width: 150px;">账户余额（元）</th>
+                    <th style="width: 150px;">商户余额（元）</th>
                     <th style="width: 170px;">每日可转账金额上限（元）</th>
                     <th style="width: 150px;">今日已转账金额（元）</th>
                     <th style="width: 170px;">单笔转账金额上限（元）</th>
@@ -1384,17 +1377,12 @@
                     <td>MCH20260708001</td>
                     <td class="merchant-type-cell">收款商户</td>
                     <td class="transfer-scene-cell"></td>
-                    <td>
-                      <span class="balance-cell">
-                        <span>¥128,450.36</span>
-                        <button class="refresh-balance" type="button" data-refresh-balance aria-label="刷新账户余额">↻</button>
-                      </span>
-                    </td>
+                    <td class="balance-value-cell"></td>
                     <td class="daily-limit-cell"></td>
                     <td class="today-transfer-cell"></td>
                     <td class="single-limit-cell"></td>
                     <td>2026-07-08 14:20</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="星图科技有限公司" data-merchant-name="星图直营网关" data-merchant-id="MCH20260708001" data-merchant-type="收款商户" data-transfer-scene="" data-balance="¥128,450.36" data-updated="2026-07-08 14:20" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="星图科技有限公司" data-merchant-name="星图直营网关" data-merchant-id="MCH20260708001" data-merchant-type="收款商户" data-transfer-scene="" data-balance="" data-updated="2026-07-08 14:20" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>云桥数字服务</td>
@@ -1402,35 +1390,30 @@
                     <td>MCH20260708002</td>
                     <td class="merchant-type-cell">收款商户</td>
                     <td class="transfer-scene-cell"></td>
-                    <td>
-                      <span class="balance-cell">
-                        <span>¥86,230.18</span>
-                        <button class="refresh-balance" type="button" data-refresh-balance aria-label="刷新账户余额">↻</button>
-                      </span>
-                    </td>
+                    <td class="balance-value-cell"></td>
                     <td class="daily-limit-cell"></td>
                     <td class="today-transfer-cell"></td>
                     <td class="single-limit-cell"></td>
                     <td>2026-07-08 13:58</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="云桥数字服务" data-merchant-name="云桥企业收款" data-merchant-id="MCH20260708002" data-merchant-type="收款商户" data-transfer-scene="" data-balance="¥86,230.18" data-updated="2026-07-08 13:58" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="云桥数字服务" data-merchant-name="云桥企业收款" data-merchant-id="MCH20260708002" data-merchant-type="收款商户" data-transfer-scene="" data-balance="" data-updated="2026-07-08 13:58" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>北辰供应链</td>
                     <td>北辰退款专户</td>
                     <td>MCH20260708003</td>
                     <td class="merchant-type-cell">退款商户</td>
-                    <td class="transfer-scene-cell">保险理赔</td>
-                    <td>
+                    <td class="transfer-scene-cell">企业赔付</td>
+                    <td class="balance-value-cell">
                       <span class="balance-cell">
                         <span>¥24,905.00</span>
-                        <button class="refresh-balance" type="button" data-refresh-balance aria-label="刷新账户余额">↻</button>
+                        <button class="refresh-balance" type="button" data-refresh-balance aria-label="刷新商户余额">↻</button>
                       </span>
                     </td>
                     <td class="daily-limit-cell">¥20,000.00</td>
                     <td class="today-transfer-cell">¥4,500.00</td>
                     <td class="single-limit-cell">¥5,000.00</td>
                     <td>2026-07-08 12:41</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="北辰供应链" data-merchant-name="北辰退款专户" data-merchant-id="MCH20260708003" data-merchant-type="退款商户" data-transfer-scene="保险理赔" data-balance="¥24,905.00" data-updated="2026-07-08 12:41" data-daily-limit="20000.00" data-today-transfer="4500.00" data-single-limit="5000.00">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="北辰供应链" data-merchant-name="北辰退款专户" data-merchant-id="MCH20260708003" data-merchant-type="退款商户" data-transfer-scene="企业赔付" data-balance="¥24,905.00" data-updated="2026-07-08 12:41" data-daily-limit="20000.00" data-today-transfer="4500.00" data-single-limit="5000.00">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>恒启智能制造</td>
@@ -1438,17 +1421,12 @@
                     <td>MCH20260708004</td>
                     <td class="merchant-type-cell">收款商户</td>
                     <td class="transfer-scene-cell"></td>
-                    <td>
-                      <span class="balance-cell">
-                        <span>¥310,762.90</span>
-                        <button class="refresh-balance" type="button" data-refresh-balance aria-label="刷新账户余额">↻</button>
-                      </span>
-                    </td>
+                    <td class="balance-value-cell"></td>
                     <td class="daily-limit-cell"></td>
                     <td class="today-transfer-cell"></td>
                     <td class="single-limit-cell"></td>
                     <td>2026-07-08 11:35</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="恒启智能制造" data-merchant-name="恒启结算商户" data-merchant-id="MCH20260708004" data-merchant-type="收款商户" data-transfer-scene="" data-balance="¥310,762.90" data-updated="2026-07-08 11:35" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号配置</button></td>
+                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="恒启智能制造" data-merchant-name="恒启结算商户" data-merchant-id="MCH20260708004" data-merchant-type="收款商户" data-transfer-scene="" data-balance="" data-updated="2026-07-08 11:35" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号配置</button></td>
                   </tr>
                   <tr>
                     <td>启航运营服务</td>
@@ -1456,10 +1434,10 @@
                     <td>MCH20260708005</td>
                     <td class="merchant-type-cell">退款商户</td>
                     <td class="transfer-scene-cell">企业赔付</td>
-                    <td>
+                    <td class="balance-value-cell">
                       <span class="balance-cell">
                         <span>¥12,608.72</span>
-                        <button class="refresh-balance" type="button" data-refresh-balance aria-label="刷新账户余额">↻</button>
+                        <button class="refresh-balance" type="button" data-refresh-balance aria-label="刷新商户余额">↻</button>
                       </span>
                     </td>
                     <td class="daily-limit-cell">¥15,000.00</td>
@@ -1511,10 +1489,6 @@
             <span class="field-label">商户号ID</span>
             <input class="text-input" id="configMerchantId" type="text" disabled>
           </label>
-          <label class="config-field">
-            <span class="field-label">账户余额（元）</span>
-            <input class="text-input" id="configBalance" type="text" disabled>
-          </label>
           <label class="config-field" id="configTodayTransferField">
             <span class="field-label">今日已转账金额（元）</span>
             <input class="text-input" id="configTodayTransfer" type="text" disabled>
@@ -1527,6 +1501,24 @@
 
         <div class="config-section-title">配置项</div>
         <div class="config-grid">
+          <label class="config-field">
+            <span class="field-label required">商户类型</span>
+            <span class="select has-value" id="configMerchantTypeSelect" data-select data-multiple-select data-placeholder="请选择商户类型">
+              <button class="select-trigger" type="button">收款商户</button>
+              <button class="select-clear" type="button" aria-label="清除商户类型">×</button>
+              <span class="caret"></span>
+              <span class="select-options">
+                <button class="select-option selected" type="button">收款商户</button>
+                <button class="select-option" type="button">退款商户</button>
+              </span>
+            </span>
+          </label>
+          <label class="config-field hidden" id="configBalanceField">
+            <span class="field-label">商户余额（元）</span>
+            <span class="amount-input">
+              <input class="text-input" id="configBalance" type="text" inputmode="decimal" data-decimal-input placeholder="请输入商户余额">
+            </span>
+          </label>
           <label class="config-field" id="configDailyLimitField">
             <span class="field-label required">每日可转账金额上限（元）</span>
             <span class="amount-input">
@@ -1541,18 +1533,6 @@
             </span>
             <span class="field-hint">单笔转账金额上限为0.1元-200元</span>
           </label>
-          <label class="config-field">
-            <span class="field-label required">商户类型</span>
-            <span class="select has-value" id="configMerchantTypeSelect" data-select data-multiple-select data-placeholder="请选择商户类型">
-              <button class="select-trigger" type="button">收款商户</button>
-              <button class="select-clear" type="button" aria-label="清除商户类型">×</button>
-              <span class="caret"></span>
-              <span class="select-options">
-                <button class="select-option selected" type="button">收款商户</button>
-                <button class="select-option" type="button">退款商户</button>
-              </span>
-            </span>
-          </label>
           <label class="config-field hidden" id="configTransferSceneField">
             <span class="field-label required">转账场景</span>
             <span class="select" id="configTransferSceneSelect" data-select data-placeholder="请选择转账场景">
@@ -1560,14 +1540,7 @@
               <button class="select-clear" type="button" aria-label="清除转账场景">×</button>
               <span class="caret"></span>
               <span class="select-options">
-                <button class="select-option" type="button">现金营销</button>
-                <button class="select-option" type="button">行政补贴</button>
-                <button class="select-option" type="button">保险理赔</button>
-                <button class="select-option" type="button">佣金报酬</button>
-                <button class="select-option" type="button">采购货款</button>
-                <button class="select-option" type="button">二手回收</button>
                 <button class="select-option" type="button">企业赔付</button>
-                <button class="select-option" type="button">公益补助</button>
               </span>
             </span>
           </label>
@@ -1634,6 +1607,10 @@
       }
 
       function formatMoney(value) {
+        if (String(value || "").trim() === "") {
+          return "";
+        }
+
         var amount = Number(value);
         if (!isFinite(amount)) {
           return "¥" + value;
@@ -1642,6 +1619,10 @@
           minimumFractionDigits: 2,
           maximumFractionDigits: 2
         });
+      }
+
+      function normalizeMoneyValue(value) {
+        return sanitizeDecimal(String(value || ""));
       }
 
       function getOptionValue(option) {
@@ -1786,6 +1767,36 @@
         return getSingleSelectValue(document.getElementById("configTransferSceneSelect"));
       }
 
+      function setRowBalance(row, value) {
+        var cell = row.querySelector(".balance-value-cell");
+
+        if (!cell) {
+          return;
+        }
+
+        cell.textContent = "";
+
+        if (!value) {
+          return;
+        }
+
+        var wrapper = document.createElement("span");
+        var amount = document.createElement("span");
+        var refreshButton = document.createElement("button");
+
+        wrapper.className = "balance-cell";
+        amount.textContent = value;
+        refreshButton.className = "refresh-balance";
+        refreshButton.type = "button";
+        refreshButton.dataset.refreshBalance = "";
+        refreshButton.setAttribute("aria-label", "刷新商户余额");
+        refreshButton.textContent = "↻";
+
+        wrapper.appendChild(amount);
+        wrapper.appendChild(refreshButton);
+        cell.appendChild(wrapper);
+      }
+
       function toggleTransferSceneField() {
         var merchantTypes = getConfigMerchantTypes();
         var collectionOnly = isCollectionOnlyMerchantTypes(merchantTypes);
@@ -1795,6 +1806,7 @@
           document.getElementById(id).classList.toggle("hidden", collectionOnly);
         });
 
+        document.getElementById("configBalanceField").classList.toggle("hidden", !hasRefundMerchant);
         document.getElementById("configTransferSceneField").classList.toggle("hidden", !hasRefundMerchant);
 
         if (collectionOnly) {
@@ -1813,7 +1825,7 @@
         setInputValue("configEnterprise", button.dataset.enterprise);
         setInputValue("configMerchantName", button.dataset.merchantName);
         setInputValue("configMerchantId", button.dataset.merchantId);
-        setInputValue("configBalance", button.dataset.balance);
+        setInputValue("configBalance", normalizeMoneyValue(button.dataset.balance));
         setInputValue("configUpdated", button.dataset.updated);
         setInputValue("configDailyLimit", button.dataset.dailyLimit);
         setInputValue("configTodayTransfer", button.dataset.todayTransfer);
@@ -1832,7 +1844,9 @@
         var merchantTypes = getConfigMerchantTypes();
         var merchantType = merchantTypes.join("、");
         var collectionOnly = isCollectionOnlyMerchantTypes(merchantTypes);
+        var hasRefundMerchant = merchantTypes.indexOf("退款商户") !== -1;
         var transferScene = merchantTypes.indexOf("退款商户") !== -1 ? getConfigTransferScene() : "";
+        var balance = document.getElementById("configBalance").value.trim();
         var dailyLimit = document.getElementById("configDailyLimit").value.trim();
         var todayTransfer = document.getElementById("configTodayTransfer").value.trim();
         var singleLimit = document.getElementById("configSingleLimit").value.trim();
@@ -1844,6 +1858,11 @@
 
         if (!collectionOnly && (!dailyLimit || !singleLimit || !isValidDecimal(dailyLimit) || !isValidDecimal(singleLimit))) {
           showToast("请填写正确的必填项");
+          return;
+        }
+
+        if (hasRefundMerchant && balance && !isValidDecimal(balance)) {
+          showToast("请填写正确的商户余额");
           return;
         }
 
@@ -1866,11 +1885,14 @@
           var configButton = activeMerchantRow.querySelector("[data-open-merchant-config]");
           activeMerchantRow.querySelector(".merchant-type-cell").textContent = merchantType;
           activeMerchantRow.querySelector(".transfer-scene-cell").textContent = transferScene;
+          var balanceText = hasRefundMerchant ? formatMoney(balance) : "";
+          setRowBalance(activeMerchantRow, balanceText);
           activeMerchantRow.querySelector(".daily-limit-cell").textContent = collectionOnly ? "" : formatMoney(dailyLimit);
           activeMerchantRow.querySelector(".today-transfer-cell").textContent = collectionOnly || !todayTransfer ? "" : formatMoney(todayTransfer);
           activeMerchantRow.querySelector(".single-limit-cell").textContent = collectionOnly ? "" : formatMoney(singleLimit);
           configButton.dataset.merchantType = merchantType;
           configButton.dataset.transferScene = transferScene;
+          configButton.dataset.balance = balanceText;
           configButton.dataset.dailyLimit = collectionOnly ? "" : dailyLimit;
           configButton.dataset.todayTransfer = collectionOnly ? "" : todayTransfer;
           configButton.dataset.singleLimit = collectionOnly ? "" : singleLimit;
@@ -2014,13 +2036,17 @@
         });
       });
 
-      document.querySelectorAll("[data-refresh-balance]").forEach(function (button) {
-        button.addEventListener("click", function () {
-          button.classList.remove("spinning");
-          void button.offsetWidth;
-          button.classList.add("spinning");
-          showToast("账户余额已刷新");
-        });
+      document.addEventListener("click", function (event) {
+        var button = event.target.closest("[data-refresh-balance]");
+
+        if (!button) {
+          return;
+        }
+
+        button.classList.remove("spinning");
+        void button.offsetWidth;
+        button.classList.add("spinning");
+        showToast("商户余额已刷新");
       });
 
       document.querySelectorAll("[data-open-merchant-config]").forEach(function (button) {
