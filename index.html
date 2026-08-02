@@ -294,6 +294,11 @@
       border-radius: 50%;
     }
 
+    .breadcrumb-close:hover {
+      color: #4f5b6b;
+      background: #edf1f6;
+    }
+
     .content {
       flex: 1;
       min-height: 0;
@@ -327,6 +332,7 @@
     .page-view.active {
       display: flex;
     }
+
 
     .inner-tabs {
       height: 44px;
@@ -563,6 +569,11 @@
       align-items: end;
     }
 
+    .filters label {
+      position: relative;
+      display: block;
+    }
+
     .field-label {
       display: block;
       margin-bottom: 7px;
@@ -665,6 +676,247 @@
     .select-clear:hover {
       color: #4f5b6b;
       background: #edf1f6;
+    }
+
+    .input-clear {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 2;
+      width: 16px;
+      height: 16px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #9aa4b1;
+      border-radius: 50%;
+      font-size: 15px;
+      line-height: 16px;
+    }
+
+    .filters label.has-input-value .input-clear {
+      display: flex;
+    }
+
+    .input-clear:hover {
+      color: #4f5b6b;
+      background: #edf1f6;
+    }
+
+    .date-range-field {
+      position: relative;
+    }
+
+    .date-range-trigger {
+      position: relative;
+      width: 100%;
+      height: 32px;
+      padding: 0 32px 0 30px;
+      display: flex;
+      align-items: center;
+      color: #4c5666;
+      background: #fff;
+      border: 1px solid var(--input-border);
+      border-radius: 3px;
+      text-align: left;
+    }
+
+    .date-range-field.open .date-range-trigger {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 2px rgba(22, 135, 232, 0.08);
+    }
+
+    .date-range-field:not(.has-value) .date-range-start,
+    .date-range-field:not(.has-value) .date-range-end {
+      color: #b8c0cc;
+    }
+
+    .date-range-icon {
+      position: absolute;
+      top: 9px;
+      left: 10px;
+      width: 13px;
+      height: 13px;
+      border: 1px solid #99a5b5;
+      border-radius: 2px;
+    }
+
+    .date-range-icon::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: -1px;
+      width: 13px;
+      border-top: 1px solid #99a5b5;
+    }
+
+    .date-range-start,
+    .date-range-end {
+      min-width: 0;
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .date-range-separator {
+      flex: 0 0 24px;
+      color: #2f3542;
+      text-align: center;
+    }
+
+    .date-range-clear {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 2;
+      width: 16px;
+      height: 16px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #9aa4b1;
+      border-radius: 50%;
+      font-size: 15px;
+      line-height: 16px;
+    }
+
+    .date-range-field.has-value .date-range-clear {
+      display: flex;
+    }
+
+    .date-range-clear:hover {
+      color: #4f5b6b;
+      background: #edf1f6;
+    }
+
+    .date-range-panel {
+      position: absolute;
+      z-index: 70;
+      top: 36px;
+      left: 0;
+      width: 628px;
+      display: none;
+      color: #2f3b52;
+      background: #fff;
+      border: 1px solid #d9dee8;
+      border-radius: 3px;
+      box-shadow: 0 10px 24px rgba(25, 52, 89, 0.14);
+    }
+
+    .date-range-field.open .date-range-panel {
+      display: flex;
+    }
+
+    .date-shortcuts {
+      flex: 0 0 108px;
+      padding: 9px 0;
+      background: #f7f9fc;
+      border-right: 1px solid #e2e7ef;
+    }
+
+    .date-shortcut {
+      width: 100%;
+      height: 29px;
+      padding: 0 12px;
+      color: #4d596b;
+      text-align: left;
+    }
+
+    .date-shortcut:hover,
+    .date-shortcut.active {
+      color: var(--blue);
+      background: #eef6ff;
+    }
+
+    .date-calendar-wrap {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .date-calendar {
+      min-width: 0;
+      padding: 13px 20px 16px;
+    }
+
+    .date-calendar + .date-calendar {
+      border-left: 1px solid #e2e7ef;
+    }
+
+    .date-calendar-head {
+      height: 26px;
+      display: grid;
+      grid-template-columns: 24px 1fr 24px;
+      align-items: center;
+      margin-bottom: 8px;
+      color: #243047;
+      font-size: 17px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .date-month-nav {
+      color: #637087;
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    .date-month-nav:disabled {
+      color: transparent;
+      cursor: default;
+    }
+
+    .date-weekdays,
+    .date-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+    }
+
+    .date-weekdays span {
+      height: 28px;
+      color: #607088;
+      line-height: 28px;
+    }
+
+    .date-day {
+      height: 32px;
+      color: #243047;
+      border-radius: 3px;
+      line-height: 32px;
+    }
+
+    .date-day.outside {
+      color: #c4cfdd;
+    }
+
+    .date-day:hover {
+      color: var(--blue);
+      background: #edf6ff;
+    }
+
+    .date-day.in-range {
+      color: #1e6fb8;
+      background: #edf6ff;
+    }
+
+    .date-day.selected {
+      color: #fff;
+      background: var(--blue);
+    }
+
+    .date-day:disabled,
+    .date-day.disabled {
+      color: #d4dbe5;
+      cursor: not-allowed;
+      background: transparent;
+    }
+
+    .date-day:disabled:hover,
+    .date-day.disabled:hover {
+      color: #d4dbe5;
+      background: transparent;
     }
 
     .select-options {
@@ -775,9 +1027,20 @@
     }
 
     .btn-gray {
-      color: #677384;
+      color: #2f3542;
       background: #fff;
       border: 1px solid #d7dee7;
+    }
+
+    .btn-gray:hover {
+      color: #1f2937;
+      background: #f7f8fa;
+      border-color: #bfc7d2;
+      box-shadow: 0 3px 8px rgba(31, 41, 55, 0.1);
+    }
+
+    .btn-gray:active {
+      background: #f0f2f5;
     }
 
     .filter-toggle {
@@ -842,8 +1105,243 @@
     }
 
     .merchant-table table {
-      min-width: 1680px;
+      min-width: 2020px;
     }
+
+    .complaint-table table {
+      min-width: 2440px;
+    }
+
+    .trade-bill-detail-table table {
+      min-width: 4140px;
+    }
+
+    .trade-bill-detail-table.is-refund table {
+      min-width: 4460px;
+    }
+
+    .trade-bill-detail-table.is-payment table {
+      min-width: 3100px;
+    }
+
+    .bill-detail-pane {
+      min-width: 0;
+      display: none;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .bill-detail-pane.active {
+      display: flex;
+    }
+
+    .bill-detail-update-tip {
+      margin: -2px 18px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #8b95a5;
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+    .complaint-table td {
+      height: 58px;
+      white-space: normal;
+      line-height: 1.45;
+      vertical-align: middle;
+    }
+
+    .complaint-status-bar {
+      margin: 0 18px 14px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .complaint-status-tab {
+      height: 30px;
+      min-width: 82px;
+      padding: 0 14px;
+      color: #5f6b7a;
+      background: #fff;
+      border: 1px solid #dfe6ef;
+      border-radius: 999px;
+    }
+
+    .complaint-status-tab:hover {
+      color: var(--blue);
+      border-color: #b9d9f6;
+    }
+
+    .complaint-status-tab.active {
+      color: var(--blue);
+      background: #edf6ff;
+      border-color: #78b8f4;
+      font-weight: 500;
+    }
+
+    .cell-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3px;
+      min-width: 0;
+      text-align: left;
+      white-space: normal;
+    }
+
+    .cell-muted {
+      color: #8b95a5;
+    }
+
+    .cell-strong {
+      color: #4b5563;
+      font-weight: 500;
+    }
+
+    .complaint-content {
+      text-align: left;
+    }
+
+    .complaint-content-text {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      word-break: break-all;
+    }
+
+    .complaint-empty-row td {
+      height: 96px;
+      color: #8b95a5;
+      text-align: center;
+      background: #fff;
+    }
+
+
+    .bill-download {
+      min-height: 100%;
+      padding: 28px 28px 40px;
+      background: #fff;
+    }
+
+    .bill-notice {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 28px;
+      color: #8b95a5;
+      font-size: 13px;
+    }
+
+    .bill-clock {
+      position: relative;
+      width: 14px;
+      height: 14px;
+      border: 1px solid #c7cdd6;
+      border-radius: 50%;
+      flex: 0 0 auto;
+    }
+
+    .bill-clock::before,
+    .bill-clock::after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 3px;
+      width: 1px;
+      height: 4px;
+      background: #b7c0cc;
+      transform-origin: bottom center;
+    }
+
+    .bill-clock::after {
+      top: 6px;
+      width: 4px;
+      height: 1px;
+      transform: none;
+    }
+
+    .bill-form {
+      width: min(780px, 100%);
+    }
+
+    .bill-row {
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr);
+      column-gap: 20px;
+      align-items: start;
+      margin-bottom: 28px;
+    }
+
+    .bill-label {
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+      color: #2f3542;
+      font-size: 13px;
+    }
+
+    .bill-control {
+      min-width: 0;
+    }
+
+    .bill-merchant-input {
+      width: 266px;
+      max-width: 100%;
+    }
+
+    .radio-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 28px;
+      min-height: 32px;
+    }
+
+    .radio-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: #2f3542;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .radio-option input {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      accent-color: var(--blue-button);
+    }
+
+    .bill-hint {
+      margin-top: 11px;
+      color: #8f97a3;
+      line-height: 1.6;
+    }
+
+    .bill-date-range-field {
+      width: 266px;
+      max-width: 100%;
+      display: block;
+    }
+
+    .bill-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 36px;
+    }
+
+    .bill-actions .btn {
+      height: 36px;
+      min-width: 108px;
+      font-size: 14px;
+    }
+
 
     .merchant-table th:last-child,
     .merchant-table td:last-child {
@@ -860,6 +1358,24 @@
     }
 
     .merchant-table tbody tr:hover td:last-child {
+      background: #f8fbff;
+    }
+
+    .complaint-table th:last-child,
+    .complaint-table td:last-child {
+      position: sticky;
+      right: 0;
+      z-index: 3;
+      background: #fff;
+      box-shadow: -1px 0 0 #e7ebf1;
+    }
+
+    .complaint-table th:last-child {
+      z-index: 4;
+      background: #fbfcfe;
+    }
+
+    .complaint-table tbody tr:hover td:last-child {
       background: #f8fbff;
     }
 
@@ -906,6 +1422,95 @@
     .link:hover {
       color: #0b69bd;
       text-decoration: underline;
+    }
+
+    .row-actions {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .action-cell {
+      overflow: visible;
+    }
+
+    .action-dropdown {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+    }
+
+    .action-trigger {
+      height: 28px;
+      min-width: 76px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: var(--blue);
+      background: #fff;
+      border: 1px solid #b9d9f6;
+      border-radius: 3px;
+    }
+
+    .action-trigger:hover,
+    .action-dropdown.open .action-trigger {
+      color: #0b69bd;
+      background: #edf6ff;
+      border-color: #78b8f4;
+    }
+
+    .action-caret {
+      width: 6px;
+      height: 6px;
+      margin-top: -3px;
+      border-right: 1px solid currentColor;
+      border-bottom: 1px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform 0.16s ease;
+    }
+
+    .action-dropdown.open .action-caret {
+      margin-top: 3px;
+      transform: rotate(225deg);
+    }
+
+    .action-menu {
+      display: none;
+    }
+
+    .global-action-menu {
+      position: fixed;
+      z-index: 2147483647;
+      top: 0;
+      left: 0;
+      width: 116px;
+      display: none;
+      padding: 5px 0;
+      background: #fff;
+      border: 1px solid #dfe6ef;
+      border-radius: 3px;
+      box-shadow: 0 10px 28px rgba(20, 44, 80, 0.22);
+    }
+
+    .global-action-menu.open {
+      display: block;
+    }
+
+    .action-menu-item {
+      width: 100%;
+      height: 30px;
+      padding: 0 12px;
+      color: #4d5664;
+      text-align: left;
+      background: #fff;
+    }
+
+    .action-menu-item:hover {
+      color: var(--blue);
+      background: #edf6ff;
     }
 
     .balance-cell {
@@ -964,6 +1569,12 @@
       color: #d77713;
       background: #fff8ed;
       border-color: #ffe1b8;
+    }
+
+    .status-pill.processing {
+      color: var(--blue);
+      background: var(--blue-light);
+      border-color: #c7e2fb;
     }
 
     .status-pill.danger {
@@ -1296,6 +1907,16 @@
         </button>
         <div class="submenu">
           <button class="submenu-btn active" type="button" data-page="商户号管理">商户号管理</button>
+          <button class="submenu-btn" type="button" data-page="交易账单">交易账单</button>
+          <button class="submenu-btn" type="button" data-page="交易账单详情">交易账单详情</button>
+        </div>
+      </div>
+      <div class="menu-group">
+        <button class="menu-title" type="button">
+          <span class="menu-icon"></span><span>服务中心</span><span class="menu-arrow"></span>
+        </button>
+        <div class="submenu">
+          <button class="submenu-btn" type="button" data-page="商户号投诉管理">商户号投诉管理</button>
         </div>
       </div>
     </aside>
@@ -1318,6 +1939,17 @@
                 </label>
                 <label>
                   <input class="text-input" type="text" placeholder="请输入商户号ID" aria-label="商户号ID">
+                </label>
+                <label class="date-range-field" data-date-range-picker data-on-range-change="merchantMetrics" data-start-placeholder="交易开始日期" data-end-placeholder="交易结束日期">
+                  <input id="merchantTradeTimeQuery" type="hidden" value="">
+                  <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="交易时间" aria-expanded="false">
+                    <span class="date-range-icon" aria-hidden="true"></span>
+                    <span class="date-range-start" data-date-range-start>交易开始日期</span>
+                    <span class="date-range-separator">至</span>
+                    <span class="date-range-end" data-date-range-end>交易结束日期</span>
+                  </button>
+                  <button class="date-range-clear" type="button" aria-label="清除交易时间">×</button>
+                  <div class="date-range-panel" data-date-range-panel></div>
                 </label>
                 <label>
                   <span class="select" data-select data-multiple-select data-placeholder="请选择商户类型">
@@ -1342,14 +1974,15 @@
                 </label>
               </div>
               <div class="actions">
-                <button class="btn btn-primary" type="button" data-toast="查询完成">查询</button>
-                <button class="btn btn-gray" type="button" data-toast="筛选已重置">重置</button>
+                <button class="btn btn-outline" id="merchantQueryButton" type="button" data-toast="查询完成">查询</button>
+                <button class="btn btn-gray" id="merchantResetButton" type="button" data-toast="筛选已重置">重置</button>
               </div>
             </section>
 
             <div class="operate-bar">
               <div class="operate-actions">
-                <button class="btn btn-primary" type="button" data-toast="已导出商户列表">导出商户列表</button>
+                <button class="btn btn-primary" id="addMerchantButton" type="button">新增商户号</button>
+                <button class="btn btn-gray" type="button" data-toast="已导出商户列表">导出商户列表</button>
               </div>
             </div>
 
@@ -1360,6 +1993,9 @@
                     <th style="width: 180px;">企业名称</th>
                     <th style="width: 160px;">商户名称</th>
                     <th style="width: 150px;">商户号ID</th>
+                    <th style="width: 110px;">投诉总数</th>
+                    <th style="width: 120px;">交易订单数</th>
+                    <th style="width: 110px;">投诉率</th>
                     <th style="width: 120px;">商户类型</th>
                     <th style="width: 150px;">转账场景</th>
                     <th style="width: 150px;">商户余额（元）</th>
@@ -1367,7 +2003,7 @@
                     <th style="width: 150px;">今日已转账金额（元）</th>
                     <th style="width: 170px;">单笔转账金额上限（元）</th>
                     <th style="width: 160px;">更新时间</th>
-                    <th style="width: 120px;">操作</th>
+                    <th style="width: 170px;">操作</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1375,6 +2011,9 @@
                     <td>星图科技有限公司</td>
                     <td>星图直营网关</td>
                     <td>MCH20260708001</td>
+                    <td class="complaint-total-cell">8</td>
+                    <td class="order-count-cell">12,500</td>
+                    <td class="complaint-rate-cell">0.06%</td>
                     <td class="merchant-type-cell">收款商户</td>
                     <td class="transfer-scene-cell"></td>
                     <td class="balance-value-cell"></td>
@@ -1382,12 +2021,15 @@
                     <td class="today-transfer-cell"></td>
                     <td class="single-limit-cell"></td>
                     <td>2026-07-08 14:20</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="星图科技有限公司" data-merchant-name="星图直营网关" data-merchant-id="MCH20260708001" data-merchant-type="收款商户" data-transfer-scene="" data-balance="" data-updated="2026-07-08 14:20" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号配置</button></td>
+                    <td class="action-cell"><div class="action-dropdown" data-action-dropdown><button class="action-trigger" type="button" data-action-dropdown-trigger aria-haspopup="true" aria-expanded="false">操作<span class="action-caret" aria-hidden="true"></span></button><div class="action-menu"><button class="action-menu-item" type="button" data-open-merchant-config data-enterprise="星图科技有限公司" data-merchant-name="星图直营网关" data-merchant-id="MCH20260708001" data-complaint-total="8" data-order-count="12500" data-complaint-rate="0.06%" data-merchant-type="收款商户" data-transfer-scene="" data-balance="" data-updated="2026-07-08 14:20" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号编辑</button><button class="action-menu-item" type="button" data-open-complaint-management data-merchant-id="MCH20260708001">投诉管理</button></div></div></td>
                   </tr>
                   <tr>
                     <td>云桥数字服务</td>
                     <td>云桥企业收款</td>
                     <td>MCH20260708002</td>
+                    <td class="complaint-total-cell">2</td>
+                    <td class="order-count-cell">8,430</td>
+                    <td class="complaint-rate-cell">0.02%</td>
                     <td class="merchant-type-cell">收款商户</td>
                     <td class="transfer-scene-cell"></td>
                     <td class="balance-value-cell"></td>
@@ -1395,12 +2037,15 @@
                     <td class="today-transfer-cell"></td>
                     <td class="single-limit-cell"></td>
                     <td>2026-07-08 13:58</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="云桥数字服务" data-merchant-name="云桥企业收款" data-merchant-id="MCH20260708002" data-merchant-type="收款商户" data-transfer-scene="" data-balance="" data-updated="2026-07-08 13:58" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号配置</button></td>
+                    <td class="action-cell"><div class="action-dropdown" data-action-dropdown><button class="action-trigger" type="button" data-action-dropdown-trigger aria-haspopup="true" aria-expanded="false">操作<span class="action-caret" aria-hidden="true"></span></button><div class="action-menu"><button class="action-menu-item" type="button" data-open-merchant-config data-enterprise="云桥数字服务" data-merchant-name="云桥企业收款" data-merchant-id="MCH20260708002" data-complaint-total="2" data-order-count="8430" data-complaint-rate="0.02%" data-merchant-type="收款商户" data-transfer-scene="" data-balance="" data-updated="2026-07-08 13:58" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号编辑</button><button class="action-menu-item" type="button" data-open-complaint-management data-merchant-id="MCH20260708002">投诉管理</button></div></div></td>
                   </tr>
                   <tr>
                     <td>北辰供应链</td>
                     <td>北辰退款专户</td>
                     <td>MCH20260708003</td>
+                    <td class="complaint-total-cell">18</td>
+                    <td class="order-count-cell">3,975</td>
+                    <td class="complaint-rate-cell">0.45%</td>
                     <td class="merchant-type-cell">退款商户</td>
                     <td class="transfer-scene-cell">企业赔付</td>
                     <td class="balance-value-cell">
@@ -1413,12 +2058,15 @@
                     <td class="today-transfer-cell">¥4,500.00</td>
                     <td class="single-limit-cell">¥5,000.00</td>
                     <td>2026-07-08 12:41</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="北辰供应链" data-merchant-name="北辰退款专户" data-merchant-id="MCH20260708003" data-merchant-type="退款商户" data-transfer-scene="企业赔付" data-balance="¥24,905.00" data-updated="2026-07-08 12:41" data-daily-limit="20000.00" data-today-transfer="4500.00" data-single-limit="5000.00">商户号配置</button></td>
+                    <td class="action-cell"><div class="action-dropdown" data-action-dropdown><button class="action-trigger" type="button" data-action-dropdown-trigger aria-haspopup="true" aria-expanded="false">操作<span class="action-caret" aria-hidden="true"></span></button><div class="action-menu"><button class="action-menu-item" type="button" data-open-merchant-config data-enterprise="北辰供应链" data-merchant-name="北辰退款专户" data-merchant-id="MCH20260708003" data-complaint-total="18" data-order-count="3975" data-complaint-rate="0.45%" data-merchant-type="退款商户" data-transfer-scene="企业赔付" data-balance="¥24,905.00" data-updated="2026-07-08 12:41" data-daily-limit="20000.00" data-today-transfer="4500.00" data-single-limit="5000.00">商户号编辑</button><button class="action-menu-item" type="button" data-open-complaint-management data-merchant-id="MCH20260708003">投诉管理</button></div></div></td>
                   </tr>
                   <tr>
                     <td>恒启智能制造</td>
                     <td>恒启结算商户</td>
                     <td>MCH20260708004</td>
+                    <td class="complaint-total-cell">4</td>
+                    <td class="order-count-cell">15,420</td>
+                    <td class="complaint-rate-cell">0.03%</td>
                     <td class="merchant-type-cell">收款商户</td>
                     <td class="transfer-scene-cell"></td>
                     <td class="balance-value-cell"></td>
@@ -1426,12 +2074,15 @@
                     <td class="today-transfer-cell"></td>
                     <td class="single-limit-cell"></td>
                     <td>2026-07-08 11:35</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="恒启智能制造" data-merchant-name="恒启结算商户" data-merchant-id="MCH20260708004" data-merchant-type="收款商户" data-transfer-scene="" data-balance="" data-updated="2026-07-08 11:35" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号配置</button></td>
+                    <td class="action-cell"><div class="action-dropdown" data-action-dropdown><button class="action-trigger" type="button" data-action-dropdown-trigger aria-haspopup="true" aria-expanded="false">操作<span class="action-caret" aria-hidden="true"></span></button><div class="action-menu"><button class="action-menu-item" type="button" data-open-merchant-config data-enterprise="恒启智能制造" data-merchant-name="恒启结算商户" data-merchant-id="MCH20260708004" data-complaint-total="4" data-order-count="15420" data-complaint-rate="0.03%" data-merchant-type="收款商户" data-transfer-scene="" data-balance="" data-updated="2026-07-08 11:35" data-daily-limit="" data-today-transfer="" data-single-limit="">商户号编辑</button><button class="action-menu-item" type="button" data-open-complaint-management data-merchant-id="MCH20260708004">投诉管理</button></div></div></td>
                   </tr>
                   <tr>
                     <td>启航运营服务</td>
                     <td>启航售后退款</td>
                     <td>MCH20260708005</td>
+                    <td class="complaint-total-cell">12</td>
+                    <td class="order-count-cell">2,860</td>
+                    <td class="complaint-rate-cell">0.42%</td>
                     <td class="merchant-type-cell">退款商户</td>
                     <td class="transfer-scene-cell">企业赔付</td>
                     <td class="balance-value-cell">
@@ -1444,7 +2095,7 @@
                     <td class="today-transfer-cell">¥3,100.00</td>
                     <td class="single-limit-cell">¥3,000.00</td>
                     <td>2026-07-08 10:26</td>
-                    <td><button class="link" type="button" data-open-merchant-config data-enterprise="启航运营服务" data-merchant-name="启航售后退款" data-merchant-id="MCH20260708005" data-merchant-type="退款商户" data-transfer-scene="企业赔付" data-balance="¥12,608.72" data-updated="2026-07-08 10:26" data-daily-limit="15000.00" data-today-transfer="3100.00" data-single-limit="3000.00">商户号配置</button></td>
+                    <td class="action-cell"><div class="action-dropdown" data-action-dropdown><button class="action-trigger" type="button" data-action-dropdown-trigger aria-haspopup="true" aria-expanded="false">操作<span class="action-caret" aria-hidden="true"></span></button><div class="action-menu"><button class="action-menu-item" type="button" data-open-merchant-config data-enterprise="启航运营服务" data-merchant-name="启航售后退款" data-merchant-id="MCH20260708005" data-complaint-total="12" data-order-count="2860" data-complaint-rate="0.42%" data-merchant-type="退款商户" data-transfer-scene="企业赔付" data-balance="¥12,608.72" data-updated="2026-07-08 10:26" data-daily-limit="15000.00" data-today-transfer="3100.00" data-single-limit="3000.00">商户号编辑</button><button class="action-menu-item" type="button" data-open-complaint-management data-merchant-id="MCH20260708005">投诉管理</button></div></div></td>
                   </tr>
                 </tbody>
               </table>
@@ -1463,31 +2114,815 @@
               <span>页</span>
             </div>
           </div>
+
+
+
+          <div class="page-view" data-view="交易账单">
+            <section class="bill-download">
+              <div class="bill-notice">
+                <span class="bill-clock" aria-hidden="true"></span>
+                <span>每日 10:00 前完成数据更新，当前数据更新至 2026-08-01</span>
+              </div>
+
+              <div class="bill-form">
+                <div class="bill-row">
+                  <div class="bill-label">商户号</div>
+                  <div class="bill-control">
+                    <input class="text-input bill-merchant-input" id="tradeBillMerchantQuery" type="text" placeholder="请输入商户号" aria-label="商户号">
+                  </div>
+                </div>
+
+                <div class="bill-row">
+                  <div class="bill-label">账单类型</div>
+                  <div class="bill-control">
+                    <div class="radio-group" role="radiogroup" aria-label="账单类型">
+                      <label class="radio-option"><input type="radio" name="billType" value="ALL" checked>所有交易</label>
+                      <label class="radio-option"><input type="radio" name="billType" value="SUCCESS">支付账单</label>
+                      <label class="radio-option"><input type="radio" name="billType" value="REFUND">退款账单</label>
+                    </div>
+                    <div class="bill-hint">微信交易账单接口支持 ALL、SUCCESS、REFUND；三类账单均不包含充值退款订单。</div>
+                  </div>
+                </div>
+
+                <div class="bill-row">
+                  <div class="bill-label">账单日期</div>
+                  <div class="bill-control">
+                    <label class="date-range-field bill-date-range-field has-value" data-date-range-picker data-date-policy="recentThreeMonthsExcludeToday" data-shortcuts="week,month,quarter" data-month-base="2026-07-01" data-range-start="2026-07-26" data-range-end="2026-08-01" data-start-placeholder="开始日期" data-end-placeholder="结束日期">
+                      <input id="tradeBillDateQuery" type="hidden" value="2026-07-26 至 2026-08-01">
+                      <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="账单日期" aria-expanded="false">
+                        <span class="date-range-icon" aria-hidden="true"></span>
+                        <span class="date-range-start" data-date-range-start>2026-07-26</span>
+                        <span class="date-range-separator">至</span>
+                        <span class="date-range-end" data-date-range-end>2026-08-01</span>
+                      </button>
+                      <button class="date-range-clear" type="button" aria-label="清除账单日期">×</button>
+                      <div class="date-range-panel" data-date-range-panel></div>
+                    </label>
+                    <div class="bill-hint">可选择昨天及之前、最近3个月内的账单日期；当天不可选择。</div>
+                  </div>
+                </div>
+
+                <div class="bill-row">
+                  <div class="bill-label">导出格式</div>
+                  <div class="bill-control">
+                    <div class="radio-group" role="radiogroup" aria-label="导出格式">
+                      <label class="radio-option"><input type="radio" name="exportFormat" value="xlsx" checked>Excel</label>
+                      <label class="radio-option"><input type="radio" name="exportFormat" value="csv">CSV</label>
+                    </div>
+                    <div class="bill-hint">下载账单文件时，后端会获取临时下载地址、完成校验后打包为 ZIP。</div>
+                  </div>
+                </div>
+
+                <div class="bill-row">
+                  <div class="bill-label"></div>
+                  <div class="bill-control">
+                    <div class="bill-actions">
+                      <button class="btn btn-primary" type="button" data-toast="账单文件打包下载中">下载账单文件</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+
+
+          <div class="page-view" data-view="交易账单详情">
+            <div class="inner-tabs bill-detail-tabs" role="tablist" aria-label="交易账单类型">
+              <button class="inner-tab active" type="button" role="tab" aria-selected="true" data-bill-detail-tab="all">所有交易账单</button>
+              <button class="inner-tab" type="button" role="tab" aria-selected="false" data-bill-detail-tab="refund">退款账单</button>
+              <button class="inner-tab" type="button" role="tab" aria-selected="false" data-bill-detail-tab="payment">支付账单</button>
+            </div>
+
+              <div class="bill-detail-pane active" data-bill-detail-pane="all">
+                <section class="filters bill-detail-filters">
+                  <div class="filter-grid">
+                    <label class="date-range-field" data-date-range-picker data-start-placeholder="交易开始时间" data-end-placeholder="交易结束时间">
+                      <input id="billDetailTradeTimeQuery" type="hidden" value="">
+                      <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="交易时间" aria-expanded="false">
+                        <span class="date-range-icon" aria-hidden="true"></span>
+                        <span class="date-range-start" data-date-range-start>交易开始时间</span>
+                        <span class="date-range-separator">至</span>
+                        <span class="date-range-end" data-date-range-end>交易结束时间</span>
+                      </button>
+                      <button class="date-range-clear" type="button" aria-label="清除交易时间">×</button>
+                      <div class="date-range-panel" data-date-range-panel></div>
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入商户号" aria-label="商户号">
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入设备号" aria-label="设备号">
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入微信订单号" aria-label="微信订单号">
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入商户订单号" aria-label="商户订单号">
+                    </label>
+                    <label>
+                      <span class="select" data-select data-placeholder="请选择交易类型">
+                        <button class="select-trigger" type="button" aria-label="交易类型">请选择交易类型</button>
+                        <button class="select-clear" type="button" aria-label="清除交易类型">×</button>
+                        <span class="caret"></span>
+                        <span class="select-options">
+                          <button class="select-option" type="button">MICROPAY</button>
+                          <button class="select-option" type="button">JSAPI</button>
+                          <button class="select-option" type="button">NATIVE</button>
+                          <button class="select-option" type="button">APP</button>
+                          <button class="select-option" type="button">FACE</button>
+                        </span>
+                      </span>
+                    </label>
+                    <label>
+                      <span class="select" data-select data-placeholder="请选择交易状态">
+                        <button class="select-trigger" type="button" aria-label="交易状态">请选择交易状态</button>
+                        <button class="select-clear" type="button" aria-label="清除交易状态">×</button>
+                        <span class="caret"></span>
+                        <span class="select-options">
+                          <button class="select-option" type="button">SUCCESS</button>
+                          <button class="select-option" type="button">REFUND</button>
+                          <button class="select-option" type="button">REVOKED</button>
+                        </span>
+                      </span>
+                    </label>
+                    <label>
+                      <span class="select" data-select data-placeholder="请选择付款银行">
+                        <button class="select-trigger" type="button" aria-label="付款银行">请选择付款银行</button>
+                        <button class="select-clear" type="button" aria-label="清除付款银行">×</button>
+                        <span class="caret"></span>
+                        <span class="select-options">
+                          <button class="select-option" type="button">CMB_CREDIT</button>
+                          <button class="select-option" type="button">ICBC_DEBIT</button>
+                          <button class="select-option" type="button">CCB_CREDIT</button>
+                          <button class="select-option" type="button">ABC_DEBIT</button>
+                          <button class="select-option" type="button">OTHERS</button>
+                        </span>
+                      </span>
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入微信退款单号" aria-label="微信退款单号">
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入商户退款单号" aria-label="商户退款单号">
+                    </label>
+                  </div>
+                  <div class="actions">
+                    <button class="btn btn-outline" type="button" data-toast="查询完成">查询</button>
+                    <button class="btn btn-gray" type="button" data-reset-bill-detail-filters data-toast="筛选已重置">重置</button>
+                  </div>
+                </section>
+
+                <div class="operate-bar bill-detail-operate">
+                  <div class="operate-actions">
+                    <button class="btn btn-primary" type="button" data-toast="已导出所有交易账单">导出</button>
+                  </div>
+                </div>
+
+                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>每日 10:10 前完成数据更新，当前数据更新至 2026-08-01</span></div>
+
+                <div class="table-shell trade-bill-detail-table is-all">
+                  <table>
+                    <thead>
+                      <tr>
+                    <th style="width: 160px;">交易时间</th>
+                    <th style="width: 170px;">公众账号ID</th>
+                    <th style="width: 120px;">商户号</th>
+                    <th style="width: 150px;">特约商户号</th>
+                    <th style="width: 120px;">设备号</th>
+                    <th style="width: 210px;">微信订单号</th>
+                    <th style="width: 210px;">商户订单号</th>
+                    <th style="width: 170px;">用户标识</th>
+                    <th style="width: 120px;">交易类型</th>
+                    <th style="width: 120px;">交易状态</th>
+                    <th style="width: 120px;">付款银行</th>
+                    <th style="width: 120px;">货币种类</th>
+                    <th style="width: 130px;">应结订单金额</th>
+                    <th style="width: 130px;">代金券金额</th>
+                    <th style="width: 210px;">微信退款单号</th>
+                    <th style="width: 210px;">商户退款单号</th>
+                    <th style="width: 130px;">退款金额</th>
+                    <th style="width: 130px;">充值券退款金额</th>
+                    <th style="width: 120px;">退款类型</th>
+                    <th style="width: 120px;">退款状态</th>
+                    <th style="width: 180px;">商品名称</th>
+                    <th style="width: 180px;">商户数据包</th>
+                    <th style="width: 130px;">手续费</th>
+                    <th style="width: 120px;">费率</th>
+                    <th style="width: 130px;">订单金额</th>
+                    <th style="width: 130px;">申请退款金额</th>
+                    <th style="width: 180px;">费率备注</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                  <tr>
+                    <td>2026-08-01 09:18:26</td>
+                    <td>wx9a7f8c2b164012a1</td>
+                    <td>1900000109</td>
+                    <td>0</td>
+                    <td>cashier001</td>
+                    <td>420000238920260801901245001</td>
+                    <td>ORD202608010001</td>
+                    <td>openid_8f21b4c9a2</td>
+                    <td>JSAPI</td>
+                    <td>SUCCESS</td>
+                    <td>CMB_CREDIT</td>
+                    <td>CNY</td>
+                    <td>1280.00</td>
+                    <td>0.00</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td></td>
+                    <td></td>
+                    <td>企业服务订单</td>
+                    <td>service_order</td>
+                    <td>7.68</td>
+                    <td>0.60%</td>
+                    <td>1280.00</td>
+                    <td>0.00</td>
+                    <td>726</td>
+                  </tr>
+                  <tr>
+                    <td>2026-08-01 10:58:12</td>
+                    <td>wx9a7f8c2b164012a1</td>
+                    <td>1900000109</td>
+                    <td>0</td>
+                    <td>cashier001</td>
+                    <td>420000238920260731901204782</td>
+                    <td>ORD202607310096</td>
+                    <td>openid_f2d138a60c</td>
+                    <td>JSAPI</td>
+                    <td>REFUND</td>
+                    <td>CCB_CREDIT</td>
+                    <td>CNY</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>50302023892026080100012001</td>
+                    <td>RF202608010001</td>
+                    <td>560.00</td>
+                    <td>0.00</td>
+                    <td>ORIGINAL</td>
+                    <td>SUCCESS</td>
+                    <td>企业售后服务</td>
+                    <td>after_sale_refund</td>
+                    <td>-3.36</td>
+                    <td>0.60%</td>
+                    <td>0.00</td>
+                    <td>560.00</td>
+                    <td>726</td>
+                  </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="pagination">
+                  <span class="pagination-total">共 128 条记录</span>
+                  <span class="select-mini">10 条/页</span>
+                  <button class="page-nav" type="button">‹</button>
+                  <button class="page-box" type="button">1</button>
+                  <button class="page-btn" type="button">2</button>
+                  <button class="page-nav" type="button">›</button>
+                  <span>前往</span>
+                  <input class="jump-input" type="text" value="1">
+                  <span>页</span>
+                </div>
+              </div>
+
+              <div class="bill-detail-pane" data-bill-detail-pane="refund">
+                <section class="filters bill-detail-filters">
+                  <div class="filter-grid">
+                    <label class="date-range-field" data-date-range-picker data-start-placeholder="交易开始时间" data-end-placeholder="交易结束时间">
+                      <input id="refundBillTradeTimeQuery" type="hidden" value="">
+                      <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="交易时间" aria-expanded="false">
+                        <span class="date-range-icon" aria-hidden="true"></span>
+                        <span class="date-range-start" data-date-range-start>交易开始时间</span>
+                        <span class="date-range-separator">至</span>
+                        <span class="date-range-end" data-date-range-end>交易结束时间</span>
+                      </button>
+                      <button class="date-range-clear" type="button" aria-label="清除交易时间">×</button>
+                      <div class="date-range-panel" data-date-range-panel></div>
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入商户号" aria-label="商户号">
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入设备号" aria-label="设备号">
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入微信订单号" aria-label="微信订单号">
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入商户订单号" aria-label="商户订单号">
+                    </label>
+                    <label class="date-range-field" data-date-range-picker data-start-placeholder="退款申请开始时间" data-end-placeholder="退款申请结束时间">
+                      <input id="refundBillApplyTimeQuery" type="hidden" value="">
+                      <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="退款申请时间" aria-expanded="false">
+                        <span class="date-range-icon" aria-hidden="true"></span>
+                        <span class="date-range-start" data-date-range-start>退款申请开始时间</span>
+                        <span class="date-range-separator">至</span>
+                        <span class="date-range-end" data-date-range-end>退款申请结束时间</span>
+                      </button>
+                      <button class="date-range-clear" type="button" aria-label="清除退款申请时间">×</button>
+                      <div class="date-range-panel" data-date-range-panel></div>
+                    </label>
+                    <label class="date-range-field" data-date-range-picker data-start-placeholder="退款成功开始时间" data-end-placeholder="退款成功结束时间">
+                      <input id="refundBillSuccessTimeQuery" type="hidden" value="">
+                      <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="退款成功时间" aria-expanded="false">
+                        <span class="date-range-icon" aria-hidden="true"></span>
+                        <span class="date-range-start" data-date-range-start>退款成功开始时间</span>
+                        <span class="date-range-separator">至</span>
+                        <span class="date-range-end" data-date-range-end>退款成功结束时间</span>
+                      </button>
+                      <button class="date-range-clear" type="button" aria-label="清除退款成功时间">×</button>
+                      <div class="date-range-panel" data-date-range-panel></div>
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入微信退款单号" aria-label="微信退款单号">
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入商户退款单号" aria-label="商户退款单号">
+                    </label>
+                  </div>
+                  <div class="actions">
+                    <button class="btn btn-outline" type="button" data-toast="查询完成">查询</button>
+                    <button class="btn btn-gray" type="button" data-reset-bill-detail-filters data-toast="筛选已重置">重置</button>
+                  </div>
+                </section>
+
+                <div class="operate-bar bill-detail-operate">
+                  <div class="operate-actions">
+                    <button class="btn btn-primary" type="button" data-toast="已导出退款账单">导出</button>
+                  </div>
+                </div>
+
+                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>每日 10:10 前完成数据更新，当前数据更新至 2026-08-01</span></div>
+
+                <div class="table-shell trade-bill-detail-table is-refund">
+                  <table>
+                    <thead>
+                      <tr>
+                    <th style="width: 160px;">交易时间</th>
+                    <th style="width: 170px;">公众账号ID</th>
+                    <th style="width: 120px;">商户号</th>
+                    <th style="width: 150px;">特约商户号</th>
+                    <th style="width: 120px;">设备号</th>
+                    <th style="width: 210px;">微信订单号</th>
+                    <th style="width: 210px;">商户订单号</th>
+                    <th style="width: 170px;">用户标识</th>
+                    <th style="width: 120px;">交易类型</th>
+                    <th style="width: 120px;">交易状态</th>
+                    <th style="width: 120px;">付款银行</th>
+                    <th style="width: 120px;">货币种类</th>
+                    <th style="width: 130px;">应结订单金额</th>
+                    <th style="width: 130px;">代金券金额</th>
+                    <th style="width: 160px;">退款申请时间</th>
+                    <th style="width: 160px;">退款成功时间</th>
+                    <th style="width: 210px;">微信退款单号</th>
+                    <th style="width: 210px;">商户退款单号</th>
+                    <th style="width: 130px;">退款金额</th>
+                    <th style="width: 130px;">充值券退款金额</th>
+                    <th style="width: 120px;">退款类型</th>
+                    <th style="width: 120px;">退款状态</th>
+                    <th style="width: 180px;">商品名称</th>
+                    <th style="width: 180px;">商户数据包</th>
+                    <th style="width: 130px;">手续费</th>
+                    <th style="width: 120px;">费率</th>
+                    <th style="width: 130px;">订单金额</th>
+                    <th style="width: 130px;">申请退款金额</th>
+                    <th style="width: 180px;">费率备注</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                  <tr>
+                    <td>2026-08-01 10:58:12</td>
+                    <td>wx9a7f8c2b164012a1</td>
+                    <td>1900000109</td>
+                    <td>0</td>
+                    <td>cashier001</td>
+                    <td>420000238920260731901204782</td>
+                    <td>ORD202607310096</td>
+                    <td>openid_f2d138a60c</td>
+                    <td>JSAPI</td>
+                    <td>REFUND</td>
+                    <td>CCB_CREDIT</td>
+                    <td>CNY</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>2026-08-01 10:58:12</td>
+                    <td>2026-08-01 11:03:40</td>
+                    <td>50302023892026080100012001</td>
+                    <td>RF202608010001</td>
+                    <td>560.00</td>
+                    <td>0.00</td>
+                    <td>ORIGINAL</td>
+                    <td>SUCCESS</td>
+                    <td>企业售后服务</td>
+                    <td>after_sale_refund</td>
+                    <td>-3.36</td>
+                    <td>0.60%</td>
+                    <td>0.00</td>
+                    <td>560.00</td>
+                    <td>726</td>
+                  </tr>
+                  <tr>
+                    <td>2026-07-31 16:18:09</td>
+                    <td>wx9a7f8c2b164012a1</td>
+                    <td>1900000109</td>
+                    <td>0</td>
+                    <td>pos002</td>
+                    <td>420000238920260731901155401</td>
+                    <td>ORD202607310018</td>
+                    <td>openid_71b0ce49d8</td>
+                    <td>MICROPAY</td>
+                    <td>REFUND</td>
+                    <td>ABC_DEBIT</td>
+                    <td>CNY</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>2026-07-31 16:18:09</td>
+                    <td>2026-07-31 16:25:31</td>
+                    <td>50302023892026073100009018</td>
+                    <td>RF202607310018</td>
+                    <td>1280.00</td>
+                    <td>0.00</td>
+                    <td>ORIGINAL</td>
+                    <td>SUCCESS</td>
+                    <td>退款专户订单</td>
+                    <td>refund_account</td>
+                    <td>-7.68</td>
+                    <td>0.60%</td>
+                    <td>0.00</td>
+                    <td>1280.00</td>
+                    <td>726</td>
+                  </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="pagination">
+                  <span class="pagination-total">共 36 条记录</span>
+                  <span class="select-mini">10 条/页</span>
+                  <button class="page-nav" type="button">‹</button>
+                  <button class="page-box" type="button">1</button>
+                  <button class="page-btn" type="button">2</button>
+                  <button class="page-nav" type="button">›</button>
+                  <span>前往</span>
+                  <input class="jump-input" type="text" value="1">
+                  <span>页</span>
+                </div>
+              </div>
+
+              <div class="bill-detail-pane" data-bill-detail-pane="payment">
+                <section class="filters bill-detail-filters">
+                  <div class="filter-grid">
+                    <label class="date-range-field" data-date-range-picker data-start-placeholder="交易开始时间" data-end-placeholder="交易结束时间">
+                      <input id="paymentBillTradeTimeQuery" type="hidden" value="">
+                      <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="交易时间" aria-expanded="false">
+                        <span class="date-range-icon" aria-hidden="true"></span>
+                        <span class="date-range-start" data-date-range-start>交易开始时间</span>
+                        <span class="date-range-separator">至</span>
+                        <span class="date-range-end" data-date-range-end>交易结束时间</span>
+                      </button>
+                      <button class="date-range-clear" type="button" aria-label="清除交易时间">×</button>
+                      <div class="date-range-panel" data-date-range-panel></div>
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入商户号" aria-label="商户号">
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入设备号" aria-label="设备号">
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入微信订单号" aria-label="微信订单号">
+                    </label>
+                    <label>
+                      <input class="text-input" type="text" placeholder="请输入商户订单号" aria-label="商户订单号">
+                    </label>
+                  </div>
+                  <div class="actions">
+                    <button class="btn btn-outline" type="button" data-toast="查询完成">查询</button>
+                    <button class="btn btn-gray" type="button" data-reset-bill-detail-filters data-toast="筛选已重置">重置</button>
+                  </div>
+                </section>
+
+                <div class="operate-bar bill-detail-operate">
+                  <div class="operate-actions">
+                    <button class="btn btn-primary" type="button" data-toast="已导出支付账单">导出</button>
+                  </div>
+                </div>
+
+                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>每日 10:10 前完成数据更新，当前数据更新至 2026-08-01</span></div>
+
+                <div class="table-shell trade-bill-detail-table is-payment">
+                  <table>
+                    <thead>
+                      <tr>
+                    <th style="width: 160px;">交易时间</th>
+                    <th style="width: 170px;">公众账号ID</th>
+                    <th style="width: 120px;">商户号</th>
+                    <th style="width: 150px;">特约商户号</th>
+                    <th style="width: 120px;">设备号</th>
+                    <th style="width: 210px;">微信订单号</th>
+                    <th style="width: 210px;">商户订单号</th>
+                    <th style="width: 170px;">用户标识</th>
+                    <th style="width: 120px;">交易类型</th>
+                    <th style="width: 120px;">交易状态</th>
+                    <th style="width: 120px;">付款银行</th>
+                    <th style="width: 120px;">货币种类</th>
+                    <th style="width: 130px;">应结订单金额</th>
+                    <th style="width: 130px;">代金券金额</th>
+                    <th style="width: 180px;">商品名称</th>
+                    <th style="width: 180px;">商户数据包</th>
+                    <th style="width: 130px;">手续费</th>
+                    <th style="width: 120px;">费率</th>
+                    <th style="width: 130px;">订单金额</th>
+                    <th style="width: 180px;">费率备注</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                  <tr>
+                    <td>2026-08-01 09:18:26</td>
+                    <td>wx9a7f8c2b164012a1</td>
+                    <td>1900000109</td>
+                    <td>0</td>
+                    <td>cashier001</td>
+                    <td>420000238920260801901245001</td>
+                    <td>ORD202608010001</td>
+                    <td>openid_8f21b4c9a2</td>
+                    <td>JSAPI</td>
+                    <td>SUCCESS</td>
+                    <td>CMB_CREDIT</td>
+                    <td>CNY</td>
+                    <td>1280.00</td>
+                    <td>0.00</td>
+                    <td>企业服务订单</td>
+                    <td>service_order</td>
+                    <td>7.68</td>
+                    <td>0.60%</td>
+                    <td>1280.00</td>
+                    <td>726</td>
+                  </tr>
+                  <tr>
+                    <td>2026-08-01 10:42:08</td>
+                    <td>wx9a7f8c2b164012a1</td>
+                    <td>1900000109</td>
+                    <td>0</td>
+                    <td>app001</td>
+                    <td>420000238920260801901286724</td>
+                    <td>ORD202608010026</td>
+                    <td>openid_65ac91f0bd</td>
+                    <td>APP</td>
+                    <td>SUCCESS</td>
+                    <td>ICBC_DEBIT</td>
+                    <td>CNY</td>
+                    <td>328.00</td>
+                    <td>0.00</td>
+                    <td>云桥企业收款</td>
+                    <td>merchant_collect</td>
+                    <td>1.97</td>
+                    <td>0.60%</td>
+                    <td>328.00</td>
+                    <td>726</td>
+                  </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="pagination">
+                  <span class="pagination-total">共 92 条记录</span>
+                  <span class="select-mini">10 条/页</span>
+                  <button class="page-nav" type="button">‹</button>
+                  <button class="page-box" type="button">1</button>
+                  <button class="page-btn" type="button">2</button>
+                  <button class="page-nav" type="button">›</button>
+                  <span>前往</span>
+                  <input class="jump-input" type="text" value="1">
+                  <span>页</span>
+                </div>
+              </div>
+          </div>
+
+
+          <div class="page-view" data-view="商户号投诉管理">
+            <section class="filters">
+              <div class="filter-grid">
+                <label>
+                  <input class="text-input" type="text" placeholder="请输入处理人" aria-label="处理人">
+                </label>
+                <label>
+                  <input class="text-input" id="complaintMerchantIdQuery" type="text" placeholder="请输入商户号" aria-label="商户号">
+                </label>
+                <label>
+                  <input class="text-input" type="text" placeholder="请输入投诉人电话号码" aria-label="投诉人电话号码">
+                </label>
+                <label>
+                  <input class="text-input" type="text" placeholder="请输入订单号" aria-label="订单号">
+                </label>
+                <label>
+                  <span class="select" data-select data-placeholder="请选择问题类型">
+                    <button class="select-trigger" type="button" aria-label="问题类型">请选择问题类型</button>
+                    <button class="select-clear" type="button" aria-label="清除问题类型">×</button>
+                    <span class="caret"></span>
+                    <span class="select-options">
+                      <button class="select-option" type="button">退款问题</button>
+                      <button class="select-option" type="button">支付失败</button>
+                      <button class="select-option" type="button">商品服务纠纷</button>
+                      <button class="select-option" type="button">疑似欺诈</button>
+                    </span>
+                  </span>
+                </label>
+                <label>
+                  <span class="select" data-select data-placeholder="请选择投诉次数">
+                    <button class="select-trigger" type="button" aria-label="投诉次数">请选择投诉次数</button>
+                    <button class="select-clear" type="button" aria-label="清除投诉次数">×</button>
+                    <span class="caret"></span>
+                    <span class="select-options">
+                      <button class="select-option" type="button">1次</button>
+                      <button class="select-option" type="button">2次</button>
+                      <button class="select-option" type="button">3次及以上</button>
+                    </span>
+                  </span>
+                </label>
+                <label>
+                  <span class="select" data-select data-placeholder="请选择是否已全额退款">
+                    <button class="select-trigger" type="button" aria-label="是否已全额退款">请选择是否已全额退款</button>
+                    <button class="select-clear" type="button" aria-label="清除是否已全额退款">×</button>
+                    <span class="caret"></span>
+                    <span class="select-options">
+                      <button class="select-option" type="button">是</button>
+                      <button class="select-option" type="button">否</button>
+                    </span>
+                  </span>
+                </label>
+                <label>
+                  <input class="text-input" type="text" placeholder="请选择投诉时间" aria-label="投诉时间">
+                </label>
+              </div>
+              <div class="actions">
+                <button class="btn btn-outline" type="button" data-toast="查询完成">查询</button>
+                <button class="btn btn-gray" type="button" data-toast="筛选已重置">重置</button>
+              </div>
+            </section>
+
+            <div class="operate-bar">
+              <div class="operate-actions">
+                <button class="btn btn-primary" type="button" data-toast="已导出投诉列表">导出</button>
+              </div>
+            </div>
+
+            <div class="complaint-status-bar" aria-label="投诉单状态">
+              <button class="complaint-status-tab active" type="button" data-status="全部" data-total="128" aria-pressed="true">全部 128</button>
+              <button class="complaint-status-tab" type="button" data-status="待处理" data-total="18" aria-pressed="false">待处理 18</button>
+              <button class="complaint-status-tab" type="button" data-status="处理中" data-total="37" aria-pressed="false">处理中 37</button>
+              <button class="complaint-status-tab" type="button" data-status="已处理完成" data-total="73" aria-pressed="false">已处理完成 73</button>
+            </div>
+
+            <div class="table-shell complaint-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th style="width: 150px;">商户号ID</th>
+                    <th style="width: 150px;">商户号名称</th>
+                    <th style="width: 120px;">是否已全额退款</th>
+                    <th style="width: 120px;">投诉单状态</th>
+                    <th style="width: 100px;">投诉次数</th>
+                    <th style="width: 190px;">订单信息</th>
+                    <th style="width: 150px;">投诉人联系方式</th>
+                    <th style="width: 260px;">投诉信息</th>
+                    <th style="width: 220px;">投诉内容</th>
+                    <th style="width: 150px;">投诉时间</th>
+                    <th style="width: 160px;">投诉处理完成时间</th>
+                    <th style="width: 220px;">处理信息</th>
+                    <th style="width: 180px;">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-complaint-status="待处理">
+                    <td>MCH20260708003</td>
+                    <td>北辰退款专户</td>
+                    <td>否</td>
+                    <td><span class="status-pill warning">待处理</span></td>
+                    <td>2次</td>
+                    <td><div class="cell-stack"><span class="cell-strong">订单号：ORD202607310018</span><span class="cell-muted">订单金额：¥1,280.00</span></div></td>
+                    <td><div class="cell-stack"><span class="cell-strong">投诉人电话：138****6821</span><span class="cell-muted">投诉人：张女士</span></div></td>
+                    <td><div class="cell-stack"><span class="cell-strong">投诉单号：CP202608010001</span><span class="cell-muted">问题类型：退款问题</span><span class="cell-muted">问题描述：商户承诺退款未到账</span></div></td>
+                    <td class="complaint-content" title="用户反馈申请退款后超过48小时仍未收到退款，希望平台协助处理。"><span class="complaint-content-text">用户反馈申请退款后超过48小时仍未收到退款，希望平台协助处理。</span></td>
+                    <td>2026-08-01 09:18</td>
+                    <td class="complaint-completed-at-cell">-</td>
+                    <td><div class="cell-stack"><span class="cell-muted">处理人：暂无处理人</span><span class="cell-muted">处理人手机号码：-</span><span class="cell-muted">处理时间：-</span></div></td>
+                    <td><span class="row-actions"><button class="link" type="button" data-toast="打开投诉详情">详情</button><button class="link" type="button" data-toast="打开回复窗口">回复</button><button class="link" type="button" data-complete-complaint>处理完成</button></span></td>
+                  </tr>
+                  <tr data-complaint-status="处理中">
+                    <td>MCH20260708005</td>
+                    <td>启航售后退款</td>
+                    <td>是</td>
+                    <td><span class="status-pill processing">处理中</span></td>
+                    <td>1次</td>
+                    <td><div class="cell-stack"><span class="cell-strong">订单号：ORD202607300096</span><span class="cell-muted">订单金额：¥560.00</span></div></td>
+                    <td><div class="cell-stack"><span class="cell-strong">投诉人电话：156****0936</span><span class="cell-muted">投诉人：刘先生</span></div></td>
+                    <td><div class="cell-stack"><span class="cell-strong">投诉单号：CP202607310014</span><span class="cell-muted">问题类型：商品服务纠纷</span><span class="cell-muted">问题描述：服务未按约定完成</span></div></td>
+                    <td class="complaint-content" title="用户已收到全额退款，但仍需商户补充服务处理说明。"><span class="complaint-content-text">用户已收到全额退款，但仍需商户补充服务处理说明。</span></td>
+                    <td>2026-07-31 16:42</td>
+                    <td class="complaint-completed-at-cell">-</td>
+                    <td><div class="cell-stack"><span class="cell-strong">处理人：王佳</span><span class="cell-muted">处理人手机号码：139****1208</span><span class="cell-muted">处理时间：2026-08-01 10:22</span></div></td>
+                    <td><span class="row-actions"><button class="link" type="button" data-toast="打开投诉详情">详情</button><button class="link" type="button" data-toast="打开回复窗口">回复</button><button class="link" type="button" data-complete-complaint>处理完成</button></span></td>
+                  </tr>
+                  <tr data-complaint-status="待处理">
+                    <td>MCH20260708001</td>
+                    <td>星图直营网关</td>
+                    <td>否</td>
+                    <td><span class="status-pill warning">待处理</span></td>
+                    <td>3次及以上</td>
+                    <td><div class="cell-stack"><span class="cell-strong">订单号：ORD202607290044</span><span class="cell-muted">订单金额：¥2,380.00</span></div></td>
+                    <td><div class="cell-stack"><span class="cell-strong">投诉人电话：177****4432</span><span class="cell-muted">投诉人：陈先生</span></div></td>
+                    <td><div class="cell-stack"><span class="cell-strong">投诉单号：CP202607300021</span><span class="cell-muted">问题类型：疑似欺诈</span><span class="cell-muted">问题描述：付款后无法联系商户</span></div></td>
+                    <td class="complaint-content" title="用户多次联系商户未得到回应，要求平台介入核实交易真实性。"><span class="complaint-content-text">用户多次联系商户未得到回应，要求平台介入核实交易真实性。</span></td>
+                    <td>2026-07-30 11:05</td>
+                    <td class="complaint-completed-at-cell">-</td>
+                    <td><div class="cell-stack"><span class="cell-strong">处理人：李明</span><span class="cell-muted">处理人手机号码：137****7812</span><span class="cell-muted">处理时间：2026-07-30 14:36</span></div></td>
+                    <td><span class="row-actions"><button class="link" type="button" data-toast="打开投诉详情">详情</button><button class="link" type="button" data-toast="打开回复窗口">回复</button><button class="link" type="button" data-complete-complaint>处理完成</button></span></td>
+                  </tr>
+                  <tr data-complaint-status="已处理完成">
+                    <td>MCH20260708002</td>
+                    <td>云桥企业收款</td>
+                    <td>是</td>
+                    <td><span class="status-pill">已处理完成</span></td>
+                    <td>1次</td>
+                    <td><div class="cell-stack"><span class="cell-strong">订单号：ORD202607280173</span><span class="cell-muted">订单金额：¥328.00</span></div></td>
+                    <td><div class="cell-stack"><span class="cell-strong">投诉人电话：185****6210</span><span class="cell-muted">投诉人：周女士</span></div></td>
+                    <td><div class="cell-stack"><span class="cell-strong">投诉单号：CP202607290008</span><span class="cell-muted">问题类型：支付失败</span><span class="cell-muted">问题描述：重复扣款后退款</span></div></td>
+                    <td class="complaint-content" title="系统核实存在重复扣款，商户已完成全额退款并回复用户。"><span class="complaint-content-text">系统核实存在重复扣款，商户已完成全额退款并回复用户。</span></td>
+                    <td>2026-07-29 09:27</td>
+                    <td class="complaint-completed-at-cell">2026-07-29 16:10</td>
+                    <td><div class="cell-stack"><span class="cell-strong">处理人：赵蕾</span><span class="cell-muted">处理人手机号码：136****8820</span><span class="cell-muted">处理时间：2026-07-29 16:10</span></div></td>
+                    <td><span class="row-actions"><button class="link" type="button" data-toast="打开投诉详情">详情</button><button class="link" type="button" data-toast="打开回复窗口">回复</button></span></td>
+                  </tr>
+                  <tr class="empty-row complaint-empty-row" hidden>
+                    <td colspan="13">暂无对应状态的投诉记录</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pagination">
+              <span class="pagination-total">共 128 条记录</span>
+              <span class="select-mini">10 条/页</span>
+              <button class="page-nav" type="button">‹</button>
+              <button class="page-box" type="button">1</button>
+              <button class="page-btn" type="button">2</button>
+              <button class="page-btn" type="button">3</button>
+              <button class="page-nav" type="button">›</button>
+              <span>前往</span>
+              <input class="jump-input" type="text" value="1">
+              <span>页</span>
+            </div>
+          </div>
+
+
         </div>
       </section>
     </main>
   </div>
 
+  <div class="global-action-menu" id="merchantActionMenu" role="menu" aria-label="商户操作">
+    <button class="action-menu-item" type="button" data-global-action="config">商户号编辑</button>
+    <button class="action-menu-item" type="button" data-global-action="complaint">投诉管理</button>
+  </div>
+
   <div class="modal-mask hidden" id="merchantConfigMask">
     <section class="modal merchant-config-dialog" role="dialog" aria-modal="true" aria-labelledby="merchantConfigTitle">
       <div class="modal-head">
-        <h2 id="merchantConfigTitle">商户号配置</h2>
+        <h2 id="merchantConfigTitle">商户号编辑</h2>
         <button class="modal-close" type="button" id="merchantConfigClose">×</button>
       </div>
       <div class="dialog-body merchant-config-body">
         <div class="config-section-title">基础信息</div>
         <div class="config-grid">
           <label class="config-field">
-            <span class="field-label">企业名称</span>
-            <input class="text-input" id="configEnterprise" type="text" disabled>
+            <span class="field-label required">企业名称</span>
+            <input class="text-input" id="configEnterprise" type="text" placeholder="请输入企业名称">
           </label>
           <label class="config-field">
-            <span class="field-label">商户名称</span>
-            <input class="text-input" id="configMerchantName" type="text" disabled>
+            <span class="field-label required">商户名称</span>
+            <input class="text-input" id="configMerchantName" type="text" placeholder="请输入商户名称">
           </label>
           <label class="config-field">
-            <span class="field-label">商户号ID</span>
-            <input class="text-input" id="configMerchantId" type="text" disabled>
+            <span class="field-label required">商户号ID</span>
+            <input class="text-input" id="configMerchantId" type="text" placeholder="请输入商户号ID">
+          </label>
+          <label class="config-field">
+            <span class="field-label">投诉总数</span>
+            <input class="text-input" id="configComplaintTotal" type="text" disabled>
+          </label>
+          <label class="config-field">
+            <span class="field-label">交易订单数</span>
+            <input class="text-input" id="configOrderCount" type="text" disabled>
+          </label>
+          <label class="config-field">
+            <span class="field-label">投诉率</span>
+            <input class="text-input" id="configComplaintRate" type="text" disabled>
           </label>
           <label class="config-field" id="configTodayTransferField">
             <span class="field-label">今日已转账金额（元）</span>
@@ -1554,6 +2989,85 @@
     </section>
   </div>
 
+
+  <div class="modal-mask hidden" id="merchantCreateMask">
+    <section class="modal merchant-config-dialog" role="dialog" aria-modal="true" aria-labelledby="merchantCreateTitle">
+      <div class="modal-head">
+        <h2 id="merchantCreateTitle">新增商户号</h2>
+        <button class="modal-close" type="button" id="merchantCreateClose" aria-label="关闭">×</button>
+      </div>
+      <div class="dialog-body merchant-config-body">
+        <div class="config-section-title">基础信息</div>
+        <div class="config-grid">
+          <label class="config-field">
+            <span class="field-label required">企业名称</span>
+            <input class="text-input" id="createEnterprise" type="text" placeholder="请输入企业名称">
+          </label>
+          <label class="config-field">
+            <span class="field-label required">商户名称</span>
+            <input class="text-input" id="createMerchantName" type="text" placeholder="请输入商户名称">
+          </label>
+          <label class="config-field">
+            <span class="field-label required">商户号ID</span>
+            <input class="text-input" id="createMerchantId" type="text" placeholder="请输入商户号ID">
+          </label>
+        </div>
+
+        <div class="config-section-title">配置项</div>
+        <div class="config-grid">
+          <label class="config-field">
+            <span class="field-label required">商户类型</span>
+            <span class="select" id="createMerchantTypeSelect" data-select data-multiple-select data-placeholder="请选择商户类型">
+              <button class="select-trigger" type="button">请选择商户类型</button>
+              <button class="select-clear" type="button" aria-label="清除商户类型">×</button>
+              <span class="caret"></span>
+              <span class="select-options">
+                <button class="select-option" type="button">收款商户</button>
+                <button class="select-option" type="button">退款商户</button>
+              </span>
+            </span>
+          </label>
+          <label class="config-field hidden" id="createBalanceField">
+            <span class="field-label required">商户余额（元）</span>
+            <span class="amount-input">
+              <input class="text-input" id="createBalance" type="text" inputmode="decimal" data-decimal-input placeholder="请输入商户余额">
+            </span>
+          </label>
+          <label class="config-field hidden" id="createDailyLimitField">
+            <span class="field-label required">每日可转账金额上限（元）</span>
+            <span class="amount-input">
+              <input class="text-input" id="createDailyLimit" type="text" inputmode="decimal" data-decimal-input placeholder="请输入金额">
+            </span>
+            <span class="field-hint">每日可转账金额上限为0.1元-50000元</span>
+          </label>
+          <label class="config-field hidden" id="createSingleLimitField">
+            <span class="field-label required">单笔转账金额上限（元）</span>
+            <span class="amount-input">
+              <input class="text-input" id="createSingleLimit" type="text" inputmode="decimal" data-decimal-input placeholder="请输入金额">
+            </span>
+            <span class="field-hint">单笔转账金额上限为0.1元-200元</span>
+          </label>
+          <label class="config-field hidden" id="createTransferSceneField">
+            <span class="field-label required">转账场景</span>
+            <span class="select" id="createTransferSceneSelect" data-select data-placeholder="请选择转账场景">
+              <button class="select-trigger" type="button">请选择转账场景</button>
+              <button class="select-clear" type="button" aria-label="清除转账场景">×</button>
+              <span class="caret"></span>
+              <span class="select-options">
+                <button class="select-option" type="button">企业赔付</button>
+              </span>
+            </span>
+          </label>
+        </div>
+
+        <div class="dialog-actions">
+          <button class="btn btn-gray" type="button" id="merchantCreateCancel">取消</button>
+          <button class="btn btn-primary" type="button" id="merchantCreateSave">保存</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <div class="toast hidden" id="toast">操作成功</div>
 
   <script>
@@ -1562,7 +3076,10 @@
       var toast = document.getElementById("toast");
       var breadcrumbBar = document.querySelector(".breadcrumb-bar");
       var merchantConfigMask = document.getElementById("merchantConfigMask");
+      var merchantCreateMask = document.getElementById("merchantCreateMask");
+      var merchantActionMenu = document.getElementById("merchantActionMenu");
       var activeMerchantRow = null;
+      var activeActionDropdown = null;
 
       function showToast(message) {
         window.clearTimeout(toastTimer);
@@ -1581,8 +3098,82 @@
         });
       }
 
+      function closeAllDateRangePickers(except) {
+        document.querySelectorAll("[data-date-range-picker].open").forEach(function (picker) {
+          if (picker !== except) {
+            picker.classList.remove("open");
+            var trigger = picker.querySelector("[data-date-range-trigger]");
+            if (trigger) {
+              trigger.setAttribute("aria-expanded", "false");
+            }
+          }
+        });
+      }
+
+      function closeAllActionDropdowns(except) {
+        document.querySelectorAll("[data-action-dropdown].open").forEach(function (dropdown) {
+          if (dropdown !== except) {
+            dropdown.classList.remove("open");
+            var trigger = dropdown.querySelector("[data-action-dropdown-trigger]");
+            if (trigger) {
+              trigger.setAttribute("aria-expanded", "false");
+            }
+          }
+        });
+
+        if (!except) {
+          activeActionDropdown = null;
+          merchantActionMenu.classList.remove("open");
+        }
+      }
+
+      function positionActionMenu(dropdown) {
+        var trigger = dropdown.querySelector("[data-action-dropdown-trigger]");
+        var menu = merchantActionMenu;
+
+        if (!trigger || !menu) {
+          return;
+        }
+
+        var rect = trigger.getBoundingClientRect();
+        var gap = 4;
+        var menuWidth = menu.offsetWidth || 116;
+        var menuHeight = menu.offsetHeight || 100;
+        var left = rect.right - menuWidth;
+        var top = rect.bottom + gap;
+
+        left = Math.max(8, Math.min(left, window.innerWidth - menuWidth - 8));
+        if (top + menuHeight > window.innerHeight - 8) {
+          top = Math.max(8, rect.top - menuHeight - gap);
+        }
+
+        menu.style.left = left + "px";
+        menu.style.top = top + "px";
+      }
+
+      function openActionDropdown(dropdown) {
+        var trigger = dropdown.querySelector("[data-action-dropdown-trigger]");
+        closeAllActionDropdowns();
+        dropdown.classList.add("open");
+        activeActionDropdown = dropdown;
+
+        if (trigger) {
+          trigger.setAttribute("aria-expanded", "true");
+        }
+
+        merchantActionMenu.classList.add("open");
+        positionActionMenu(dropdown);
+      }
+
       function setInputValue(id, value) {
         document.getElementById(id).value = value || "";
+      }
+
+      function updateFilterInputClear(input) {
+        var field = input.closest("label");
+        if (field) {
+          field.classList.toggle("has-input-value", input.value.trim() !== "");
+        }
       }
 
       function sanitizeDecimal(value) {
@@ -1606,6 +3197,17 @@
         return isFinite(amount) && amount >= min && amount <= max;
       }
 
+      function formatCount(value) {
+        var count = Number(String(value || "").replace(/,/g, ""));
+        if (!isFinite(count)) {
+          return value || "";
+        }
+
+        return count.toLocaleString("en-US", {
+          maximumFractionDigits: 0
+        });
+      }
+
       function formatMoney(value) {
         if (String(value || "").trim() === "") {
           return "";
@@ -1619,6 +3221,281 @@
           minimumFractionDigits: 2,
           maximumFractionDigits: 2
         });
+      }
+
+      function formatDateValue(date) {
+        var year = date.getFullYear();
+        var month = String(date.getMonth() + 1).padStart(2, "0");
+        var day = String(date.getDate()).padStart(2, "0");
+        return year + "-" + month + "-" + day;
+      }
+
+      function formatDateTimeValue(date) {
+        var hours = String(date.getHours()).padStart(2, "0");
+        var minutes = String(date.getMinutes()).padStart(2, "0");
+        return formatDateValue(date) + " " + hours + ":" + minutes;
+      }
+
+      function parseDateValue(value) {
+        var parts = String(value || "").split("-").map(Number);
+        if (parts.length !== 3 || parts.some(function (item) { return !isFinite(item); })) {
+          return null;
+        }
+        return new Date(parts[0], parts[1] - 1, parts[2]);
+      }
+
+      function addDays(date, days) {
+        var next = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        next.setDate(next.getDate() + days);
+        return next;
+      }
+
+      function addMonthsClamped(date, months) {
+        var targetMonth = new Date(date.getFullYear(), date.getMonth() + months, 1);
+        var day = Math.min(date.getDate(), endOfMonth(targetMonth).getDate());
+        return new Date(targetMonth.getFullYear(), targetMonth.getMonth(), day);
+      }
+
+      function getDatePickerBounds(picker) {
+        var minDate = parseDateValue(picker.dataset.minDate || "");
+        var maxDate = parseDateValue(picker.dataset.maxDate || "");
+
+        if (picker.dataset.datePolicy === "recentThreeMonthsExcludeToday") {
+          var now = new Date();
+          var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+          minDate = addMonthsClamped(today, -3);
+          maxDate = addDays(today, -1);
+        }
+
+        return { minDate: minDate, maxDate: maxDate };
+      }
+
+      function setMonthOffset(date, offset) {
+        return new Date(date.getFullYear(), date.getMonth() + offset, 1);
+      }
+
+      function endOfMonth(date) {
+        return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+      }
+
+      function calculateComplaintRate(complaintTotal, orderCount) {
+        var total = Number(complaintTotal);
+        var count = Number(orderCount);
+
+        if (!isFinite(total) || !isFinite(count) || count <= 0) {
+          return "0.00%";
+        }
+
+        return (total / count * 100).toFixed(2) + "%";
+      }
+
+      var merchantMetricBase = {
+        MCH20260708001: { complaintTotal: 8, orderCount: 12500 },
+        MCH20260708002: { complaintTotal: 2, orderCount: 8430 },
+        MCH20260708003: { complaintTotal: 18, orderCount: 3975 },
+        MCH20260708004: { complaintTotal: 4, orderCount: 15420 },
+        MCH20260708005: { complaintTotal: 12, orderCount: 2860 }
+      };
+
+      function getMerchantMetricsForTradeTime(merchantId, tradeTime) {
+        var base = merchantMetricBase[merchantId];
+
+        if (!base) {
+          return { complaintTotal: 0, orderCount: 0 };
+        }
+
+        if (!String(tradeTime || "").trim()) {
+          return {
+            complaintTotal: base.complaintTotal,
+            orderCount: base.orderCount
+          };
+        }
+
+        var seed = (merchantId + tradeTime).split("").reduce(function (sum, item) {
+          return sum + item.charCodeAt(0);
+        }, 0);
+        var orderRatio = [0.28, 0.36, 0.44, 0.52][seed % 4];
+        var complaintRatio = [0.5, 0.7, 0.9, 1.15][seed % 4];
+
+        return {
+          complaintTotal: Math.max(0, Math.round(base.complaintTotal * complaintRatio)),
+          orderCount: Math.max(1, Math.round(base.orderCount * orderRatio))
+        };
+      }
+
+      function renderMonthCalendar(year, monthIndex, options) {
+        var firstDay = new Date(year, monthIndex, 1);
+        var startDate = addDays(firstDay, -firstDay.getDay());
+        var html = '<div class="date-calendar-head">';
+        html += '<button class="date-month-nav" type="button" data-month-nav="prev"' + (options.left ? '' : ' disabled') + '>‹</button>';
+        html += '<span>' + year + ' 年 ' + (monthIndex + 1) + ' 月</span>';
+        html += '<button class="date-month-nav" type="button" data-month-nav="next"' + (options.right ? '' : ' disabled') + '>›</button>';
+        html += '</div>';
+        html += '<div class="date-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>';
+        html += '<div class="date-days">';
+
+        for (var index = 0; index < 42; index += 1) {
+          var day = addDays(startDate, index);
+          var value = formatDateValue(day);
+          var outside = day.getMonth() !== monthIndex ? ' outside' : '';
+          var disabled = Boolean((options.minDate && day < options.minDate) || (options.maxDate && day > options.maxDate));
+          html += '<button class="date-day' + outside + (disabled ? ' disabled' : '') + '" type="button" data-date-value="' + value + '"' + (disabled ? ' disabled aria-disabled="true"' : '') + '>' + day.getDate() + '</button>';
+        }
+
+        html += '</div>';
+        return html;
+      }
+
+      function renderDateRangePicker(picker) {
+        var panel = picker.querySelector("[data-date-range-panel]");
+        var monthBase = parseDateValue(picker.dataset.monthBase || "2026-05-01") || new Date(2026, 4, 1);
+        var nextMonth = setMonthOffset(monthBase, 1);
+        var bounds = getDatePickerBounds(picker);
+        var previousMonth = setMonthOffset(monthBase, -1);
+        var monthAfterPair = setMonthOffset(monthBase, 2);
+        var canNavigatePrevious = !bounds.minDate || endOfMonth(previousMonth) >= bounds.minDate;
+        var canNavigateNext = !bounds.maxDate || monthAfterPair <= bounds.maxDate;
+        var shortcuts = [
+          ["最近一周", "week"],
+          ["最近一个月", "month"],
+          ["最近3个月", "quarter"],
+          ["最近半年", "half"],
+          ["最近一年", "year"],
+          ["上月", "lastMonth"],
+          ["本月", "currentMonth"],
+          ["次月", "nextMonth"]
+        ];
+        var enabledShortcuts = String(picker.dataset.shortcuts || "").split(",").filter(Boolean);
+        if (enabledShortcuts.length) {
+          shortcuts = shortcuts.filter(function (item) {
+            return enabledShortcuts.indexOf(item[1]) !== -1;
+          });
+        }
+        var html = '<div class="date-shortcuts">';
+        shortcuts.forEach(function (item) {
+          html += '<button class="date-shortcut" type="button" data-range-shortcut="' + item[1] + '">' + item[0] + '</button>';
+        });
+        html += '</div><div class="date-calendar-wrap">';
+        html += '<div class="date-calendar">' + renderMonthCalendar(monthBase.getFullYear(), monthBase.getMonth(), { left: canNavigatePrevious, right: false, minDate: bounds.minDate, maxDate: bounds.maxDate }) + '</div>';
+        html += '<div class="date-calendar">' + renderMonthCalendar(nextMonth.getFullYear(), nextMonth.getMonth(), { left: false, right: canNavigateNext, minDate: bounds.minDate, maxDate: bounds.maxDate }) + '</div>';
+        html += '</div>';
+        panel.innerHTML = html;
+      }
+
+      function refreshDateRangeSelection(picker) {
+        var start = picker.dataset.rangeStart || "";
+        var end = picker.dataset.rangeEnd || "";
+        var startDate = parseDateValue(start);
+        var endDate = parseDateValue(end);
+
+        picker.querySelectorAll("[data-date-value]").forEach(function (day) {
+          var current = parseDateValue(day.dataset.dateValue);
+          var isStart = start && day.dataset.dateValue === start;
+          var isEnd = end && day.dataset.dateValue === end;
+          var inRange = startDate && endDate && current >= startDate && current <= endDate;
+          day.classList.toggle("selected", isStart || isEnd);
+          day.classList.toggle("in-range", Boolean(inRange && !isStart && !isEnd));
+        });
+      }
+
+      function setDateRangeValue(picker, start, end, updateMetrics) {
+        var hiddenInput = picker.querySelector('input[type="hidden"]');
+        picker.dataset.rangeStart = start || "";
+        picker.dataset.rangeEnd = end || "";
+        picker.querySelector("[data-date-range-start]").textContent = start || picker.dataset.startPlaceholder || "开始日期";
+        picker.querySelector("[data-date-range-end]").textContent = end || picker.dataset.endPlaceholder || "结束日期";
+        picker.classList.toggle("has-value", Boolean(start && end));
+        if (hiddenInput) {
+          hiddenInput.value = start && end ? start + " 至 " + end : "";
+        }
+        refreshDateRangeSelection(picker);
+
+        if (updateMetrics && picker.dataset.onRangeChange === "merchantMetrics") {
+          updateMerchantComplaintMetrics();
+        }
+      }
+
+      function clearDateRangePicker(picker, updateMetrics) {
+        setDateRangeValue(picker, "", "", updateMetrics);
+        picker.querySelectorAll("[data-range-shortcut]").forEach(function (shortcut) {
+          shortcut.classList.remove("active");
+        });
+      }
+
+      function getShortcutRange(type, picker) {
+        var bounds = picker ? getDatePickerBounds(picker) : { minDate: null, maxDate: null };
+        var anchor = bounds.maxDate || new Date(2026, 7, 1);
+        var range;
+
+        if (type === "week") {
+          range = [addDays(anchor, -6), anchor];
+        } else if (type === "month") {
+          range = [addDays(anchor, -30), anchor];
+        } else if (type === "quarter") {
+          range = [bounds.minDate || addDays(anchor, -90), anchor];
+        } else if (type === "half") {
+          range = [addDays(anchor, -180), anchor];
+        } else if (type === "year") {
+          range = [addDays(anchor, -365), anchor];
+        } else if (type === "lastMonth") {
+          var lastMonth = new Date(anchor.getFullYear(), anchor.getMonth() - 1, 1);
+          range = [lastMonth, endOfMonth(lastMonth)];
+        } else if (type === "currentMonth") {
+          range = [new Date(anchor.getFullYear(), anchor.getMonth(), 1), endOfMonth(anchor)];
+        } else {
+          var nextMonth = new Date(anchor.getFullYear(), anchor.getMonth() + 1, 1);
+          range = [nextMonth, endOfMonth(nextMonth)];
+        }
+
+        if (bounds.minDate && range[0] < bounds.minDate) {
+          range[0] = bounds.minDate;
+        }
+        if (bounds.maxDate && range[1] > bounds.maxDate) {
+          range[1] = bounds.maxDate;
+        }
+
+        return [formatDateValue(range[0]), formatDateValue(range[1])];
+      }
+
+      function updateMerchantComplaintMetrics() {
+        var tradeTimeInput = document.getElementById("merchantTradeTimeQuery");
+        var tradeTime = tradeTimeInput ? tradeTimeInput.value.trim() : "";
+
+        document.querySelectorAll(".merchant-table tbody tr").forEach(function (row) {
+          var configButton = row.querySelector("[data-open-merchant-config]");
+
+          if (!configButton) {
+            return;
+          }
+
+          var metrics = getMerchantMetricsForTradeTime(configButton.dataset.merchantId, tradeTime);
+          var rate = calculateComplaintRate(metrics.complaintTotal, metrics.orderCount);
+
+          row.querySelector(".complaint-total-cell").textContent = formatCount(metrics.complaintTotal);
+          row.querySelector(".order-count-cell").textContent = formatCount(metrics.orderCount);
+          row.querySelector(".complaint-rate-cell").textContent = rate;
+          configButton.dataset.complaintTotal = String(metrics.complaintTotal);
+          configButton.dataset.orderCount = String(metrics.orderCount);
+          configButton.dataset.complaintRate = rate;
+        });
+      }
+
+      function resetMerchantFilters() {
+        var merchantView = document.querySelector('.page-view[data-view="商户号管理"]');
+
+        if (!merchantView) {
+          return;
+        }
+
+        merchantView.querySelectorAll(".filters .text-input").forEach(function (input) {
+          input.value = "";
+          updateFilterInputClear(input);
+        });
+        merchantView.querySelectorAll(".filters [data-select]").forEach(clearSelectValue);
+        merchantView.querySelectorAll("[data-date-range-picker]").forEach(function (picker) {
+          clearDateRangePicker(picker, false);
+        });
+        updateMerchantComplaintMetrics();
       }
 
       function normalizeMoneyValue(value) {
@@ -1767,6 +3644,29 @@
         return getSingleSelectValue(document.getElementById("configTransferSceneSelect"));
       }
 
+      function setCreateMerchantTypes(value) {
+        setMultiSelectValues(document.getElementById("createMerchantTypeSelect"), value);
+        toggleCreateMerchantFields();
+      }
+
+      function getCreateMerchantTypes() {
+        return getMultiSelectValues(document.getElementById("createMerchantTypeSelect"));
+      }
+
+      function setCreateTransferScene(value) {
+        setSingleSelectValue(document.getElementById("createTransferSceneSelect"), value);
+      }
+
+      function getCreateTransferScene() {
+        return getSingleSelectValue(document.getElementById("createTransferSceneSelect"));
+      }
+
+      function merchantIdExists(merchantId, exceptRow) {
+        return Array.prototype.some.call(document.querySelectorAll("[data-open-merchant-config]"), function (button) {
+          return button.dataset.merchantId === merchantId && button.closest("tr") !== exceptRow;
+        });
+      }
+
       function setRowBalance(row, value) {
         var cell = row.querySelector(".balance-value-cell");
 
@@ -1820,11 +3720,30 @@
         }
       }
 
+      function toggleCreateMerchantFields() {
+        var merchantTypes = getCreateMerchantTypes();
+        var hasRefundMerchant = merchantTypes.indexOf("退款商户") !== -1;
+
+        ["createBalanceField", "createDailyLimitField", "createSingleLimitField", "createTransferSceneField"].forEach(function (id) {
+          document.getElementById(id).classList.toggle("hidden", !hasRefundMerchant);
+        });
+
+        if (!hasRefundMerchant) {
+          setInputValue("createBalance", "");
+          setInputValue("createDailyLimit", "");
+          setInputValue("createSingleLimit", "");
+          setCreateTransferScene("");
+        }
+      }
+
       function openMerchantConfig(button) {
         activeMerchantRow = button.closest("tr");
         setInputValue("configEnterprise", button.dataset.enterprise);
         setInputValue("configMerchantName", button.dataset.merchantName);
         setInputValue("configMerchantId", button.dataset.merchantId);
+        setInputValue("configComplaintTotal", button.dataset.complaintTotal);
+        setInputValue("configOrderCount", formatCount(button.dataset.orderCount));
+        setInputValue("configComplaintRate", button.dataset.complaintRate);
         setInputValue("configBalance", normalizeMoneyValue(button.dataset.balance));
         setInputValue("configUpdated", button.dataset.updated);
         setInputValue("configDailyLimit", button.dataset.dailyLimit);
@@ -1840,19 +3759,198 @@
         merchantConfigMask.classList.add("hidden");
       }
 
+      function openMerchantCreate() {
+        ["createEnterprise", "createMerchantName", "createMerchantId", "createBalance", "createDailyLimit", "createSingleLimit"].forEach(function (id) {
+          setInputValue(id, "");
+        });
+        setCreateMerchantTypes("");
+        setCreateTransferScene("");
+        toggleCreateMerchantFields();
+        merchantCreateMask.classList.remove("hidden");
+      }
+
+      function closeMerchantCreate() {
+        merchantCreateMask.classList.add("hidden");
+        closeAllSelects();
+      }
+
+      function createMerchantActionCell(data) {
+        var cell = document.createElement("td");
+        var dropdown = document.createElement("div");
+        var trigger = document.createElement("button");
+        var caret = document.createElement("span");
+        var menu = document.createElement("div");
+        var configButton = document.createElement("button");
+        var complaintButton = document.createElement("button");
+
+        cell.className = "action-cell";
+        dropdown.className = "action-dropdown";
+        dropdown.dataset.actionDropdown = "";
+        trigger.className = "action-trigger";
+        trigger.type = "button";
+        trigger.dataset.actionDropdownTrigger = "";
+        trigger.setAttribute("aria-haspopup", "true");
+        trigger.setAttribute("aria-expanded", "false");
+        trigger.appendChild(document.createTextNode("操作"));
+        caret.className = "action-caret";
+        caret.setAttribute("aria-hidden", "true");
+        trigger.appendChild(caret);
+
+        menu.className = "action-menu";
+        configButton.className = "action-menu-item";
+        configButton.type = "button";
+        configButton.dataset.openMerchantConfig = "";
+        Object.keys(data).forEach(function (key) {
+          configButton.dataset[key] = data[key];
+        });
+        configButton.textContent = "商户号编辑";
+
+        complaintButton.className = "action-menu-item";
+        complaintButton.type = "button";
+        complaintButton.dataset.openComplaintManagement = "";
+        complaintButton.dataset.merchantId = data.merchantId;
+        complaintButton.textContent = "投诉管理";
+
+        menu.appendChild(configButton);
+        menu.appendChild(complaintButton);
+        dropdown.appendChild(trigger);
+        dropdown.appendChild(menu);
+        cell.appendChild(dropdown);
+        return cell;
+      }
+
+      function appendMerchantRow(data) {
+        var row = document.createElement("tr");
+
+        function appendCell(text, className) {
+          var cell = document.createElement("td");
+          if (className) {
+            cell.className = className;
+          }
+          cell.textContent = text || "";
+          row.appendChild(cell);
+          return cell;
+        }
+
+        appendCell(data.enterprise);
+        appendCell(data.merchantName);
+        appendCell(data.merchantId);
+        appendCell("0", "complaint-total-cell");
+        appendCell("0", "order-count-cell");
+        appendCell("0.00%", "complaint-rate-cell");
+        appendCell(data.merchantType, "merchant-type-cell");
+        appendCell(data.transferScene, "transfer-scene-cell");
+        appendCell("", "balance-value-cell");
+        appendCell(data.dailyLimit ? formatMoney(data.dailyLimit) : "", "daily-limit-cell");
+        appendCell("", "today-transfer-cell");
+        appendCell(data.singleLimit ? formatMoney(data.singleLimit) : "", "single-limit-cell");
+        appendCell(data.updated);
+        row.appendChild(createMerchantActionCell(data));
+        document.querySelector(".merchant-table tbody").appendChild(row);
+        setRowBalance(row, data.balance);
+
+        var total = document.querySelector('[data-view="商户号管理"] .pagination-total');
+        if (total) {
+          var count = Number((total.textContent.match(/\d+/) || [0])[0]);
+          total.textContent = "共 " + (count + 1) + " 条记录";
+        }
+      }
+
+      function saveMerchantCreate() {
+        var enterprise = document.getElementById("createEnterprise").value.trim();
+        var merchantName = document.getElementById("createMerchantName").value.trim();
+        var merchantId = document.getElementById("createMerchantId").value.trim();
+        var merchantTypes = getCreateMerchantTypes();
+        var hasRefundMerchant = merchantTypes.indexOf("退款商户") !== -1;
+        var balance = document.getElementById("createBalance").value.trim();
+        var dailyLimit = document.getElementById("createDailyLimit").value.trim();
+        var singleLimit = document.getElementById("createSingleLimit").value.trim();
+        var transferScene = hasRefundMerchant ? getCreateTransferScene() : "";
+
+        if (!enterprise || !merchantName || !merchantId || !merchantTypes.length) {
+          showToast("请填写正确的必填项");
+          return;
+        }
+        if (merchantIdExists(merchantId, null)) {
+          showToast("商户号ID已存在");
+          return;
+        }
+        if (hasRefundMerchant && (!balance || !dailyLimit || !singleLimit || !isValidDecimal(balance) || !isValidDecimal(dailyLimit) || !isValidDecimal(singleLimit))) {
+          showToast("请填写正确的必填项");
+          return;
+        }
+        if (hasRefundMerchant && !transferScene) {
+          showToast("请选择转账场景");
+          return;
+        }
+        if (hasRefundMerchant && !isAmountInRange(dailyLimit, 0.1, 50000)) {
+          showToast("每日可转账金额上限为0.1元-50000元");
+          return;
+        }
+        if (hasRefundMerchant && !isAmountInRange(singleLimit, 0.1, 200)) {
+          showToast("单笔转账金额上限为0.1元-200元");
+          return;
+        }
+
+        var updated = formatDateTimeValue(new Date());
+        appendMerchantRow({
+          enterprise: enterprise,
+          merchantName: merchantName,
+          merchantId: merchantId,
+          complaintTotal: "0",
+          orderCount: "0",
+          complaintRate: "0.00%",
+          merchantType: merchantTypes.join("、"),
+          transferScene: transferScene,
+          balance: hasRefundMerchant ? formatMoney(balance) : "",
+          updated: updated,
+          dailyLimit: hasRefundMerchant ? dailyLimit : "",
+          todayTransfer: "",
+          singleLimit: hasRefundMerchant ? singleLimit : ""
+        });
+        merchantMetricBase[merchantId] = { complaintTotal: 0, orderCount: 0 };
+        closeMerchantCreate();
+        showToast("商户号新增成功");
+      }
+
+      function openComplaintManagement(merchantId) {
+        var merchantInput = document.getElementById("complaintMerchantIdQuery");
+        if (merchantInput) {
+          merchantInput.value = merchantId || "";
+          updateFilterInputClear(merchantInput);
+        }
+
+        var allStatusTab = document.querySelector('.complaint-status-tab[data-status="全部"]');
+        if (allStatusTab) {
+          allStatusTab.click();
+        }
+
+        activateMenu("商户号投诉管理");
+        showPage("商户号投诉管理");
+        showToast("已带入商户号：" + (merchantId || "-"));
+      }
+
       function saveMerchantConfig() {
+        var enterprise = document.getElementById("configEnterprise").value.trim();
+        var merchantName = document.getElementById("configMerchantName").value.trim();
+        var merchantId = document.getElementById("configMerchantId").value.trim();
         var merchantTypes = getConfigMerchantTypes();
         var merchantType = merchantTypes.join("、");
         var collectionOnly = isCollectionOnlyMerchantTypes(merchantTypes);
         var hasRefundMerchant = merchantTypes.indexOf("退款商户") !== -1;
-        var transferScene = merchantTypes.indexOf("退款商户") !== -1 ? getConfigTransferScene() : "";
+        var transferScene = hasRefundMerchant ? getConfigTransferScene() : "";
         var balance = document.getElementById("configBalance").value.trim();
         var dailyLimit = document.getElementById("configDailyLimit").value.trim();
         var todayTransfer = document.getElementById("configTodayTransfer").value.trim();
         var singleLimit = document.getElementById("configSingleLimit").value.trim();
 
-        if (!merchantTypes.length) {
+        if (!enterprise || !merchantName || !merchantId || !merchantTypes.length) {
           showToast("请填写正确的必填项");
+          return;
+        }
+
+        if (merchantIdExists(merchantId, activeMerchantRow)) {
+          showToast("商户号ID已存在");
           return;
         }
 
@@ -1866,7 +3964,7 @@
           return;
         }
 
-        if (merchantTypes.indexOf("退款商户") !== -1 && !transferScene) {
+        if (hasRefundMerchant && !transferScene) {
           showToast("请选择转账场景");
           return;
         }
@@ -1883,6 +3981,12 @@
 
         if (activeMerchantRow) {
           var configButton = activeMerchantRow.querySelector("[data-open-merchant-config]");
+          var complaintButton = activeMerchantRow.querySelector("[data-open-complaint-management]");
+          var previousMerchantId = configButton.dataset.merchantId;
+          var updated = formatDateTimeValue(new Date());
+          activeMerchantRow.children[0].textContent = enterprise;
+          activeMerchantRow.children[1].textContent = merchantName;
+          activeMerchantRow.children[2].textContent = merchantId;
           activeMerchantRow.querySelector(".merchant-type-cell").textContent = merchantType;
           activeMerchantRow.querySelector(".transfer-scene-cell").textContent = transferScene;
           var balanceText = hasRefundMerchant ? formatMoney(balance) : "";
@@ -1890,16 +3994,28 @@
           activeMerchantRow.querySelector(".daily-limit-cell").textContent = collectionOnly ? "" : formatMoney(dailyLimit);
           activeMerchantRow.querySelector(".today-transfer-cell").textContent = collectionOnly || !todayTransfer ? "" : formatMoney(todayTransfer);
           activeMerchantRow.querySelector(".single-limit-cell").textContent = collectionOnly ? "" : formatMoney(singleLimit);
+          activeMerchantRow.children[12].textContent = updated;
+          configButton.dataset.enterprise = enterprise;
+          configButton.dataset.merchantName = merchantName;
+          configButton.dataset.merchantId = merchantId;
           configButton.dataset.merchantType = merchantType;
           configButton.dataset.transferScene = transferScene;
           configButton.dataset.balance = balanceText;
+          configButton.dataset.updated = updated;
           configButton.dataset.dailyLimit = collectionOnly ? "" : dailyLimit;
           configButton.dataset.todayTransfer = collectionOnly ? "" : todayTransfer;
           configButton.dataset.singleLimit = collectionOnly ? "" : singleLimit;
+          if (complaintButton) {
+            complaintButton.dataset.merchantId = merchantId;
+          }
+          if (previousMerchantId !== merchantId && merchantMetricBase[previousMerchantId]) {
+            merchantMetricBase[merchantId] = merchantMetricBase[previousMerchantId];
+            delete merchantMetricBase[previousMerchantId];
+          }
         }
 
         closeMerchantConfig();
-        showToast("商户号配置已保存");
+        showToast("商户号编辑已保存");
       }
 
       function activateBreadcrumb(page) {
@@ -1953,6 +4069,19 @@
         activateBreadcrumb(requestedPage);
       }
 
+      function closeBreadcrumb(item) {
+        var isActive = item.classList.contains("active");
+        var fallbackItem = item.previousElementSibling || item.nextElementSibling;
+        var fallbackPage = fallbackItem ? fallbackItem.dataset.page : "商户号管理";
+
+        item.remove();
+
+        if (isActive) {
+          activateMenu(fallbackPage);
+          showPage(fallbackPage);
+        }
+      }
+
       document.querySelectorAll(".menu-title").forEach(function (title) {
         title.addEventListener("click", function () {
           var group = title.closest(".menu-group");
@@ -1968,10 +4097,19 @@
       });
 
       breadcrumbBar.addEventListener("click", function (event) {
+        var closeIcon = event.target.closest(".breadcrumb-close");
         var item = event.target.closest(".breadcrumb-item");
+
         if (!item) {
           return;
         }
+
+        if (closeIcon) {
+          event.preventDefault();
+          closeBreadcrumb(item);
+          return;
+        }
+
         activateMenu(item.dataset.page);
         showPage(item.dataset.page);
       });
@@ -1985,6 +4123,91 @@
         });
       });
 
+      document.querySelectorAll("[data-bill-detail-tab]").forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          var page = tab.closest('.page-view[data-view="交易账单详情"]');
+          if (!page) {
+            return;
+          }
+
+          page.querySelectorAll("[data-bill-detail-tab]").forEach(function (item) {
+            item.setAttribute("aria-selected", item === tab ? "true" : "false");
+          });
+          page.querySelectorAll("[data-bill-detail-pane]").forEach(function (pane) {
+            pane.classList.toggle("active", pane.dataset.billDetailPane === tab.dataset.billDetailTab);
+          });
+        });
+      });
+
+      function filterComplaintRows(status, total) {
+        var complaintView = document.querySelector('.page-view[data-view="商户号投诉管理"]');
+
+        if (!complaintView) {
+          return;
+        }
+
+        var visibleCount = 0;
+        complaintView.querySelectorAll("[data-complaint-status]").forEach(function (row) {
+          var shouldShow = status === "全部" || row.dataset.complaintStatus === status;
+          row.hidden = !shouldShow;
+          if (shouldShow) {
+            visibleCount += 1;
+          }
+        });
+
+        var emptyRow = complaintView.querySelector(".complaint-empty-row");
+        if (emptyRow) {
+          emptyRow.hidden = visibleCount !== 0;
+        }
+
+        var totalLabel = complaintView.querySelector(".pagination-total");
+        if (totalLabel) {
+          totalLabel.textContent = "共 " + total + " 条记录";
+        }
+      }
+
+      document.querySelectorAll(".complaint-status-tab").forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          tab.parentElement.querySelectorAll(".complaint-status-tab").forEach(function (item) {
+            item.classList.remove("active");
+            item.setAttribute("aria-pressed", "false");
+          });
+          tab.classList.add("active");
+          tab.setAttribute("aria-pressed", "true");
+          filterComplaintRows(tab.dataset.status || "全部", tab.dataset.total || "0");
+        });
+      });
+
+      document.querySelectorAll("[data-complete-complaint]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          var row = button.closest("[data-complaint-status]");
+          if (!row) {
+            return;
+          }
+
+          row.dataset.complaintStatus = "已处理完成";
+          var status = row.querySelector(".status-pill");
+          if (status) {
+            status.className = "status-pill";
+            status.textContent = "已处理完成";
+          }
+
+          var completedAt = row.querySelector(".complaint-completed-at-cell");
+          if (completedAt) {
+            completedAt.textContent = formatDateTimeValue(new Date());
+          }
+
+          button.remove();
+
+          var activeTab = document.querySelector(".complaint-status-tab.active");
+          if (activeTab) {
+            filterComplaintRows(activeTab.dataset.status || "全部", activeTab.dataset.total || "0");
+          }
+
+          showToast("投诉单已处理完成");
+        });
+      });
+
       document.querySelectorAll("[data-select]").forEach(function (select) {
         if (select.hasAttribute("data-multiple-select")) {
           updateMultiSelectTrigger(select);
@@ -1995,9 +4218,207 @@
         setSingleSelectValue(select, selectedOption ? getOptionValue(selectedOption) : "");
       });
 
+      document.querySelectorAll("[data-date-range-picker]").forEach(function (picker) {
+        renderDateRangePicker(picker);
+        refreshDateRangeSelection(picker);
+      });
+
       document.addEventListener("click", function (event) {
+        var picker = event.target.closest("[data-date-range-picker]");
+
+        if (!picker) {
+          closeAllDateRangePickers();
+          return;
+        }
+
+        if (event.target.closest("[data-date-range-trigger]")) {
+          var willOpen = !picker.classList.contains("open");
+          closeAllDateRangePickers(picker);
+          picker.classList.toggle("open", willOpen);
+          picker.querySelector("[data-date-range-trigger]").setAttribute("aria-expanded", willOpen ? "true" : "false");
+          closeAllSelects();
+          closeAllActionDropdowns();
+          return;
+        }
+
+        if (event.target.closest(".date-range-clear")) {
+          event.preventDefault();
+          clearDateRangePicker(picker, true);
+          picker.classList.remove("open");
+          picker.querySelector("[data-date-range-trigger]").setAttribute("aria-expanded", "false");
+          return;
+        }
+
+        var nav = event.target.closest("[data-month-nav]");
+        if (nav && !nav.disabled) {
+          var baseMonth = parseDateValue(picker.dataset.monthBase || "2026-05-01") || new Date(2026, 4, 1);
+          var nextBase = setMonthOffset(baseMonth, nav.dataset.monthNav === "prev" ? -1 : 1);
+          picker.dataset.monthBase = formatDateValue(nextBase);
+          renderDateRangePicker(picker);
+          refreshDateRangeSelection(picker);
+          return;
+        }
+
+        var shortcut = event.target.closest("[data-range-shortcut]");
+        if (shortcut) {
+          picker.querySelectorAll("[data-range-shortcut]").forEach(function (item) {
+            item.classList.toggle("active", item === shortcut);
+          });
+          var range = getShortcutRange(shortcut.dataset.rangeShortcut, picker);
+          setDateRangeValue(picker, range[0], range[1], true);
+          picker.classList.remove("open");
+          picker.querySelector("[data-date-range-trigger]").setAttribute("aria-expanded", "false");
+          return;
+        }
+
+        var day = event.target.closest("[data-date-value]");
+        if (day && !day.disabled) {
+          var selectedDate = day.dataset.dateValue;
+          var start = picker.dataset.rangeStart || "";
+          var end = picker.dataset.rangeEnd || "";
+
+          picker.querySelectorAll("[data-range-shortcut]").forEach(function (item) {
+            item.classList.remove("active");
+          });
+
+          if (!start || end) {
+            setDateRangeValue(picker, selectedDate, "", false);
+            return;
+          }
+
+          if (parseDateValue(selectedDate) < parseDateValue(start)) {
+            setDateRangeValue(picker, selectedDate, start, true);
+          } else {
+            setDateRangeValue(picker, start, selectedDate, true);
+          }
+          picker.classList.remove("open");
+          picker.querySelector("[data-date-range-trigger]").setAttribute("aria-expanded", "false");
+        }
+      });
+
+      document.querySelectorAll(".filters .text-input").forEach(function (input) {
+        var field = input.closest("label");
+        var clearButton = document.createElement("button");
+
+        clearButton.className = "input-clear";
+        clearButton.type = "button";
+        clearButton.setAttribute("aria-label", "清空" + (input.getAttribute("aria-label") || "输入内容"));
+        clearButton.textContent = "×";
+        field.appendChild(clearButton);
+        updateFilterInputClear(input);
+
+        input.addEventListener("input", function () {
+          updateFilterInputClear(input);
+        });
+
+        clearButton.addEventListener("click", function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          input.value = "";
+          updateFilterInputClear(input);
+          if (input.id === "merchantTradeTimeQuery") {
+            updateMerchantComplaintMetrics();
+          }
+          input.focus();
+        });
+      });
+
+      var merchantQueryButton = document.getElementById("merchantQueryButton");
+      var merchantResetButton = document.getElementById("merchantResetButton");
+      var merchantTradeTimeInput = document.getElementById("merchantTradeTimeQuery");
+
+      if (merchantQueryButton) {
+        merchantQueryButton.addEventListener("click", updateMerchantComplaintMetrics);
+      }
+
+      if (merchantResetButton) {
+        merchantResetButton.addEventListener("click", resetMerchantFilters);
+      }
+
+      document.querySelectorAll("[data-reset-bill-detail-filters]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          var filters = button.closest(".filters");
+          if (!filters) {
+            return;
+          }
+
+          filters.querySelectorAll(".text-input").forEach(function (input) {
+            input.value = "";
+            updateFilterInputClear(input);
+          });
+          filters.querySelectorAll("[data-select]").forEach(clearSelectValue);
+          filters.querySelectorAll("[data-date-range-picker]").forEach(function (picker) {
+            clearDateRangePicker(picker, false);
+          });
+        });
+      });
+
+      if (merchantTradeTimeInput) {
+        merchantTradeTimeInput.addEventListener("input", function () {
+          if (!merchantTradeTimeInput.value.trim()) {
+            updateMerchantComplaintMetrics();
+          }
+        });
+      }
+
+      document.addEventListener("click", function (event) {
+        var trigger = event.target.closest("[data-action-dropdown-trigger]");
+        var globalAction = event.target.closest("[data-global-action]");
+
+        if (trigger) {
+          var dropdown = trigger.closest("[data-action-dropdown]");
+          var willOpen = activeActionDropdown !== dropdown || !merchantActionMenu.classList.contains("open");
+
+          if (willOpen) {
+            openActionDropdown(dropdown);
+          } else {
+            closeAllActionDropdowns();
+          }
+
+          closeAllSelects();
+          return;
+        }
+
+        if (globalAction) {
+          if (activeActionDropdown) {
+            if (globalAction.dataset.globalAction === "config") {
+              openMerchantConfig(activeActionDropdown.querySelector("[data-open-merchant-config]"));
+            }
+
+            if (globalAction.dataset.globalAction === "complaint") {
+              var complaintButton = activeActionDropdown.querySelector("[data-open-complaint-management]");
+              openComplaintManagement(complaintButton ? complaintButton.dataset.merchantId : "");
+            }
+          }
+
+          closeAllActionDropdowns();
+          return;
+        }
+
+        if (!event.target.closest("[data-action-dropdown]") && !event.target.closest("#merchantActionMenu")) {
+          closeAllActionDropdowns();
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        closeAllActionDropdowns();
+      });
+
+      document.addEventListener("scroll", function (event) {
+        if (event.target.closest && event.target.closest(".table-shell")) {
+          closeAllActionDropdowns();
+        }
+      }, true);
+
+      document.addEventListener("click", function (event) {
+        if (event.target.closest("[data-action-dropdown]") || event.target.closest("#merchantActionMenu") || event.target.closest("[data-date-range-picker]")) {
+          closeAllSelects();
+          return;
+        }
+
         var select = event.target.closest("[data-select]");
         if (!select) {
+          closeAllActionDropdowns();
           closeAllSelects();
           return;
         }
@@ -2008,6 +4429,9 @@
           if (select.id === "configMerchantTypeSelect") {
             toggleTransferSceneField();
           }
+          if (select.id === "createMerchantTypeSelect") {
+            toggleCreateMerchantFields();
+          }
           return;
         }
 
@@ -2017,6 +4441,9 @@
 
             if (select.id === "configMerchantTypeSelect") {
               toggleTransferSceneField();
+            }
+            if (select.id === "createMerchantTypeSelect") {
+              toggleCreateMerchantFields();
             }
             return;
           }
@@ -2055,11 +4482,22 @@
         });
       });
 
+      document.querySelectorAll("[data-open-complaint-management]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          openComplaintManagement(button.dataset.merchantId || "");
+        });
+      });
+
       document.querySelectorAll("[data-decimal-input]").forEach(function (input) {
         input.addEventListener("input", function () {
           input.value = sanitizeDecimal(input.value);
         });
       });
+
+      document.getElementById("addMerchantButton").addEventListener("click", openMerchantCreate);
+      document.getElementById("merchantCreateClose").addEventListener("click", closeMerchantCreate);
+      document.getElementById("merchantCreateCancel").addEventListener("click", closeMerchantCreate);
+      document.getElementById("merchantCreateSave").addEventListener("click", saveMerchantCreate);
 
       document.getElementById("merchantConfigClose").addEventListener("click", closeMerchantConfig);
       document.getElementById("merchantConfigCancel").addEventListener("click", closeMerchantConfig);
@@ -2068,6 +4506,12 @@
       merchantConfigMask.addEventListener("click", function (event) {
         if (event.target === merchantConfigMask) {
           closeMerchantConfig();
+        }
+      });
+
+      merchantCreateMask.addEventListener("click", function (event) {
+        if (event.target === merchantCreateMask) {
+          closeMerchantCreate();
         }
       });
     })();
