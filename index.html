@@ -1108,6 +1108,56 @@
       min-width: 2020px;
     }
 
+    .table-head-help {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .table-help-trigger {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--blue);
+      border: 1px solid var(--blue);
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 14px;
+    }
+
+    .table-help-trigger:hover,
+    .table-help-trigger[aria-expanded="true"] {
+      color: var(--blue);
+      border-color: var(--blue);
+      background: #eef6ff;
+    }
+
+    .table-help-popover {
+      position: fixed;
+      z-index: 75;
+      width: max-content;
+      max-width: calc(100vw - 24px);
+      padding: 9px 12px;
+      color: #344054;
+      background: #fff;
+      border: 1px solid #dce3ec;
+      border-radius: 4px;
+      box-shadow: 0 8px 22px rgba(25, 52, 89, 0.16);
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 20px;
+      white-space: nowrap;
+    }
+
+    .table-help-popover.hidden {
+      display: none;
+    }
+
     .complaint-table table {
       min-width: 2440px;
     }
@@ -1994,8 +2044,8 @@
                     <th style="width: 160px;">商户名称</th>
                     <th style="width: 150px;">商户号ID</th>
                     <th style="width: 110px;">投诉总数</th>
-                    <th style="width: 120px;">交易订单数</th>
-                    <th style="width: 110px;">投诉率</th>
+                    <th style="width: 120px;">订单支付成功数</th>
+                    <th style="width: 110px;"><span class="table-head-help">投诉率<button class="table-help-trigger" id="complaintRateHelp" type="button" aria-label="查看投诉率计算公式" aria-expanded="false" aria-describedby="complaintRatePopover" title="投诉率计算公式">i</button></span></th>
                     <th style="width: 120px;">商户类型</th>
                     <th style="width: 150px;">转账场景</th>
                     <th style="width: 150px;">商户余额（元）</th>
@@ -2891,6 +2941,8 @@
     <button class="action-menu-item" type="button" data-global-action="complaint">投诉管理</button>
   </div>
 
+  <div class="table-help-popover hidden" id="complaintRatePopover" role="tooltip">投诉率=订单投诉总数/订单支付成功数*100%</div>
+
   <div class="modal-mask hidden" id="merchantConfigMask">
     <section class="modal merchant-config-dialog" role="dialog" aria-modal="true" aria-labelledby="merchantConfigTitle">
       <div class="modal-head">
@@ -2917,7 +2969,7 @@
             <input class="text-input" id="configComplaintTotal" type="text" disabled>
           </label>
           <label class="config-field">
-            <span class="field-label">交易订单数</span>
+            <span class="field-label">订单支付成功数</span>
             <input class="text-input" id="configOrderCount" type="text" disabled>
           </label>
           <label class="config-field">
@@ -3078,6 +3130,8 @@
       var merchantConfigMask = document.getElementById("merchantConfigMask");
       var merchantCreateMask = document.getElementById("merchantCreateMask");
       var merchantActionMenu = document.getElementById("merchantActionMenu");
+      var complaintRateHelp = document.getElementById("complaintRateHelp");
+      var complaintRatePopover = document.getElementById("complaintRatePopover");
       var activeMerchantRow = null;
       var activeActionDropdown = null;
 
@@ -3088,6 +3142,38 @@
         toastTimer = window.setTimeout(function () {
           toast.classList.add("hidden");
         }, 1800);
+      }
+
+      function closeComplaintRatePopover() {
+        complaintRatePopover.classList.add("hidden");
+        complaintRateHelp.setAttribute("aria-expanded", "false");
+      }
+
+      function positionComplaintRatePopover() {
+        var rect = complaintRateHelp.getBoundingClientRect();
+        complaintRatePopover.classList.remove("hidden");
+        var width = complaintRatePopover.offsetWidth;
+        var height = complaintRatePopover.offsetHeight;
+        var left = rect.left + rect.width / 2 - width / 2;
+        var top = rect.bottom + 8;
+
+        left = Math.max(8, Math.min(left, window.innerWidth - width - 8));
+        if (top + height > window.innerHeight - 8) {
+          top = Math.max(8, rect.top - height - 8);
+        }
+
+        complaintRatePopover.style.left = left + "px";
+        complaintRatePopover.style.top = top + "px";
+      }
+
+      function toggleComplaintRatePopover() {
+        var willOpen = complaintRatePopover.classList.contains("hidden");
+        if (willOpen) {
+          positionComplaintRatePopover();
+        } else {
+          closeComplaintRatePopover();
+        }
+        complaintRateHelp.setAttribute("aria-expanded", willOpen ? "true" : "false");
       }
 
       function closeAllSelects(except) {
@@ -4456,6 +4542,19 @@
         closeAllSelects(select);
         select.classList.toggle("open");
       });
+
+      document.addEventListener("click", function (event) {
+        if (event.target.closest("#complaintRateHelp")) {
+          toggleComplaintRatePopover();
+          return;
+        }
+        if (!event.target.closest("#complaintRatePopover")) {
+          closeComplaintRatePopover();
+        }
+      });
+
+      window.addEventListener("resize", closeComplaintRatePopover);
+      document.addEventListener("scroll", closeComplaintRatePopover, true);
 
       document.querySelectorAll("[data-toast]").forEach(function (button) {
         button.addEventListener("click", function () {
