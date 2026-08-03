@@ -1271,21 +1271,6 @@
     }
 
 
-    .bill-download {
-      min-height: 100%;
-      padding: 28px 28px 40px;
-      background: #fff;
-    }
-
-    .bill-notice {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 28px;
-      color: #8b95a5;
-      font-size: 13px;
-    }
-
     .bill-clock {
       position: relative;
       width: 14px;
@@ -1312,84 +1297,6 @@
       width: 4px;
       height: 1px;
       transform: none;
-    }
-
-    .bill-form {
-      width: min(780px, 100%);
-    }
-
-    .bill-row {
-      display: grid;
-      grid-template-columns: 88px minmax(0, 1fr);
-      column-gap: 20px;
-      align-items: start;
-      margin-bottom: 28px;
-    }
-
-    .bill-label {
-      min-height: 32px;
-      display: flex;
-      align-items: center;
-      color: #2f3542;
-      font-size: 13px;
-    }
-
-    .bill-control {
-      min-width: 0;
-    }
-
-    .bill-merchant-input {
-      width: 266px;
-      max-width: 100%;
-    }
-
-    .radio-group {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 28px;
-      min-height: 32px;
-    }
-
-    .radio-option {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      color: #2f3542;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .radio-option input {
-      width: 16px;
-      height: 16px;
-      margin: 0;
-      accent-color: var(--blue-button);
-    }
-
-    .bill-hint {
-      margin-top: 11px;
-      color: #8f97a3;
-      line-height: 1.6;
-    }
-
-    .bill-date-range-field {
-      width: 266px;
-      max-width: 100%;
-      display: block;
-    }
-
-    .bill-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 36px;
-    }
-
-    .bill-actions .btn {
-      height: 36px;
-      min-width: 108px;
-      font-size: 14px;
     }
 
 
@@ -1957,8 +1864,7 @@
         </button>
         <div class="submenu">
           <button class="submenu-btn active" type="button" data-page="商户号管理">商户号管理</button>
-          <button class="submenu-btn" type="button" data-page="交易账单">交易账单</button>
-          <button class="submenu-btn" type="button" data-page="交易账单详情">交易账单详情</button>
+          <button class="submenu-btn" type="button" data-page="微信交易账单">微信交易账单</button>
         </div>
       </div>
       <div class="menu-group">
@@ -2167,78 +2073,8 @@
 
 
 
-          <div class="page-view" data-view="交易账单">
-            <section class="bill-download">
-              <div class="bill-notice">
-                <span class="bill-clock" aria-hidden="true"></span>
-                <span>每日 10:00 前完成数据更新，当前数据更新至 2026-08-01</span>
-              </div>
-
-              <div class="bill-form">
-                <div class="bill-row">
-                  <div class="bill-label">商户号</div>
-                  <div class="bill-control">
-                    <input class="text-input bill-merchant-input" id="tradeBillMerchantQuery" type="text" placeholder="请输入商户号" aria-label="商户号">
-                  </div>
-                </div>
-
-                <div class="bill-row">
-                  <div class="bill-label">账单类型</div>
-                  <div class="bill-control">
-                    <div class="radio-group" role="radiogroup" aria-label="账单类型">
-                      <label class="radio-option"><input type="radio" name="billType" value="ALL" checked>所有交易</label>
-                      <label class="radio-option"><input type="radio" name="billType" value="SUCCESS">支付账单</label>
-                      <label class="radio-option"><input type="radio" name="billType" value="REFUND">退款账单</label>
-                    </div>
-                    <div class="bill-hint">微信交易账单接口支持 ALL、SUCCESS、REFUND；三类账单均不包含充值退款订单。</div>
-                  </div>
-                </div>
-
-                <div class="bill-row">
-                  <div class="bill-label">账单日期</div>
-                  <div class="bill-control">
-                    <label class="date-range-field bill-date-range-field has-value" data-date-range-picker data-date-policy="recentThreeMonthsExcludeToday" data-shortcuts="week,month,quarter" data-month-base="2026-07-01" data-range-start="2026-07-26" data-range-end="2026-08-01" data-start-placeholder="开始日期" data-end-placeholder="结束日期">
-                      <input id="tradeBillDateQuery" type="hidden" value="2026-07-26 至 2026-08-01">
-                      <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="账单日期" aria-expanded="false">
-                        <span class="date-range-icon" aria-hidden="true"></span>
-                        <span class="date-range-start" data-date-range-start>2026-07-26</span>
-                        <span class="date-range-separator">至</span>
-                        <span class="date-range-end" data-date-range-end>2026-08-01</span>
-                      </button>
-                      <button class="date-range-clear" type="button" aria-label="清除账单日期">×</button>
-                      <div class="date-range-panel" data-date-range-panel></div>
-                    </label>
-                    <div class="bill-hint">可选择昨天及之前、最近3个月内的账单日期；当天不可选择。</div>
-                  </div>
-                </div>
-
-                <div class="bill-row">
-                  <div class="bill-label">导出格式</div>
-                  <div class="bill-control">
-                    <div class="radio-group" role="radiogroup" aria-label="导出格式">
-                      <label class="radio-option"><input type="radio" name="exportFormat" value="xlsx" checked>Excel</label>
-                      <label class="radio-option"><input type="radio" name="exportFormat" value="csv">CSV</label>
-                    </div>
-                    <div class="bill-hint">下载账单文件时，后端会获取临时下载地址、完成校验后打包为 ZIP。</div>
-                  </div>
-                </div>
-
-                <div class="bill-row">
-                  <div class="bill-label"></div>
-                  <div class="bill-control">
-                    <div class="bill-actions">
-                      <button class="btn btn-primary" type="button" data-toast="账单文件打包下载中">下载账单文件</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-
-
-
-          <div class="page-view" data-view="交易账单详情">
-            <div class="inner-tabs bill-detail-tabs" role="tablist" aria-label="交易账单类型">
+          <div class="page-view" data-view="微信交易账单">
+            <div class="inner-tabs bill-detail-tabs" role="tablist" aria-label="微信交易账单类型">
               <button class="inner-tab active" type="button" role="tab" aria-selected="true" data-bill-detail-tab="all">所有交易账单</button>
               <button class="inner-tab" type="button" role="tab" aria-selected="false" data-bill-detail-tab="refund">退款账单</button>
               <button class="inner-tab" type="button" role="tab" aria-selected="false" data-bill-detail-tab="payment">支付账单</button>
@@ -3336,22 +3172,9 @@
         return next;
       }
 
-      function addMonthsClamped(date, months) {
-        var targetMonth = new Date(date.getFullYear(), date.getMonth() + months, 1);
-        var day = Math.min(date.getDate(), endOfMonth(targetMonth).getDate());
-        return new Date(targetMonth.getFullYear(), targetMonth.getMonth(), day);
-      }
-
       function getDatePickerBounds(picker) {
         var minDate = parseDateValue(picker.dataset.minDate || "");
         var maxDate = parseDateValue(picker.dataset.maxDate || "");
-
-        if (picker.dataset.datePolicy === "recentThreeMonthsExcludeToday") {
-          var now = new Date();
-          var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-          minDate = addMonthsClamped(today, -3);
-          maxDate = addDays(today, -1);
-        }
 
         return { minDate: minDate, maxDate: maxDate };
       }
@@ -4211,7 +4034,7 @@
 
       document.querySelectorAll("[data-bill-detail-tab]").forEach(function (tab) {
         tab.addEventListener("click", function () {
-          var page = tab.closest('.page-view[data-view="交易账单详情"]');
+          var page = tab.closest('.page-view[data-view="微信交易账单"]');
           if (!page) {
             return;
           }
