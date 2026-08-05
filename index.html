@@ -703,6 +703,52 @@
       background: #edf1f6;
     }
 
+    .bill-fuzzy-field {
+      z-index: 4;
+    }
+
+    .bill-fuzzy-field.open {
+      z-index: 25;
+    }
+
+    .bill-fuzzy-options {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      right: 0;
+      z-index: 30;
+      max-height: 196px;
+      padding: 5px 0;
+      display: none;
+      overflow-y: auto;
+      background: #fff;
+      border: 1px solid var(--input-border);
+      border-radius: 3px;
+      box-shadow: 0 7px 20px rgba(43, 56, 74, 0.16);
+    }
+
+    .bill-fuzzy-field.open .bill-fuzzy-options {
+      display: block;
+    }
+
+    .bill-fuzzy-option {
+      width: 100%;
+      min-height: 32px;
+      padding: 7px 11px;
+      display: block;
+      color: #4c5666;
+      background: #fff;
+      text-align: left;
+      line-height: 18px;
+      overflow-wrap: anywhere;
+    }
+
+    .bill-fuzzy-option:hover,
+    .bill-fuzzy-option.active {
+      color: var(--blue);
+      background: #edf6ff;
+    }
+
     .date-range-field {
       position: relative;
     }
@@ -1193,6 +1239,66 @@
       color: #8b95a5;
       font-size: 13px;
       line-height: 20px;
+    }
+
+    .bill-summary {
+      margin: 0 18px 14px;
+      background: #fff;
+      border: 1px solid #e6ebf2;
+    }
+
+    .bill-summary-heading {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      color: #344054;
+      border-bottom: 1px solid #edf1f5;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .bill-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(130px, 1fr));
+    }
+
+    .bill-summary-grid.is-compact {
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
+    }
+
+    .bill-summary-item {
+      min-width: 0;
+      min-height: 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 7px;
+      padding: 12px 10px;
+    }
+
+    .bill-summary-item + .bill-summary-item {
+      border-left: 1px solid #edf1f5;
+    }
+
+    .bill-summary-label {
+      overflow: hidden;
+      color: #7b8798;
+      font-size: 12px;
+      line-height: 18px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .bill-summary-value {
+      overflow: hidden;
+      color: #27364d;
+      font-size: 16px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      line-height: 24px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .complaint-table td {
@@ -1791,6 +1897,19 @@
         grid-template-columns: repeat(2, minmax(180px, 1fr));
       }
 
+      .bill-summary-grid,
+      .bill-summary-grid.is-compact {
+        grid-template-columns: repeat(4, minmax(150px, 1fr));
+      }
+
+      .bill-summary-item:nth-child(5) {
+        border-left: 0;
+      }
+
+      .bill-summary-item:nth-child(n + 5) {
+        border-top: 1px solid #edf1f5;
+      }
+
       .workbench-grid {
         grid-template-columns: 1fr;
       }
@@ -1830,6 +1949,19 @@
       .filter-grid,
       .metric-grid {
         grid-template-columns: 1fr;
+      }
+
+      .bill-summary-grid,
+      .bill-summary-grid.is-compact {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .bill-summary-item:nth-child(odd) {
+        border-left: 0;
+      }
+
+      .bill-summary-item:nth-child(n + 3) {
+        border-top: 1px solid #edf1f5;
       }
 
       .operate-bar {
@@ -2154,8 +2286,21 @@
                     </label>
                   </div>
                   <div class="actions">
-                    <button class="btn btn-outline" type="button" data-toast="查询完成">查询</button>
+                    <button class="btn btn-outline" type="button" data-query-bill-summary data-toast="查询完成">查询</button>
                     <button class="btn btn-gray" type="button" data-reset-bill-detail-filters data-toast="筛选已重置">重置</button>
+                  </div>
+                </section>
+
+                <section class="bill-summary" data-bill-summary aria-label="所有交易账单统计">
+                  <div class="bill-summary-heading">账单统计</div>
+                  <div class="bill-summary-grid" aria-live="polite">
+                    <div class="bill-summary-item"><span class="bill-summary-label">交易订单数</span><strong class="bill-summary-value" data-bill-summary-value="orderCount">128</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">应结订单总金额</span><strong class="bill-summary-value" data-bill-summary-value="settlementTotal">¥356,820.00</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">退款总金额</span><strong class="bill-summary-value" data-bill-summary-value="refundTotal">¥24,680.00</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">充值券退款总金额</span><strong class="bill-summary-value" data-bill-summary-value="couponRefundTotal">¥1,280.00</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">手续费总金额</span><strong class="bill-summary-value" data-bill-summary-value="feeTotal">¥2,140.92</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">订单总金额</span><strong class="bill-summary-value" data-bill-summary-value="orderTotal">¥382,780.00</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">申请退款总金额</span><strong class="bill-summary-value" data-bill-summary-value="refundApplyTotal">¥26,450.00</strong></div>
                   </div>
                 </section>
 
@@ -2165,7 +2310,7 @@
                   </div>
                 </div>
 
-                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>每日 10:10 前完成数据更新，当前数据更新至 2026-08-01</span></div>
+                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>平台每日上午10:15开始同步前一天数据，建议在上午10:30后查询，当前数据更新至 2026-08-01</span></div>
 
                 <div class="table-shell trade-bill-detail-table is-all">
                   <table>
@@ -2332,8 +2477,21 @@
                     </label>
                   </div>
                   <div class="actions">
-                    <button class="btn btn-outline" type="button" data-toast="查询完成">查询</button>
+                    <button class="btn btn-outline" type="button" data-query-bill-summary data-toast="查询完成">查询</button>
                     <button class="btn btn-gray" type="button" data-reset-bill-detail-filters data-toast="筛选已重置">重置</button>
+                  </div>
+                </section>
+
+                <section class="bill-summary" data-bill-summary aria-label="退款账单统计">
+                  <div class="bill-summary-heading">账单统计</div>
+                  <div class="bill-summary-grid" aria-live="polite">
+                    <div class="bill-summary-item"><span class="bill-summary-label">交易订单数</span><strong class="bill-summary-value" data-bill-summary-value="orderCount">36</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">应结订单总金额</span><strong class="bill-summary-value" data-bill-summary-value="settlementTotal">¥0.00</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">退款总金额</span><strong class="bill-summary-value" data-bill-summary-value="refundTotal">¥24,680.00</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">充值券退款总金额</span><strong class="bill-summary-value" data-bill-summary-value="couponRefundTotal">¥1,280.00</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">手续费总金额</span><strong class="bill-summary-value" data-bill-summary-value="feeTotal">¥148.08</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">订单总金额</span><strong class="bill-summary-value" data-bill-summary-value="orderTotal">¥0.00</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">申请退款总金额</span><strong class="bill-summary-value" data-bill-summary-value="refundApplyTotal">¥26,450.00</strong></div>
                   </div>
                 </section>
 
@@ -2343,7 +2501,7 @@
                   </div>
                 </div>
 
-                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>每日 10:10 前完成数据更新，当前数据更新至 2026-08-01</span></div>
+                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>平台每日上午10:15开始同步前一天数据，建议在上午10:30后查询，当前数据更新至 2026-08-01</span></div>
 
                 <div class="table-shell trade-bill-detail-table is-refund">
                   <table>
@@ -2488,8 +2646,18 @@
                     </label>
                   </div>
                   <div class="actions">
-                    <button class="btn btn-outline" type="button" data-toast="查询完成">查询</button>
+                    <button class="btn btn-outline" type="button" data-query-bill-summary data-toast="查询完成">查询</button>
                     <button class="btn btn-gray" type="button" data-reset-bill-detail-filters data-toast="筛选已重置">重置</button>
+                  </div>
+                </section>
+
+                <section class="bill-summary" data-bill-summary aria-label="支付账单统计">
+                  <div class="bill-summary-heading">账单统计</div>
+                  <div class="bill-summary-grid is-compact" aria-live="polite">
+                    <div class="bill-summary-item"><span class="bill-summary-label">交易订单数</span><strong class="bill-summary-value" data-bill-summary-value="orderCount">92</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">应结订单总金额</span><strong class="bill-summary-value" data-bill-summary-value="settlementTotal">¥356,820.00</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">手续费总金额</span><strong class="bill-summary-value" data-bill-summary-value="feeTotal">¥2,289.00</strong></div>
+                    <div class="bill-summary-item"><span class="bill-summary-label">订单总金额</span><strong class="bill-summary-value" data-bill-summary-value="orderTotal">¥382,780.00</strong></div>
                   </div>
                 </section>
 
@@ -2499,7 +2667,7 @@
                   </div>
                 </div>
 
-                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>每日 10:10 前完成数据更新，当前数据更新至 2026-08-01</span></div>
+                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>平台每日上午10:15开始同步前一天数据，建议在上午10:30后查询，当前数据更新至 2026-08-01</span></div>
 
                 <div class="table-shell trade-bill-detail-table is-payment">
                   <table>
@@ -3089,8 +3257,192 @@
       function updateFilterInputClear(input) {
         var field = input.closest("label");
         if (field) {
-          field.classList.toggle("has-input-value", input.value.trim() !== "");
+          var hasValue = input.value.trim() !== "";
+          field.classList.toggle("has-input-value", hasValue);
+          if (!hasValue && field.classList.contains("bill-fuzzy-field")) {
+            closeBillFuzzyField(field);
+          }
         }
+      }
+
+      function closeBillFuzzyField(field) {
+        if (!field) {
+          return;
+        }
+
+        field.classList.remove("open");
+        field.dataset.activeIndex = "-1";
+        var input = field.querySelector(".text-input");
+        var options = field.querySelector(".bill-fuzzy-options");
+        if (input) {
+          input.setAttribute("aria-expanded", "false");
+        }
+        if (options) {
+          options.innerHTML = "";
+        }
+      }
+
+      function setActiveBillFuzzyOption(field, nextIndex) {
+        var options = Array.from(field.querySelectorAll(".bill-fuzzy-option"));
+        if (!options.length) {
+          return;
+        }
+
+        var index = (nextIndex + options.length) % options.length;
+        options.forEach(function (option, optionIndex) {
+          option.classList.toggle("active", optionIndex === index);
+          option.setAttribute("aria-selected", optionIndex === index ? "true" : "false");
+        });
+        field.dataset.activeIndex = String(index);
+        options[index].scrollIntoView({ block: "nearest" });
+      }
+
+      function renderBillFuzzyOptions(input) {
+        var field = input.closest(".bill-fuzzy-field");
+        var options = field && field.querySelector(".bill-fuzzy-options");
+        var query = input.value.trim().toLowerCase();
+
+        if (!field || !options || !query) {
+          closeBillFuzzyField(field);
+          return;
+        }
+
+        var matches = (input.billFuzzyOptions || []).filter(function (value) {
+          return value.toLowerCase().indexOf(query) !== -1;
+        }).slice(0, 8);
+
+        options.innerHTML = "";
+        if (!matches.length) {
+          closeBillFuzzyField(field);
+          return;
+        }
+
+        matches.forEach(function (value, index) {
+          var option = document.createElement("button");
+          option.className = "bill-fuzzy-option";
+          option.type = "button";
+          option.setAttribute("role", "option");
+          option.setAttribute("aria-selected", "false");
+          option.textContent = value;
+
+          option.addEventListener("mouseenter", function () {
+            setActiveBillFuzzyOption(field, index);
+          });
+
+          option.addEventListener("click", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            input.value = value;
+            updateFilterInputClear(input);
+            input.focus();
+            closeBillFuzzyField(field);
+          });
+
+          options.appendChild(option);
+        });
+
+        field.dataset.activeIndex = "-1";
+        field.classList.add("open");
+        input.setAttribute("aria-expanded", "true");
+      }
+
+      function collectBillFuzzyOptions(page) {
+        var fieldNames = ["商户号", "设备号", "微信订单号", "商户订单号", "微信退款单号", "商户退款单号"];
+        var values = {};
+        fieldNames.forEach(function (fieldName) {
+          values[fieldName] = [];
+        });
+
+        page.querySelectorAll(".trade-bill-detail-table table").forEach(function (table) {
+          var headings = Array.from(table.querySelectorAll("thead th")).map(function (heading) {
+            return heading.textContent.trim();
+          });
+
+          fieldNames.forEach(function (fieldName) {
+            var columnIndex = headings.indexOf(fieldName);
+            if (columnIndex === -1) {
+              return;
+            }
+
+            table.querySelectorAll("tbody tr").forEach(function (row) {
+              var cell = row.children[columnIndex];
+              var value = cell ? cell.textContent.trim() : "";
+              if (value && value !== "0" && value !== "-" && values[fieldName].indexOf(value) === -1) {
+                values[fieldName].push(value);
+              }
+            });
+          });
+        });
+
+        return values;
+      }
+
+      function initializeBillFuzzySearch() {
+        var page = document.querySelector('.page-view[data-view="微信交易账单"]');
+        if (!page) {
+          return;
+        }
+
+        var fieldNames = ["商户号", "设备号", "微信订单号", "商户订单号", "微信退款单号", "商户退款单号"];
+        var optionsByField = collectBillFuzzyOptions(page);
+        var listIndex = 0;
+
+        page.querySelectorAll(".bill-detail-filters .text-input").forEach(function (input) {
+          var fieldName = input.getAttribute("aria-label");
+          if (fieldNames.indexOf(fieldName) === -1) {
+            return;
+          }
+
+          var field = input.closest("label");
+          var options = document.createElement("div");
+          listIndex += 1;
+          options.id = "bill-fuzzy-options-" + listIndex;
+          options.className = "bill-fuzzy-options";
+          options.setAttribute("role", "listbox");
+          options.setAttribute("aria-label", fieldName + "候选项");
+          field.classList.add("bill-fuzzy-field");
+          field.dataset.activeIndex = "-1";
+          field.appendChild(options);
+
+          input.billFuzzyOptions = optionsByField[fieldName] || [];
+          input.setAttribute("autocomplete", "off");
+          input.setAttribute("aria-autocomplete", "list");
+          input.setAttribute("aria-controls", options.id);
+          input.setAttribute("aria-expanded", "false");
+
+          input.addEventListener("input", function () {
+            renderBillFuzzyOptions(input);
+          });
+
+          input.addEventListener("focus", function () {
+            if (input.value.trim()) {
+              renderBillFuzzyOptions(input);
+            }
+          });
+
+          input.addEventListener("keydown", function (event) {
+            var visibleOptions = Array.from(field.querySelectorAll(".bill-fuzzy-option"));
+            if (event.key === "Escape") {
+              closeBillFuzzyField(field);
+              return;
+            }
+            if (!field.classList.contains("open") || !visibleOptions.length) {
+              return;
+            }
+
+            var activeIndex = Number(field.dataset.activeIndex || -1);
+            if (event.key === "ArrowDown") {
+              event.preventDefault();
+              setActiveBillFuzzyOption(field, activeIndex + 1);
+            } else if (event.key === "ArrowUp") {
+              event.preventDefault();
+              setActiveBillFuzzyOption(field, activeIndex - 1);
+            } else if (event.key === "Enter" && activeIndex >= 0) {
+              event.preventDefault();
+              visibleOptions[activeIndex].click();
+            }
+          });
+        });
       }
 
       function sanitizeDecimal(value) {
@@ -3138,6 +3490,87 @@
           minimumFractionDigits: 2,
           maximumFractionDigits: 2
         });
+      }
+
+      var billSummaryBase = {
+        all: {
+          orderCount: 128,
+          settlementTotal: 356820,
+          refundTotal: 24680,
+          couponRefundTotal: 1280,
+          feeTotal: 2140.92,
+          orderTotal: 382780,
+          refundApplyTotal: 26450
+        },
+        refund: {
+          orderCount: 36,
+          settlementTotal: 0,
+          refundTotal: 24680,
+          couponRefundTotal: 1280,
+          feeTotal: 148.08,
+          orderTotal: 0,
+          refundApplyTotal: 26450
+        },
+        payment: {
+          orderCount: 92,
+          settlementTotal: 356820,
+          feeTotal: 2289,
+          orderTotal: 382780
+        }
+      };
+
+      function getBillSummaryCriteria(filters) {
+        var criteria = [];
+
+        filters.querySelectorAll("input").forEach(function (input) {
+          var value = String(input.value || "").trim();
+          if (value) {
+            criteria.push(value);
+          }
+        });
+
+        filters.querySelectorAll("[data-select].has-value").forEach(function (select) {
+          var trigger = select.querySelector(".select-trigger");
+          var value = trigger ? trigger.textContent.trim() : "";
+          if (value) {
+            criteria.push(value);
+          }
+        });
+
+        return criteria;
+      }
+
+      function updateBillSummary(filters) {
+        var pane = filters ? filters.closest("[data-bill-detail-pane]") : null;
+        var summary = pane ? pane.querySelector("[data-bill-summary]") : null;
+        var scope = pane ? pane.dataset.billDetailPane : "";
+        var base = billSummaryBase[scope];
+
+        if (!summary || !base) {
+          return;
+        }
+
+        var criteria = getBillSummaryCriteria(filters);
+        var seed = criteria.join("|").split("").reduce(function (total, character) {
+          return total + character.charCodeAt(0);
+        }, 0);
+        var factor = criteria.length ? Math.max(0.01, Math.pow(0.58, criteria.length) * (0.92 + seed % 15 / 100)) : 1;
+        var metrics = {};
+        Object.keys(base).forEach(function (key) {
+          metrics[key] = key === "orderCount"
+            ? (criteria.length ? Math.max(1, Math.round(base[key] * factor)) : base[key])
+            : base[key] * factor;
+        });
+
+        summary.querySelectorAll("[data-bill-summary-value]").forEach(function (value) {
+          var key = value.dataset.billSummaryValue;
+          value.textContent = key === "orderCount" ? formatCount(metrics[key]) : formatMoney(metrics[key] === 0 ? "0" : metrics[key]);
+        });
+
+        var total = pane.querySelector(".pagination-total");
+        if (total) {
+          total.textContent = "共 " + formatCount(metrics.orderCount) + " 条记录";
+        }
       }
 
       function formatDateValue(date) {
@@ -3273,6 +3706,11 @@
         if (enabledShortcuts.length) {
           shortcuts = shortcuts.filter(function (item) {
             return enabledShortcuts.indexOf(item[1]) !== -1;
+          });
+        }
+        if (picker.closest('.page-view[data-view="微信交易账单"]')) {
+          shortcuts = shortcuts.filter(function (item) {
+            return item[1] !== "nextMonth";
           });
         }
         var html = '<div class="date-shortcuts">';
@@ -4227,6 +4665,14 @@
         });
       });
 
+      initializeBillFuzzySearch();
+
+      document.addEventListener("click", function (event) {
+        if (!event.target.closest(".bill-fuzzy-field")) {
+          document.querySelectorAll(".bill-fuzzy-field.open").forEach(closeBillFuzzyField);
+        }
+      });
+
       var merchantQueryButton = document.getElementById("merchantQueryButton");
       var merchantResetButton = document.getElementById("merchantResetButton");
       var merchantTradeTimeInput = document.getElementById("merchantTradeTimeQuery");
@@ -4238,6 +4684,12 @@
       if (merchantResetButton) {
         merchantResetButton.addEventListener("click", resetMerchantFilters);
       }
+
+      document.querySelectorAll("[data-query-bill-summary]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          updateBillSummary(button.closest(".filters"));
+        });
+      });
 
       document.querySelectorAll("[data-reset-bill-detail-filters]").forEach(function (button) {
         button.addEventListener("click", function () {
@@ -4254,6 +4706,7 @@
           filters.querySelectorAll("[data-date-range-picker]").forEach(function (picker) {
             clearDateRangePicker(picker, false);
           });
+          updateBillSummary(filters);
         });
       });
 
