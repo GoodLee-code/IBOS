@@ -1657,6 +1657,20 @@
       margin-top: auto;
     }
 
+    .page-view[data-view="微信交易账单"] .pagination {
+      position: sticky;
+      bottom: 0;
+      z-index: 12;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      flex: 0 0 auto;
+      background: #fff;
+      border-top: 1px solid #edf1f5;
+      box-shadow: 0 -4px 12px rgba(35, 64, 100, 0.04);
+    }
+
     .pagination-total {
       margin-right: auto;
       color: #333;
@@ -2291,6 +2305,14 @@
                   </div>
                 </section>
 
+                <div class="operate-bar bill-detail-operate">
+                  <div class="operate-actions">
+                    <button class="btn btn-primary" type="button" data-toast="已导出所有交易账单">导出</button>
+                  </div>
+                </div>
+
+                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>平台每日上午10:15开始同步前一天数据，建议在上午10:30后查询，当前数据更新至 2026-08-01</span></div>
+
                 <section class="bill-summary" data-bill-summary aria-label="所有交易账单统计">
                   <div class="bill-summary-heading">账单统计</div>
                   <div class="bill-summary-grid" aria-live="polite">
@@ -2303,14 +2325,6 @@
                     <div class="bill-summary-item"><span class="bill-summary-label">申请退款总金额</span><strong class="bill-summary-value" data-bill-summary-value="refundApplyTotal">¥26,450.00</strong></div>
                   </div>
                 </section>
-
-                <div class="operate-bar bill-detail-operate">
-                  <div class="operate-actions">
-                    <button class="btn btn-primary" type="button" data-toast="已导出所有交易账单">导出</button>
-                  </div>
-                </div>
-
-                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>平台每日上午10:15开始同步前一天数据，建议在上午10:30后查询，当前数据更新至 2026-08-01</span></div>
 
                 <div class="table-shell trade-bill-detail-table is-all">
                   <table>
@@ -2482,6 +2496,14 @@
                   </div>
                 </section>
 
+                <div class="operate-bar bill-detail-operate">
+                  <div class="operate-actions">
+                    <button class="btn btn-primary" type="button" data-toast="已导出退款账单">导出</button>
+                  </div>
+                </div>
+
+                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>平台每日上午10:15开始同步前一天数据，建议在上午10:30后查询，当前数据更新至 2026-08-01</span></div>
+
                 <section class="bill-summary" data-bill-summary aria-label="退款账单统计">
                   <div class="bill-summary-heading">账单统计</div>
                   <div class="bill-summary-grid" aria-live="polite">
@@ -2494,14 +2516,6 @@
                     <div class="bill-summary-item"><span class="bill-summary-label">申请退款总金额</span><strong class="bill-summary-value" data-bill-summary-value="refundApplyTotal">¥26,450.00</strong></div>
                   </div>
                 </section>
-
-                <div class="operate-bar bill-detail-operate">
-                  <div class="operate-actions">
-                    <button class="btn btn-primary" type="button" data-toast="已导出退款账单">导出</button>
-                  </div>
-                </div>
-
-                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>平台每日上午10:15开始同步前一天数据，建议在上午10:30后查询，当前数据更新至 2026-08-01</span></div>
 
                 <div class="table-shell trade-bill-detail-table is-refund">
                   <table>
@@ -2651,6 +2665,14 @@
                   </div>
                 </section>
 
+                <div class="operate-bar bill-detail-operate">
+                  <div class="operate-actions">
+                    <button class="btn btn-primary" type="button" data-toast="已导出支付账单">导出</button>
+                  </div>
+                </div>
+
+                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>平台每日上午10:15开始同步前一天数据，建议在上午10:30后查询，当前数据更新至 2026-08-01</span></div>
+
                 <section class="bill-summary" data-bill-summary aria-label="支付账单统计">
                   <div class="bill-summary-heading">账单统计</div>
                   <div class="bill-summary-grid is-compact" aria-live="polite">
@@ -2660,14 +2682,6 @@
                     <div class="bill-summary-item"><span class="bill-summary-label">订单总金额</span><strong class="bill-summary-value" data-bill-summary-value="orderTotal">¥382,780.00</strong></div>
                   </div>
                 </section>
-
-                <div class="operate-bar bill-detail-operate">
-                  <div class="operate-actions">
-                    <button class="btn btn-primary" type="button" data-toast="已导出支付账单">导出</button>
-                  </div>
-                </div>
-
-                <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>平台每日上午10:15开始同步前一天数据，建议在上午10:30后查询，当前数据更新至 2026-08-01</span></div>
 
                 <div class="table-shell trade-bill-detail-table is-payment">
                   <table>
