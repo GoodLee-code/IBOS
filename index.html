@@ -322,6 +322,8 @@
     }
 
     .page-view {
+      --module-component-gap: 14px;
+      --module-region-gap: 21px;
       min-width: 0;
       min-height: 100%;
       flex: 1;
@@ -556,9 +558,20 @@
     }
 
     .filters {
+      position: relative;
       padding: 17px 18px 14px;
       border-top: 1px solid #f0f3f7;
-      border-bottom: 1px solid #f0f3f7;
+      border-bottom: 0;
+    }
+
+    .filters::after {
+      content: "";
+      position: absolute;
+      right: 18px;
+      bottom: 0;
+      left: 18px;
+      height: 1px;
+      background: #f0f3f7;
     }
 
     .filter-grid {
@@ -1038,8 +1051,8 @@
     .actions {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-top: 16px;
+      gap: var(--module-component-gap);
+      margin-top: var(--module-component-gap);
     }
 
     .btn {
@@ -1121,17 +1134,17 @@
     }
 
     .operate-bar {
-      padding: 14px 18px;
+      padding: 0 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: var(--module-component-gap);
     }
 
     .operate-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: var(--module-component-gap);
       margin-top: 0;
     }
 
@@ -1152,6 +1165,22 @@
 
     .merchant-table table {
       min-width: 2020px;
+    }
+
+    .juhuo-refund-table table {
+      min-width: 2790px;
+    }
+
+    #juhuoRefundFilters .date-range-panel {
+      right: 0;
+      left: auto;
+    }
+
+    .status-pill.refund-revoked {
+      color: #657182;
+      cursor: help;
+      background: #f4f6f8;
+      border-color: #dce2e9;
     }
 
     .table-head-help {
@@ -1232,7 +1261,7 @@
     }
 
     .bill-detail-update-tip {
-      margin: -2px 18px 12px;
+      margin: 0 18px var(--module-component-gap);
       display: flex;
       align-items: center;
       gap: 8px;
@@ -1242,7 +1271,7 @@
     }
 
     .bill-summary {
-      margin: 0 18px 14px;
+      margin: 0 18px var(--module-component-gap);
       background: #fff;
       border: 1px solid #e6ebf2;
     }
@@ -1308,15 +1337,17 @@
       vertical-align: middle;
     }
 
-    .complaint-status-bar {
-      margin: 0 18px 14px;
+    .complaint-status-bar,
+    .juhuo-refund-status-bar {
+      margin: 0 18px var(--module-component-gap);
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: var(--module-component-gap);
     }
 
-    .complaint-status-tab {
+    .complaint-status-tab,
+    .juhuo-refund-status-tab {
       height: 30px;
       min-width: 82px;
       padding: 0 14px;
@@ -1326,12 +1357,14 @@
       border-radius: 999px;
     }
 
-    .complaint-status-tab:hover {
+    .complaint-status-tab:hover,
+    .juhuo-refund-status-tab:hover {
       color: var(--blue);
       border-color: #b9d9f6;
     }
 
-    .complaint-status-tab.active {
+    .complaint-status-tab.active,
+    .juhuo-refund-status-tab.active {
       color: var(--blue);
       background: #edf6ff;
       border-color: #78b8f4;
@@ -1442,6 +1475,24 @@
       background: #f8fbff;
     }
 
+    .juhuo-refund-table th:last-child,
+    .juhuo-refund-table td:last-child {
+      position: sticky;
+      right: 0;
+      z-index: 3;
+      background: #fff;
+      box-shadow: -1px 0 0 #e7ebf1;
+    }
+
+    .juhuo-refund-table th:last-child {
+      z-index: 4;
+      background: #fbfcfe;
+    }
+
+    .juhuo-refund-table tbody tr:hover td:last-child {
+      background: #f8fbff;
+    }
+
     th {
       height: 38px;
       color: #4b5563;
@@ -1484,6 +1535,30 @@
 
     .link:hover {
       color: #0b69bd;
+      text-decoration: underline;
+    }
+
+    [data-revoke-juhuo-refund] {
+      color: #e04646;
+    }
+
+    [data-delete-juhuo-refund] {
+      color: #e04646;
+    }
+
+    [data-delete-juhuo-refund]:hover {
+      color: #c93636;
+    }
+
+    .juhuo-refund-action-cell .table-actions-inline {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      white-space: nowrap;
+    }
+
+    [data-revoke-juhuo-refund]:hover {
+      color: #c93636;
       text-decoration: underline;
     }
 
@@ -1657,6 +1732,14 @@
       margin-top: auto;
     }
 
+    .filters + .operate-bar,
+    .filters + .juhuo-refund-status-bar,
+    .operate-bar + .table-shell,
+    .operate-bar + .complaint-status-bar,
+    .operate-bar + .bill-detail-update-tip {
+      margin-top: var(--module-region-gap);
+    }
+
     .page-view[data-view="微信交易账单"] .pagination {
       position: sticky;
       bottom: 0;
@@ -1740,6 +1823,444 @@
       width: min(860px, calc(100vw - 64px));
     }
 
+    .payment-password-dialog {
+      width: min(440px, calc(100vw - 32px));
+    }
+
+    #juhuoRefundProcessMask {
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.45);
+    }
+
+    .refund-process-dialog {
+      width: min(960px, calc(100vw - 48px));
+      max-height: 90vh;
+      overflow: hidden;
+      color: #1f2937;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .refund-process-dialog .modal-head {
+      height: 64px;
+      padding: 0 24px;
+      border-color: #e2e8f0;
+    }
+
+    .refund-process-dialog .modal-head h2 {
+      color: #1f2937;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .refund-process-dialog .modal-close {
+      width: 20px;
+      height: 20px;
+      color: #64748b;
+      border-radius: 4px;
+      font-size: 20px;
+      line-height: 18px;
+    }
+
+    .refund-process-dialog .modal-close:hover {
+      color: #1f2937;
+      background: transparent;
+    }
+
+    .refund-process-dialog .dialog-body {
+      max-height: calc(90vh - 64px);
+      padding: 20px 24px 24px;
+      overflow-y: auto;
+    }
+
+    .refund-process-info-section,
+    .refund-process-refund-section {
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #e8eef7;
+      border-radius: 10px;
+    }
+
+    .refund-process-refund-section {
+      margin-top: 16px;
+    }
+
+    .refund-process-dialog .config-section-title {
+      height: auto;
+      margin: 0 0 20px;
+      color: #1e293b;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .refund-process-dialog .config-section-title::before {
+      width: 4px;
+      height: 16px;
+      margin-right: 8px;
+      background: #1677ff;
+      border-radius: 3px;
+    }
+
+    .config-grid.refund-process-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 28px;
+      row-gap: 18px;
+      margin-bottom: 0;
+    }
+
+    .refund-process-dialog .field-label {
+      margin-bottom: 8px;
+      color: #334155;
+      font-size: 14px;
+    }
+
+    .refund-process-dialog .field-label.required::before {
+      color: #f04438;
+    }
+
+    .refund-process-grid .text-input {
+      width: 100%;
+      height: 40px;
+      padding: 0 12px;
+      color: #1f2937;
+      background: #fff;
+      border-color: #cbd5e1;
+      border-radius: 6px;
+    }
+
+    .refund-process-grid .text-input::placeholder,
+    .refund-process-grid .textarea-input::placeholder {
+      color: #94a3b8;
+    }
+
+    .refund-process-grid .text-input:focus,
+    .refund-process-grid .textarea-input:focus {
+      outline: none;
+      border-color: #1677ff;
+      box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.1);
+    }
+
+    .refund-process-grid .text-input:disabled {
+      padding: 0 12px;
+      color: #475569;
+      cursor: default;
+      opacity: 1;
+      background: #f8fafc;
+      border-color: #e2e8f0;
+      -webkit-text-fill-color: #475569;
+    }
+
+    .refund-status-readonly {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 40px;
+      padding: 0 12px;
+      color: #06a77d;
+      background: #edf9f4;
+      border: 1px solid #c9eddf;
+      border-radius: 6px;
+    }
+
+    .refund-status-readonly.warning {
+      color: #d77713;
+      background: #fff8ed;
+      border-color: #ffe1b8;
+    }
+
+    .refund-status-readonly.processing {
+      color: var(--blue);
+      background: var(--blue-light);
+      border-color: #c7e2fb;
+    }
+
+    .refund-status-readonly.danger {
+      color: #e04646;
+      background: #fff1f1;
+      border-color: #ffd4d4;
+    }
+
+    .refund-status-readonly.refund-revoked {
+      color: #657182;
+      background: #f4f6f8;
+      border-color: #dce2e9;
+    }
+
+    .refund-status-dot {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      background: currentColor;
+      border-radius: 50%;
+    }
+
+    .refund-process-note {
+      grid-column: 1 / -1;
+    }
+
+    .refund-process-merchant-order {
+      grid-column: 1 / -1;
+      width: calc((100% - 28px) / 2);
+    }
+
+    .refund-order-detail-panel {
+      grid-column: 1 / -1;
+      padding: 16px;
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+
+    .refund-order-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 28px;
+      row-gap: 18px;
+    }
+
+    .refund-order-detail-panel .text-input:disabled {
+      background: #fff;
+    }
+
+    .refund-process-grid .textarea-input {
+      height: 72px;
+      min-height: 72px;
+      padding: 9px 12px;
+      color: #1f2937;
+      resize: none;
+      background: #fff;
+      border-color: #cbd5e1;
+      border-radius: 6px;
+    }
+
+    .refund-amount-input-wrap {
+      position: relative;
+    }
+
+    .refund-amount-prefix {
+      position: absolute;
+      top: 0;
+      left: 12px;
+      display: none;
+      align-items: center;
+      height: 40px;
+      color: #475569;
+      pointer-events: none;
+    }
+
+    .refund-amount-input-wrap.has-value .refund-amount-prefix {
+      display: flex;
+    }
+
+    .refund-amount-input-wrap.has-value .text-input {
+      padding-left: 28px;
+    }
+
+    .refund-amount-hint {
+      display: block;
+      margin-top: 7px;
+      color: #94a3b8;
+      font-size: 12px;
+    }
+
+    .payment-screenshot-button {
+      position: relative;
+      display: block;
+      width: 80px;
+      height: 96px;
+      padding: 0;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+    }
+
+    .table-payment-screenshot-button {
+      display: block;
+      width: 44px;
+      height: 52px;
+      padding: 0;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+    }
+
+    .table-payment-screenshot-button:hover,
+    .table-payment-screenshot-button:focus-visible {
+      border-color: #1677ff;
+      box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.1);
+    }
+
+    .table-payment-screenshot-button img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .payment-screenshot-button:hover {
+      border-color: #1677ff;
+      box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.1);
+    }
+
+    .payment-screenshot-button img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .payment-screenshot-hover {
+      position: absolute;
+      inset: auto 0 0;
+      padding: 5px 0;
+      color: #fff;
+      background: rgba(15, 23, 42, 0.72);
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .payment-screenshot-button:hover .payment-screenshot-hover,
+    .payment-screenshot-button:focus-visible .payment-screenshot-hover {
+      opacity: 1;
+    }
+
+    .refund-process-dialog .dialog-actions {
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .refund-process-dialog .dialog-actions .btn {
+      width: 88px;
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .refund-process-dialog .dialog-actions .btn-gray {
+      color: #334155;
+      background: #fff;
+      border-color: #cbd5e1;
+    }
+
+    .refund-process-dialog .dialog-actions .btn-primary {
+      color: #fff;
+      background: #1677ff;
+      border-color: #1677ff;
+    }
+
+    .refund-process-dialog .dialog-actions .btn-primary:hover {
+      background: #4096ff;
+      border-color: #4096ff;
+    }
+
+    .payment-screenshot-dialog {
+      width: min(420px, calc(100vw - 32px));
+    }
+
+    .payment-screenshot-preview {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: calc(100vh - 178px);
+      margin: 0 auto;
+      border: 1px solid #edf1f5;
+      border-radius: 3px;
+    }
+
+    .delete-refund-dialog {
+      width: min(440px, calc(100vw - 32px));
+    }
+
+    .delete-refund-warning {
+      padding: 12px 14px;
+      color: #4c5666;
+      background: #fff5f5;
+      border: 1px solid #ffd9d9;
+      border-radius: 3px;
+      line-height: 22px;
+    }
+
+    .delete-refund-warning strong {
+      color: #d9363e;
+      font-weight: 500;
+    }
+
+    .btn-danger {
+      color: #fff;
+      background: #e04646;
+      border-color: #e04646;
+    }
+
+    .btn-danger:hover {
+      background: #c93636;
+      border-color: #c93636;
+    }
+
+    .refund-confirm-order {
+      margin-bottom: 18px;
+      padding: 10px 12px;
+      color: #657182;
+      background: #f7f9fc;
+      border: 1px solid #edf1f5;
+      border-radius: 3px;
+      line-height: 20px;
+      overflow-wrap: anywhere;
+    }
+
+    .refund-confirm-order strong {
+      color: #344054;
+      font-weight: 500;
+    }
+
+    .refund-confirm-order span {
+      display: block;
+    }
+
+    .refund-confirm-order span + span {
+      margin-top: 4px;
+    }
+
+    .refund-password-field {
+      display: block;
+    }
+
+    .refund-password-field .text-input {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .refund-password-hint {
+      display: block;
+      margin-top: 7px;
+      color: #8b96a7;
+      font-size: 12px;
+    }
+
+    .payment-password-dialog .btn-primary:disabled {
+      color: #aeb7c3;
+      cursor: not-allowed;
+      background: #edf1f5;
+      border-color: #edf1f5;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .refund-process-dialog .dialog-actions .btn-primary:disabled {
+      color: #94a3b8;
+      cursor: not-allowed;
+      background: #e2e8f0;
+      border-color: #e2e8f0;
+      box-shadow: none;
+      transform: none;
+    }
+
     .modal-head {
       height: 52px;
       display: flex;
@@ -1784,7 +2305,7 @@
       display: flex;
       align-items: center;
       height: 30px;
-      margin-bottom: 12px;
+      margin: 0 0 12px;
       color: #344054;
       font-size: 14px;
       font-weight: 600;
@@ -1983,6 +2504,37 @@
         flex-direction: column;
       }
 
+      .config-grid.refund-process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .refund-process-merchant-order {
+        width: 100%;
+      }
+
+      .refund-order-detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #juhuoRefundProcessMask {
+        padding: 12px;
+      }
+
+      .refund-process-dialog {
+        width: calc(100vw - 24px);
+        max-height: 94vh;
+      }
+
+      .refund-process-dialog .dialog-body {
+        max-height: calc(94vh - 64px);
+        padding: 16px;
+      }
+
+      .refund-process-info-section,
+      .refund-process-refund-section {
+        padding: 16px;
+      }
+
       .modal-mask {
         padding: 20px 12px;
       }
@@ -2019,6 +2571,7 @@
         </button>
         <div class="submenu">
           <button class="submenu-btn" type="button" data-page="商户号投诉管理">商户号投诉管理</button>
+          <button class="submenu-btn" type="button" data-page="聚火退款管理">聚火退款管理</button>
         </div>
       </div>
     </aside>
@@ -2944,6 +3497,257 @@
           </div>
 
 
+          <div class="page-view" data-view="聚火退款管理">
+            <section class="filters" id="juhuoRefundFilters">
+              <div class="filter-grid">
+                <label>
+                  <input class="text-input" id="juhuoRefundOrderQuery" type="text" placeholder="请输入商户订单号" aria-label="商户订单号">
+                </label>
+                <label>
+                  <input class="text-input" id="juhuoRefundRecipientNameQuery" type="text" placeholder="请输入收款人姓名" aria-label="收款人姓名">
+                </label>
+                <label>
+                  <input class="text-input" id="juhuoRefundRecipientPhoneQuery" type="text" inputmode="tel" placeholder="请输入收款人电话号码" aria-label="收款人电话号码">
+                </label>
+
+                <label class="date-range-field" id="juhuoRefundSubmittedTimePicker" data-date-range-picker data-month-base="2026-07-01" data-max-date="2026-08-07" data-shortcuts="week,month,quarter,lastMonth,currentMonth" data-start-placeholder="退款申请提交开始时间" data-end-placeholder="退款申请提交结束时间">
+                  <input type="hidden" value="">
+                  <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="退款申请提交时间" aria-expanded="false">
+                    <span class="date-range-icon" aria-hidden="true"></span>
+                    <span class="date-range-start" data-date-range-start>退款申请提交开始时间</span>
+                    <span class="date-range-separator">至</span>
+                    <span class="date-range-end" data-date-range-end>退款申请提交结束时间</span>
+                  </button>
+                  <button class="date-range-clear" type="button" aria-label="清除退款申请提交时间">×</button>
+                  <div class="date-range-panel" data-date-range-panel></div>
+                </label>
+                <label class="date-range-field" id="juhuoRefundProcessTimePicker" data-date-range-picker data-month-base="2026-07-01" data-max-date="2026-08-07" data-shortcuts="week,month,quarter,lastMonth,currentMonth" data-start-placeholder="处理退款开始时间" data-end-placeholder="处理退款结束时间">
+                  <input type="hidden" value="">
+                  <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="处理退款时间" aria-expanded="false">
+                    <span class="date-range-icon" aria-hidden="true"></span>
+                    <span class="date-range-start" data-date-range-start>处理退款开始时间</span>
+                    <span class="date-range-separator">至</span>
+                    <span class="date-range-end" data-date-range-end>处理退款结束时间</span>
+                  </button>
+                  <button class="date-range-clear" type="button" aria-label="清除处理退款时间">×</button>
+                  <div class="date-range-panel" data-date-range-panel></div>
+                </label>
+                <label class="date-range-field" id="juhuoRefundCompletedTimePicker" data-date-range-picker data-month-base="2026-07-01" data-max-date="2026-08-07" data-shortcuts="week,month,quarter,lastMonth,currentMonth" data-start-placeholder="退款完成开始时间" data-end-placeholder="退款完成结束时间">
+                  <input type="hidden" value="">
+                  <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="退款完成时间" aria-expanded="false">
+                    <span class="date-range-icon" aria-hidden="true"></span>
+                    <span class="date-range-start" data-date-range-start>退款完成开始时间</span>
+                    <span class="date-range-separator">至</span>
+                    <span class="date-range-end" data-date-range-end>退款完成结束时间</span>
+                  </button>
+                  <button class="date-range-clear" type="button" aria-label="清除退款完成时间">×</button>
+                  <div class="date-range-panel" data-date-range-panel></div>
+                </label>
+              </div>
+              <div class="actions">
+                <button class="btn btn-outline" id="juhuoRefundQueryButton" type="button">查询</button>
+                <button class="btn btn-gray" id="juhuoRefundResetButton" type="button">重置</button>
+              </div>
+            </section>
+
+            <div class="juhuo-refund-status-bar" aria-label="退款状态">
+              <button class="juhuo-refund-status-tab active" type="button" data-status="未退款" aria-pressed="true">未退款 0</button>
+              <button class="juhuo-refund-status-tab" type="button" data-status="待确认收款" aria-pressed="false">待确认收款 0</button>
+              <button class="juhuo-refund-status-tab" type="button" data-status="已退款" aria-pressed="false">已退款 0</button>
+              <button class="juhuo-refund-status-tab" type="button" data-status="退款失败" aria-pressed="false">退款失败 0</button>
+              <button class="juhuo-refund-status-tab" type="button" data-status="全部" aria-pressed="false">全部 0</button>
+            </div>
+
+            <div class="table-shell juhuo-refund-table">
+              <table>
+                <colgroup>
+                  <col style="width: 180px">
+                  <col style="width: 120px">
+                  <col style="width: 180px">
+                  <col style="width: 230px">
+                  <col style="width: 230px">
+                  <col style="width: 120px">
+                  <col style="width: 170px">
+                  <col style="width: 120px">
+                  <col style="width: 145px">
+                  <col style="width: 120px">
+                  <col style="width: 220px">
+                  <col style="width: 145px">
+                  <col style="width: 180px">
+                  <col style="width: 180px">
+                  <col style="width: 170px">
+                  <col style="width: 170px">
+                  <col style="width: 170px">
+                  <col style="width: 120px">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>退款申请单号</th>
+                    <th>退款状态</th>
+                    <th>商户订单号</th>
+                    <th>微信支付订单号</th>
+                    <th>商品描述</th>
+                    <th>支付金额</th>
+                    <th>支付完成时间</th>
+                    <th>收款人姓名</th>
+                    <th>收款人电话号码</th>
+                    <th>订单支付截图</th>
+                    <th>退款原因</th>
+                    <th>退款商户号</th>
+                    <th>收款AppID</th>
+                    <th>收款用户open ID</th>
+                    <th>退款申请提交时间</th>
+                    <th>处理退款时间</th>
+                    <th>退款完成时间</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-juhuo-refund-row data-refund-status="已退款" data-wechat-order="420000247820260805901345821" data-merchant-order="JH202608050001" data-payment-amount="368.00" data-payment-completed-at="2026-08-05 09:42:18" data-open-id="openid_78ad24f9ce" data-app-id="wx47d9820a35bf1c72" data-recipient-name="张明" data-recipient-phone="13800138001" data-submitted-at="2026-08-05 09:58:43" data-process-time="2026-08-05 10:03:26" data-refund-completed-time="2026-08-05 10:04:11">
+                    <td>TK202608050001</td>
+                    <td class="juhuo-refund-status-cell"><span class="status-pill">已退款</span></td>
+                    <td>JH202608050001</td>
+                    <td>420000247820260805901345821</td>
+                    <td>聚火会员服务退款</td>
+                    <td>¥368.00</td>
+                    <td>2026-08-05 09:42:18</td>
+                    <td>张明</td>
+                    <td>13800138001</td>
+                    <td>
+                      <button class="table-payment-screenshot-button" type="button" data-view-juhuo-payment-screenshot aria-label="查看张明的订单支付截图" title="查看图片详情">
+                        <img src="assets/juhuo-payment-receipt.png" alt="张明的订单支付截图缩略图">
+                      </button>
+                    </td>
+                    <td>用户申请取消会员服务</td>
+                    <td>1708358679</td>
+                    <td>wx47d9820a35bf1c72</td>
+                    <td>openid_78ad24f9ce</td>
+                    <td>2026-08-05 09:58:43</td>
+                    <td class="juhuo-refund-process-time-cell">2026-08-05 10:03:26</td>
+                    <td class="juhuo-refund-complete-time-cell">2026-08-05 10:04:11</td>
+                    <td class="juhuo-refund-action-cell">—</td>
+                  </tr>
+                  <tr data-juhuo-refund-row data-refund-no="TK202608050002" data-refund-status="未退款" data-wechat-order="" data-merchant-order="" data-product-description="" data-payment-amount="" data-payment-completed-at="" data-payment-screenshot="已上传" data-refund-reason="" data-refund-merchant="" data-open-id="openid_4fc81d92ab" data-app-id="wx8d732f95ab604ce1" data-recipient-name="李佳" data-recipient-phone="13900139002" data-submitted-at="2026-08-05 10:25:09" data-process-time="" data-refund-completed-time="">
+                    <td>TK202608050002</td>
+                    <td class="juhuo-refund-status-cell"><span class="status-pill warning">未退款</span></td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>李佳</td>
+                    <td>13900139002</td>
+                    <td>
+                      <button class="table-payment-screenshot-button" type="button" data-view-juhuo-payment-screenshot aria-label="查看李佳的订单支付截图" title="查看图片详情">
+                        <img src="assets/juhuo-payment-receipt.png" alt="李佳的订单支付截图缩略图">
+                      </button>
+                    </td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>wx8d732f95ab604ce1</td>
+                    <td>openid_4fc81d92ab</td>
+                    <td>2026-08-05 10:25:09</td>
+                    <td class="juhuo-refund-process-time-cell">—</td>
+                    <td class="juhuo-refund-complete-time-cell">—</td>
+                    <td class="juhuo-refund-action-cell">
+                      <span class="table-actions-inline">
+                        <button class="link" type="button" data-process-juhuo-refund>处理退款</button>
+                        <button class="link" type="button" data-delete-juhuo-refund>删除</button>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr data-juhuo-refund-row data-refund-no="TK202608050003" data-refund-status="未退款" data-wechat-order="" data-merchant-order="" data-product-description="" data-payment-amount="" data-payment-completed-at="" data-payment-screenshot="已上传" data-refund-reason="" data-refund-merchant="" data-open-id="openid_9bd31f604e" data-app-id="" data-recipient-name="赵宁" data-recipient-phone="13500135005" data-submitted-at="2026-08-05 10:42:17" data-process-time="" data-refund-completed-time="">
+                    <td>TK202608050003</td>
+                    <td class="juhuo-refund-status-cell"><span class="status-pill warning">未退款</span></td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>赵宁</td>
+                    <td>13500135005</td>
+                    <td>
+                      <button class="table-payment-screenshot-button" type="button" data-view-juhuo-payment-screenshot aria-label="查看赵宁的订单支付截图" title="查看图片详情">
+                        <img src="assets/juhuo-payment-receipt.png" alt="赵宁的订单支付截图缩略图">
+                      </button>
+                    </td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>openid_9bd31f604e</td>
+                    <td>2026-08-05 10:42:17</td>
+                    <td class="juhuo-refund-process-time-cell">—</td>
+                    <td class="juhuo-refund-complete-time-cell">—</td>
+                    <td class="juhuo-refund-action-cell"><button class="link" type="button" data-delete-juhuo-refund>删除</button></td>
+                  </tr>
+                  <tr data-juhuo-refund-row data-refund-status="待确认收款" data-wechat-order="420000247820260804901298614" data-merchant-order="JH202608040087" data-payment-amount="560.00" data-payment-completed-at="2026-08-04 16:38:09" data-open-id="openid_5e921dc840" data-app-id="wx4a02c8176de953bf" data-recipient-name="王雪" data-recipient-phone="13700137003" data-submitted-at="2026-08-04 16:40:06" data-process-time="2026-08-04 16:41:52" data-refund-completed-time="">
+                    <td>TK202608040087</td>
+                    <td class="juhuo-refund-status-cell"><span class="status-pill processing">待确认收款</span></td>
+                    <td>JH202608040087</td>
+                    <td>420000247820260804901298614</td>
+                    <td>聚火售后服务退款</td>
+                    <td>¥560.00</td>
+                    <td>2026-08-04 16:38:09</td>
+                    <td>王雪</td>
+                    <td>13700137003</td>
+                    <td>
+                      <button class="table-payment-screenshot-button" type="button" data-view-juhuo-payment-screenshot aria-label="查看王雪的订单支付截图" title="查看图片详情">
+                        <img src="assets/juhuo-payment-receipt.png" alt="王雪的订单支付截图缩略图">
+                      </button>
+                    </td>
+                    <td>售后服务协商退款</td>
+                    <td>1708358679</td>
+                    <td>wx4a02c8176de953bf</td>
+                    <td>openid_5e921dc840</td>
+                    <td>2026-08-04 16:40:06</td>
+                    <td class="juhuo-refund-process-time-cell">2026-08-04 16:41:52</td>
+                    <td class="juhuo-refund-complete-time-cell">—</td>
+                    <td class="juhuo-refund-action-cell"><button class="link" type="button" data-revoke-juhuo-refund>撤销退款</button></td>
+                  </tr>
+                  <tr data-juhuo-refund-row data-refund-status="退款失败" data-wechat-order="420000247820260804901277356" data-merchant-order="JH202608040052" data-payment-amount="2380.00" data-payment-completed-at="2026-08-04 11:27:35" data-open-id="" data-app-id="wx9f36a8b2401cd725" data-recipient-name="陈海" data-recipient-phone="13600136004" data-submitted-at="2026-08-04 11:29:18" data-process-time="2026-08-04 11:31:07" data-refund-completed-time="">
+                    <td>TK202608040052</td>
+                    <td class="juhuo-refund-status-cell"><span class="status-pill danger">退款失败</span></td>
+                    <td>JH202608040052</td>
+                    <td>420000247820260804901277356</td>
+                    <td>聚火供应链服务订单</td>
+                    <td>¥2,380.00</td>
+                    <td>2026-08-04 11:27:35</td>
+                    <td>陈海</td>
+                    <td>13600136004</td>
+                    <td>
+                      <button class="table-payment-screenshot-button" type="button" data-view-juhuo-payment-screenshot aria-label="查看陈海的订单支付截图" title="查看图片详情">
+                        <img src="assets/juhuo-payment-receipt.png" alt="陈海的订单支付截图缩略图">
+                      </button>
+                    </td>
+                    <td>收款用户信息异常</td>
+                    <td>1708358679</td>
+                    <td>wx9f36a8b2401cd725</td>
+                    <td>—</td>
+                    <td>2026-08-04 11:29:18</td>
+                    <td class="juhuo-refund-process-time-cell">2026-08-04 11:31:07</td>
+                    <td class="juhuo-refund-complete-time-cell">—</td>
+                    <td class="juhuo-refund-action-cell">—</td>
+                  </tr>
+                  <tr class="empty-row juhuo-refund-empty-row" hidden>
+                    <td colspan="18">暂无符合条件的退款记录</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pagination">
+              <span class="pagination-total" id="juhuoRefundTotal">共 5 条记录</span>
+              <span class="select-mini">10 条/页</span>
+              <button class="page-nav" type="button">‹</button>
+              <button class="page-box" type="button">1</button>
+              <button class="page-nav" type="button">›</button>
+              <span>前往</span>
+              <input class="jump-input" type="text" value="1" aria-label="前往页码">
+              <span>页</span>
+            </div>
+          </div>
+
+
         </div>
       </section>
     </main>
@@ -2955,6 +3759,7 @@
   </div>
 
   <div class="table-help-popover hidden" id="complaintRatePopover" role="tooltip">投诉率=订单投诉总数/订单支付成功数*100%</div>
+  <div class="table-help-popover hidden" id="juhuoRefundRevokedPopover" role="tooltip"></div>
 
   <div class="modal-mask hidden" id="merchantConfigMask">
     <section class="modal merchant-config-dialog" role="dialog" aria-modal="true" aria-labelledby="merchantConfigTitle">
@@ -3133,6 +3938,185 @@
     </section>
   </div>
 
+
+
+  <div class="modal-mask hidden" id="juhuoRefundProcessMask">
+    <section class="modal refund-process-dialog" role="dialog" aria-modal="true" aria-labelledby="juhuoRefundProcessTitle">
+      <div class="modal-head">
+        <h2 id="juhuoRefundProcessTitle">处理退款</h2>
+        <button class="modal-close" type="button" id="juhuoRefundProcessClose" aria-label="关闭">×</button>
+      </div>
+      <div class="dialog-body">
+        <section class="refund-process-info-section" aria-labelledby="juhuoRefundApplicationInfoTitle">
+          <h3 class="config-section-title" id="juhuoRefundApplicationInfoTitle">退款申请信息</h3>
+          <div class="config-grid refund-process-grid">
+            <label class="config-field">
+              <span class="field-label">退款申请单号</span>
+              <input class="text-input" id="juhuoRefundProcessRefundNo" type="text" disabled>
+            </label>
+            <div class="config-field">
+              <span class="field-label">退款状态</span>
+              <span class="refund-status-readonly" role="status">
+                <span class="refund-status-dot" aria-hidden="true"></span>
+                <span id="juhuoRefundProcessStatus">未退款</span>
+              </span>
+            </div>
+            <label class="config-field">
+              <span class="field-label">收款人姓名</span>
+              <input class="text-input" id="juhuoRefundProcessRecipientName" type="text" disabled>
+            </label>
+            <label class="config-field">
+              <span class="field-label">收款人电话号码</span>
+              <input class="text-input" id="juhuoRefundProcessRecipientPhone" type="text" disabled>
+            </label>
+            <label class="config-field">
+              <span class="field-label">退款原因</span>
+              <input class="text-input" id="juhuoRefundProcessReason" type="text" disabled>
+            </label>
+            <label class="config-field">
+              <span class="field-label">退款申请提交时间</span>
+              <input class="text-input" id="juhuoRefundProcessSubmittedAt" type="text" disabled>
+            </label>
+            <label class="config-field">
+              <span class="field-label">收款AppID</span>
+              <input class="text-input" id="juhuoRefundProcessAppId" type="text" disabled>
+            </label>
+            <label class="config-field">
+              <span class="field-label">收款用户open ID</span>
+              <input class="text-input" id="juhuoRefundProcessOpenId" type="text" disabled>
+            </label>
+            <label class="config-field">
+              <span class="field-label">退款商户号</span>
+              <input class="text-input" id="juhuoRefundProcessRefundMerchant" type="text" disabled>
+            </label>
+            <div class="config-field">
+              <span class="field-label">订单支付截图</span>
+              <button class="payment-screenshot-button" type="button" id="juhuoRefundProcessScreenshot" aria-label="查看订单支付截图">
+                <img src="assets/juhuo-payment-receipt.png" alt="订单支付截图缩略图">
+                <span class="payment-screenshot-hover">查看大图</span>
+              </button>
+            </div>
+          </div>
+        </section>
+        <section class="refund-process-refund-section" aria-labelledby="juhuoRefundInfoTitle">
+          <h3 class="config-section-title" id="juhuoRefundInfoTitle">退款信息</h3>
+          <div class="config-grid refund-process-grid">
+            <label class="config-field refund-process-merchant-order">
+              <span class="field-label required">商户订单号</span>
+              <input class="text-input" id="juhuoRefundProcessMerchantOrder" type="text" autocomplete="off" placeholder="请输入商户订单号" required aria-required="true">
+            </label>
+            <div class="refund-order-detail-panel" role="group" aria-label="订单详情">
+              <div class="refund-order-detail-grid">
+                <label class="config-field">
+                  <span class="field-label">微信支付订单号</span>
+                  <input class="text-input" id="juhuoRefundProcessOrder" type="text" disabled>
+                </label>
+                <label class="config-field">
+                  <span class="field-label">商品描述</span>
+                  <input class="text-input" id="juhuoRefundProcessProductDescription" type="text" disabled>
+                </label>
+                <label class="config-field">
+                  <span class="field-label">支付金额</span>
+                  <input class="text-input" id="juhuoRefundProcessPaymentAmount" type="text" disabled>
+                </label>
+                <label class="config-field">
+                  <span class="field-label">支付完成时间</span>
+                  <input class="text-input" id="juhuoRefundProcessCompletedAt" type="text" disabled>
+                </label>
+              </div>
+            </div>
+            <label class="config-field">
+              <span class="field-label required">退款金额（元）</span>
+              <span class="refund-amount-input-wrap" id="juhuoRefundAmountField">
+                <span class="refund-amount-prefix" aria-hidden="true">¥</span>
+                <input class="text-input" id="juhuoRefundAmountInput" type="text" inputmode="decimal" data-decimal-input placeholder="请输入退款金额" aria-label="退款金额">
+              </span>
+              <span class="refund-amount-hint" id="juhuoRefundAmountHint">退款金额不得大于支付金额</span>
+            </label>
+            <label class="config-field refund-process-note">
+              <span class="field-label">备注</span>
+              <textarea class="textarea-input" id="juhuoRefundProcessNote" maxlength="200" placeholder="请输入备注"></textarea>
+            </label>
+          </div>
+        </section>
+        <div class="dialog-actions">
+          <button class="btn btn-gray" type="button" id="juhuoRefundProcessCancel">取消</button>
+          <button class="btn btn-primary" type="button" id="juhuoRefundProcessSubmit" disabled>提交</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-mask hidden" id="juhuoPaymentScreenshotMask">
+    <section class="modal payment-screenshot-dialog" role="dialog" aria-modal="true" aria-labelledby="juhuoPaymentScreenshotTitle">
+      <div class="modal-head">
+        <h2 id="juhuoPaymentScreenshotTitle">订单支付截图</h2>
+        <button class="modal-close" type="button" id="juhuoPaymentScreenshotClose" aria-label="关闭">×</button>
+      </div>
+      <div class="dialog-body">
+        <img class="payment-screenshot-preview" src="assets/juhuo-payment-receipt.png" alt="订单支付截图详情">
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-mask hidden" id="juhuoRefundDeleteMask">
+    <section class="modal delete-refund-dialog" role="alertdialog" aria-modal="true" aria-labelledby="juhuoRefundDeleteTitle" aria-describedby="juhuoRefundDeleteDescription">
+      <div class="modal-head">
+        <h2 id="juhuoRefundDeleteTitle">删除退款申请</h2>
+        <button class="modal-close" type="button" id="juhuoRefundDeleteClose" aria-label="关闭">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="delete-refund-warning" id="juhuoRefundDeleteDescription">
+          <strong>删除后无法恢复。</strong>
+          <span id="juhuoRefundDeleteMessage">确认删除该退款申请吗？</span>
+        </div>
+        <div class="dialog-actions">
+          <button class="btn btn-gray" type="button" id="juhuoRefundDeleteCancel">取消</button>
+          <button class="btn btn-danger" type="button" id="juhuoRefundDeleteConfirm">确认删除</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-mask hidden" id="juhuoRefundRevokeMask">
+    <section class="modal delete-refund-dialog" role="alertdialog" aria-modal="true" aria-labelledby="juhuoRefundRevokeTitle" aria-describedby="juhuoRefundRevokeDescription">
+      <div class="modal-head">
+        <h2 id="juhuoRefundRevokeTitle">撤销退款</h2>
+        <button class="modal-close" type="button" id="juhuoRefundRevokeClose" aria-label="关闭">×</button>
+      </div>
+      <div class="dialog-body">
+        <div class="delete-refund-warning" id="juhuoRefundRevokeDescription">
+          <strong>撤销后本次退款操作将终止。</strong>
+          <span id="juhuoRefundRevokeMessage">确认撤销该退款吗？</span>
+        </div>
+        <div class="dialog-actions">
+          <button class="btn btn-gray" type="button" id="juhuoRefundRevokeCancel">取消</button>
+          <button class="btn btn-danger" type="button" id="juhuoRefundRevokeConfirm">确认撤销</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-mask hidden" id="juhuoRefundPasswordMask">
+    <section class="modal payment-password-dialog" role="dialog" aria-modal="true" aria-labelledby="juhuoRefundPasswordTitle">
+      <div class="modal-head">
+        <h2 id="juhuoRefundPasswordTitle">输入支付密码</h2>
+        <button class="modal-close" type="button" id="juhuoRefundPasswordClose" aria-label="关闭">×</button>
+      </div>
+      <div class="dialog-body">
+        <label class="refund-password-field">
+          <span class="field-label required">支付密码</span>
+          <input class="text-input" id="juhuoRefundPasswordInput" type="password" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="请输入支付密码" aria-label="支付密码">
+          <span class="refund-password-hint">请输入6位支付密码</span>
+        </label>
+        <div class="dialog-actions">
+          <button class="btn btn-gray" type="button" id="juhuoRefundPasswordCancel">取消</button>
+          <button class="btn btn-primary" type="button" id="juhuoRefundPasswordConfirm" disabled>提交</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <div class="toast hidden" id="toast">操作成功</div>
 
   <script>
@@ -3142,9 +4126,59 @@
       var breadcrumbBar = document.querySelector(".breadcrumb-bar");
       var merchantConfigMask = document.getElementById("merchantConfigMask");
       var merchantCreateMask = document.getElementById("merchantCreateMask");
+      var juhuoRefundProcessMask = document.getElementById("juhuoRefundProcessMask");
+      var juhuoPaymentScreenshotMask = document.getElementById("juhuoPaymentScreenshotMask");
+      var juhuoRefundDeleteMask = document.getElementById("juhuoRefundDeleteMask");
+      var juhuoRefundRevokeMask = document.getElementById("juhuoRefundRevokeMask");
+      var juhuoRefundPasswordMask = document.getElementById("juhuoRefundPasswordMask");
+      var activeJuhuoRefundRow = null;
+      var activeJuhuoRefundOrder = null;
+      var activeJuhuoRefundDeleteRow = null;
+      var activeJuhuoRefundRevokeRow = null;
+      var pendingJuhuoRefundAmount = "";
+      var pendingJuhuoRefundNote = "";
+      var juhuoRefundOrderCatalog = {
+        JH202608050001: {
+          wechatOrder: "420000247820260805901345821",
+          productDescription: "聚火会员服务退款",
+          paymentAmount: "368.00",
+          paymentCompletedAt: "2026-08-05 09:42:18",
+          refundMerchant: "1708358679",
+          appId: "wx47d9820a35bf1c72",
+          openId: "openid_78ad24f9ce"
+        },
+        JH202608050002: {
+          wechatOrder: "420000247820260805901351942",
+          productDescription: "聚火会员服务退款",
+          paymentAmount: "298.00",
+          paymentCompletedAt: "2026-08-05 10:12:36",
+          refundMerchant: "1708358679",
+          appId: "wx8d732f95ab604ce1",
+          openId: "openid_4fc81d92ab"
+        },
+        JH202608040087: {
+          wechatOrder: "420000247820260804901298614",
+          productDescription: "聚火售后服务退款",
+          paymentAmount: "560.00",
+          paymentCompletedAt: "2026-08-04 16:38:09",
+          refundMerchant: "1708358679",
+          appId: "wx4a02c8176de953bf",
+          openId: "openid_5e921dc840"
+        },
+        JH202608040052: {
+          wechatOrder: "420000247820260804901277356",
+          productDescription: "聚火供应链服务订单",
+          paymentAmount: "2380.00",
+          paymentCompletedAt: "2026-08-04 11:27:35",
+          refundMerchant: "1708358679",
+          appId: "wx9f36a8b2401cd725",
+          openId: ""
+        }
+      };
       var merchantActionMenu = document.getElementById("merchantActionMenu");
       var complaintRateHelp = document.getElementById("complaintRateHelp");
       var complaintRatePopover = document.getElementById("complaintRatePopover");
+      var juhuoRefundRevokedPopover = document.getElementById("juhuoRefundRevokedPopover");
       var activeMerchantRow = null;
       var activeActionDropdown = null;
 
@@ -3187,6 +4221,30 @@
           closeComplaintRatePopover();
         }
         complaintRateHelp.setAttribute("aria-expanded", willOpen ? "true" : "false");
+      }
+
+
+      function closeJuhuoRefundRevokedPopover() {
+        juhuoRefundRevokedPopover.classList.add("hidden");
+      }
+
+      function positionJuhuoRefundRevokedPopover(trigger) {
+        var revokedAt = trigger.dataset.refundRevokedAt || "—";
+        var rect = trigger.getBoundingClientRect();
+        juhuoRefundRevokedPopover.textContent = "撤销退款时间：" + revokedAt;
+        juhuoRefundRevokedPopover.classList.remove("hidden");
+        var width = juhuoRefundRevokedPopover.offsetWidth;
+        var height = juhuoRefundRevokedPopover.offsetHeight;
+        var left = rect.left + rect.width / 2 - width / 2;
+        var top = rect.bottom + 8;
+
+        left = Math.max(8, Math.min(left, window.innerWidth - width - 8));
+        if (top + height > window.innerHeight - 8) {
+          top = Math.max(8, rect.top - height - 8);
+        }
+
+        juhuoRefundRevokedPopover.style.left = left + "px";
+        juhuoRefundRevokedPopover.style.top = top + "px";
       }
 
       function closeAllSelects(except) {
@@ -3419,6 +4477,76 @@
           field.appendChild(options);
 
           input.billFuzzyOptions = optionsByField[fieldName] || [];
+          input.setAttribute("autocomplete", "off");
+          input.setAttribute("aria-autocomplete", "list");
+          input.setAttribute("aria-controls", options.id);
+          input.setAttribute("aria-expanded", "false");
+
+          input.addEventListener("input", function () {
+            renderBillFuzzyOptions(input);
+          });
+
+          input.addEventListener("focus", function () {
+            if (input.value.trim()) {
+              renderBillFuzzyOptions(input);
+            }
+          });
+
+          input.addEventListener("keydown", function (event) {
+            var visibleOptions = Array.from(field.querySelectorAll(".bill-fuzzy-option"));
+            if (event.key === "Escape") {
+              closeBillFuzzyField(field);
+              return;
+            }
+            if (!field.classList.contains("open") || !visibleOptions.length) {
+              return;
+            }
+
+            var activeIndex = Number(field.dataset.activeIndex || -1);
+            if (event.key === "ArrowDown") {
+              event.preventDefault();
+              setActiveBillFuzzyOption(field, activeIndex + 1);
+            } else if (event.key === "ArrowUp") {
+              event.preventDefault();
+              setActiveBillFuzzyOption(field, activeIndex - 1);
+            } else if (event.key === "Enter" && activeIndex >= 0) {
+              event.preventDefault();
+              visibleOptions[activeIndex].click();
+            }
+          });
+        });
+      }
+
+
+      function initializeJuhuoRefundFuzzySearch() {
+        var page = document.querySelector('.page-view[data-view="聚火退款管理"]');
+        if (!page) {
+          return;
+        }
+
+        [
+          { id: "juhuoRefundOrderQuery", key: "merchantOrder", label: "商户订单号" },
+          { id: "juhuoRefundRecipientNameQuery", key: "recipientName", label: "收款人姓名" },
+          { id: "juhuoRefundRecipientPhoneQuery", key: "recipientPhone", label: "收款人电话号码" }
+        ].forEach(function (config, index) {
+          var input = document.getElementById(config.id);
+          if (!input) {
+            return;
+          }
+
+          var field = input.closest("label");
+          var options = document.createElement("div");
+          options.id = "juhuo-refund-fuzzy-options-" + index;
+          options.className = "bill-fuzzy-options";
+          options.setAttribute("role", "listbox");
+          options.setAttribute("aria-label", config.label + "候选项");
+          field.classList.add("bill-fuzzy-field");
+          field.dataset.activeIndex = "-1";
+          field.appendChild(options);
+
+          input.billFuzzyOptions = Array.from(new Set(Array.from(page.querySelectorAll("[data-juhuo-refund-row]"))
+            .map(function (row) { return row.dataset[config.key] || ""; })
+            .filter(Boolean)));
           input.setAttribute("autocomplete", "off");
           input.setAttribute("aria-autocomplete", "list");
           input.setAttribute("aria-controls", options.id);
@@ -4405,6 +5533,373 @@
         });
       }
 
+
+
+      function matchesJuhuoRefundDateRange(value, pickerId) {
+        var picker = document.getElementById(pickerId);
+        var start = picker ? picker.dataset.rangeStart || "" : "";
+        var end = picker ? picker.dataset.rangeEnd || "" : "";
+        if (!start || !end) {
+          return true;
+        }
+        var dateValue = String(value || "").slice(0, 10);
+        return Boolean(dateValue && dateValue >= start && dateValue <= end);
+      }
+
+      function updateJuhuoRefundStatusTabs() {
+        var rows = Array.from(document.querySelectorAll("[data-juhuo-refund-row]"));
+        var counts = {};
+
+        rows.forEach(function (row) {
+          var status = row.dataset.refundStatus || "";
+          counts[status] = (counts[status] || 0) + 1;
+        });
+
+        document.querySelectorAll(".juhuo-refund-status-tab").forEach(function (tab) {
+          var status = tab.dataset.status || "全部";
+          var count = status === "全部" ? rows.length : (counts[status] || 0);
+          tab.textContent = status + " " + count;
+          tab.dataset.total = String(count);
+        });
+      }
+
+      function filterJuhuoRefundRows() {
+        var queryInput = document.getElementById("juhuoRefundOrderQuery");
+        var recipientNameInput = document.getElementById("juhuoRefundRecipientNameQuery");
+        var recipientPhoneInput = document.getElementById("juhuoRefundRecipientPhoneQuery");
+        var activeStatusTab = document.querySelector(".juhuo-refund-status-tab.active");
+        var query = queryInput ? queryInput.value.trim().toLowerCase() : "";
+        var recipientName = recipientNameInput ? recipientNameInput.value.trim().toLowerCase() : "";
+        var recipientPhone = recipientPhoneInput ? recipientPhoneInput.value.trim().toLowerCase() : "";
+        var status = activeStatusTab ? activeStatusTab.dataset.status : "未退款";
+        var visibleCount = 0;
+
+        document.querySelectorAll("[data-juhuo-refund-row]").forEach(function (row) {
+          var matchesOrder = !query || (row.dataset.merchantOrder || "").toLowerCase().indexOf(query) !== -1;
+          var matchesRecipientName = !recipientName || (row.dataset.recipientName || "").toLowerCase().indexOf(recipientName) !== -1;
+          var matchesRecipientPhone = !recipientPhone || (row.dataset.recipientPhone || "").toLowerCase().indexOf(recipientPhone) !== -1;
+          var matchesStatus = status === "全部" || row.dataset.refundStatus === status;
+          var matchesSubmittedTime = matchesJuhuoRefundDateRange(row.dataset.submittedAt, "juhuoRefundSubmittedTimePicker");
+          var matchesProcessTime = matchesJuhuoRefundDateRange(row.dataset.processTime, "juhuoRefundProcessTimePicker");
+          var matchesCompletedTime = matchesJuhuoRefundDateRange(row.dataset.refundCompletedTime, "juhuoRefundCompletedTimePicker");
+          var visible = matchesOrder && matchesRecipientName && matchesRecipientPhone && matchesStatus && matchesSubmittedTime && matchesProcessTime && matchesCompletedTime;
+          row.hidden = !visible;
+          if (visible) {
+            visibleCount += 1;
+          }
+        });
+
+        var emptyRow = document.querySelector(".juhuo-refund-empty-row");
+        var total = document.getElementById("juhuoRefundTotal");
+        if (emptyRow) {
+          emptyRow.hidden = visibleCount !== 0;
+        }
+        if (total) {
+          total.textContent = "共 " + visibleCount + " 条记录";
+        }
+      }
+
+      function resetJuhuoRefundFilters() {
+        ["juhuoRefundOrderQuery", "juhuoRefundRecipientNameQuery", "juhuoRefundRecipientPhoneQuery"].forEach(function (inputId) {
+          var input = document.getElementById(inputId);
+          if (input) {
+            input.value = "";
+            updateFilterInputClear(input);
+            closeBillFuzzyField(input.closest(".bill-fuzzy-field"));
+          }
+        });
+        ["juhuoRefundSubmittedTimePicker", "juhuoRefundProcessTimePicker", "juhuoRefundCompletedTimePicker"].forEach(function (pickerId) {
+          var picker = document.getElementById(pickerId);
+          if (picker) {
+            clearDateRangePicker(picker, false);
+          }
+        });
+        closeAllDateRangePickers();
+        filterJuhuoRefundRows();
+      }
+
+
+      function formatJuhuoRefundAmount(value) {
+        if (!String(value || "").trim()) {
+          return "—";
+        }
+        var amount = Number(value);
+        return isFinite(amount) ? "¥" + amount.toLocaleString("zh-CN", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }) : "—";
+      }
+
+      function isValidJuhuoRefundAmount(value, row) {
+        var paymentAmountValue = activeJuhuoRefundOrder ? String(activeJuhuoRefundOrder.paymentAmount || "").trim() : "";
+        var paymentAmount = Number(paymentAmountValue);
+        var refundAmount = Number(value);
+        var hasPaymentAmount = Boolean(paymentAmountValue) && isFinite(paymentAmount) && paymentAmount > 0;
+        return Boolean(row && activeJuhuoRefundOrder) && /^\d+(\.\d{1,2})?$/.test(value) && isFinite(refundAmount) && refundAmount > 0 && hasPaymentAmount && refundAmount <= paymentAmount;
+      }
+
+      function updateJuhuoRefundProcessSubmitState() {
+        var input = document.getElementById("juhuoRefundAmountInput");
+        document.getElementById("juhuoRefundProcessSubmit").disabled = !activeJuhuoRefundRow || !isValidJuhuoRefundAmount(input.value, activeJuhuoRefundRow);
+      }
+
+      function updateJuhuoRefundAmountPrefix() {
+        var input = document.getElementById("juhuoRefundAmountInput");
+        document.getElementById("juhuoRefundAmountField").classList.toggle("has-value", Boolean(input.value));
+      }
+
+      function updateJuhuoRefundProcessStatus(status) {
+        var statusText = document.getElementById("juhuoRefundProcessStatus");
+        var statusField = statusText.closest(".refund-status-readonly");
+        var statusClassMap = {
+          "未退款": "warning",
+          "待确认收款": "processing",
+          "退款失败": "danger",
+          "已撤销退款": "refund-revoked"
+        };
+        statusField.className = "refund-status-readonly";
+        if (statusClassMap[status]) {
+          statusField.classList.add(statusClassMap[status]);
+        }
+        statusText.textContent = status || "—";
+      }
+
+      function renderJuhuoRefundOrder(order) {
+        var orderFields = {
+          juhuoRefundProcessOrder: order && order.wechatOrder,
+          juhuoRefundProcessProductDescription: order && order.productDescription,
+          juhuoRefundProcessPaymentAmount: order && formatJuhuoRefundAmount(order.paymentAmount),
+          juhuoRefundProcessCompletedAt: order && order.paymentCompletedAt
+        };
+
+        Object.keys(orderFields).forEach(function (fieldId) {
+          document.getElementById(fieldId).value = orderFields[fieldId] || "—";
+        });
+        document.getElementById("juhuoRefundProcessRefundMerchant").value = "1708358679";
+        document.getElementById("juhuoRefundAmountHint").textContent = order ? "退款金额不得大于支付金额" : "请先查询订单；退款金额不得大于支付金额";
+        updateJuhuoRefundProcessSubmitState();
+      }
+
+      function queryJuhuoRefundOrder(value) {
+        var merchantOrder = String(value || "").trim().toUpperCase();
+        activeJuhuoRefundOrder = juhuoRefundOrderCatalog[merchantOrder] || null;
+        renderJuhuoRefundOrder(activeJuhuoRefundOrder);
+      }
+
+      function canProcessJuhuoRefund(row) {
+        return Boolean(row && row.dataset.refundStatus === "未退款" && String(row.dataset.openId || "").trim() && String(row.dataset.appId || "").trim());
+      }
+
+      function openJuhuoRefundProcess(row) {
+        if (!canProcessJuhuoRefund(row)) {
+          return;
+        }
+        activeJuhuoRefundRow = row;
+        activeJuhuoRefundOrder = null;
+        pendingJuhuoRefundAmount = "";
+        pendingJuhuoRefundNote = "";
+        var processFields = {
+          juhuoRefundProcessRefundNo: row.dataset.refundNo,
+          juhuoRefundProcessRecipientName: row.dataset.recipientName,
+          juhuoRefundProcessRecipientPhone: row.dataset.recipientPhone,
+          juhuoRefundProcessReason: row.dataset.refundReason,
+          juhuoRefundProcessSubmittedAt: row.dataset.submittedAt,
+          juhuoRefundProcessAppId: row.dataset.appId,
+          juhuoRefundProcessOpenId: row.dataset.openId
+        };
+
+        Object.keys(processFields).forEach(function (fieldId) {
+          document.getElementById(fieldId).value = processFields[fieldId] || "—";
+        });
+        updateJuhuoRefundProcessStatus(row.dataset.refundStatus);
+        var merchantOrderInput = document.getElementById("juhuoRefundProcessMerchantOrder");
+        merchantOrderInput.value = row.dataset.merchantOrder || "";
+        queryJuhuoRefundOrder(merchantOrderInput.value);
+        document.getElementById("juhuoRefundAmountInput").value = "";
+        updateJuhuoRefundAmountPrefix();
+        document.getElementById("juhuoRefundProcessNote").value = row.dataset.refundNote || "";
+        updateJuhuoRefundProcessSubmitState();
+        juhuoRefundProcessMask.classList.remove("hidden");
+        window.setTimeout(function () { merchantOrderInput.focus(); }, 0);
+      }
+
+      function closeJuhuoRefundProcess() {
+        juhuoRefundProcessMask.classList.add("hidden");
+        document.getElementById("juhuoRefundAmountInput").value = "";
+        updateJuhuoRefundAmountPrefix();
+        document.getElementById("juhuoRefundProcessNote").value = "";
+        document.getElementById("juhuoRefundProcessSubmit").disabled = true;
+        activeJuhuoRefundRow = null;
+        activeJuhuoRefundOrder = null;
+        pendingJuhuoRefundAmount = "";
+        pendingJuhuoRefundNote = "";
+      }
+
+      function submitJuhuoRefundProcess() {
+        var input = document.getElementById("juhuoRefundAmountInput");
+        if (!activeJuhuoRefundRow || !isValidJuhuoRefundAmount(input.value, activeJuhuoRefundRow)) {
+          showToast(activeJuhuoRefundOrder ? "请输入不超过支付金额的有效退款金额" : "请先输入有效的商户订单号");
+          input.focus();
+          return;
+        }
+        pendingJuhuoRefundAmount = Number(input.value).toFixed(2);
+        pendingJuhuoRefundNote = document.getElementById("juhuoRefundProcessNote").value.trim();
+        juhuoRefundProcessMask.classList.add("hidden");
+        openJuhuoRefundPassword();
+      }
+
+      function openJuhuoRefundPassword() {
+        var input = document.getElementById("juhuoRefundPasswordInput");
+        var confirm = document.getElementById("juhuoRefundPasswordConfirm");
+        input.value = "";
+        confirm.disabled = true;
+        juhuoRefundPasswordMask.classList.remove("hidden");
+        window.setTimeout(function () { input.focus(); }, 0);
+      }
+
+      function closeJuhuoRefundPassword() {
+        juhuoRefundPasswordMask.classList.add("hidden");
+        document.getElementById("juhuoRefundPasswordInput").value = "";
+        document.getElementById("juhuoRefundPasswordConfirm").disabled = true;
+        activeJuhuoRefundRow = null;
+        activeJuhuoRefundOrder = null;
+        pendingJuhuoRefundAmount = "";
+        pendingJuhuoRefundNote = "";
+      }
+
+      function confirmJuhuoRefund() {
+        var input = document.getElementById("juhuoRefundPasswordInput");
+        if (!activeJuhuoRefundRow || !activeJuhuoRefundOrder || !/^\d{6}$/.test(input.value)) {
+          showToast("请输入6位支付密码");
+          input.focus();
+          return;
+        }
+
+        activeJuhuoRefundRow.dataset.refundStatus = "待确认收款";
+        activeJuhuoRefundRow.dataset.refundAmount = pendingJuhuoRefundAmount;
+        activeJuhuoRefundRow.dataset.refundNote = pendingJuhuoRefundNote;
+        activeJuhuoRefundRow.dataset.processTime = formatDateTimeValue(new Date());
+        activeJuhuoRefundRow.dataset.merchantOrder = document.getElementById("juhuoRefundProcessMerchantOrder").value.trim().toUpperCase();
+        activeJuhuoRefundRow.dataset.wechatOrder = activeJuhuoRefundOrder.wechatOrder;
+        activeJuhuoRefundRow.dataset.productDescription = activeJuhuoRefundOrder.productDescription;
+        activeJuhuoRefundRow.dataset.paymentAmount = activeJuhuoRefundOrder.paymentAmount;
+        activeJuhuoRefundRow.dataset.paymentCompletedAt = activeJuhuoRefundOrder.paymentCompletedAt;
+        activeJuhuoRefundRow.dataset.refundMerchant = "1708358679";
+        activeJuhuoRefundRow.dataset.appId = activeJuhuoRefundOrder.appId;
+        activeJuhuoRefundRow.dataset.openId = activeJuhuoRefundOrder.openId;
+        var statusCell = activeJuhuoRefundRow.querySelector(".juhuo-refund-status-cell");
+        var processTimeCell = activeJuhuoRefundRow.querySelector(".juhuo-refund-process-time-cell");
+        var actionCell = activeJuhuoRefundRow.querySelector(".juhuo-refund-action-cell");
+        var cells = activeJuhuoRefundRow.cells;
+        if (statusCell) {
+          statusCell.innerHTML = '<span class="status-pill processing">待确认收款</span>';
+        }
+        if (cells.length >= 14) {
+          cells[2].textContent = activeJuhuoRefundRow.dataset.merchantOrder;
+          cells[3].textContent = activeJuhuoRefundRow.dataset.wechatOrder;
+          cells[4].textContent = activeJuhuoRefundRow.dataset.productDescription;
+          cells[5].textContent = formatJuhuoRefundAmount(activeJuhuoRefundRow.dataset.paymentAmount);
+          cells[6].textContent = activeJuhuoRefundRow.dataset.paymentCompletedAt;
+          cells[11].textContent = activeJuhuoRefundRow.dataset.refundMerchant;
+          cells[12].textContent = activeJuhuoRefundRow.dataset.appId || "—";
+          cells[13].textContent = activeJuhuoRefundRow.dataset.openId || "—";
+        }
+        if (processTimeCell) {
+          processTimeCell.textContent = activeJuhuoRefundRow.dataset.processTime;
+        }
+        if (actionCell) {
+          actionCell.innerHTML = '<button class="link" type="button" data-revoke-juhuo-refund>撤销退款</button>';
+        }
+
+        closeJuhuoRefundPassword();
+        updateJuhuoRefundStatusTabs();
+        filterJuhuoRefundRows();
+        showToast("退款已提交，等待用户确认收款");
+      }
+
+      function openJuhuoPaymentScreenshot() {
+        juhuoPaymentScreenshotMask.classList.remove("hidden");
+        window.setTimeout(function () { document.getElementById("juhuoPaymentScreenshotClose").focus(); }, 0);
+      }
+
+      function closeJuhuoPaymentScreenshot() {
+        juhuoPaymentScreenshotMask.classList.add("hidden");
+      }
+
+      function openJuhuoRefundDelete(row) {
+        if (!row || row.dataset.refundStatus !== "未退款") {
+          return;
+        }
+        activeJuhuoRefundDeleteRow = row;
+        var refundNo = row.dataset.refundNo || row.cells[0].textContent.trim();
+        document.getElementById("juhuoRefundDeleteMessage").textContent = "确认删除退款申请 “" + refundNo + "” 吗？";
+        juhuoRefundDeleteMask.classList.remove("hidden");
+        window.setTimeout(function () { document.getElementById("juhuoRefundDeleteConfirm").focus(); }, 0);
+      }
+
+      function closeJuhuoRefundDelete() {
+        juhuoRefundDeleteMask.classList.add("hidden");
+        activeJuhuoRefundDeleteRow = null;
+      }
+
+      function confirmJuhuoRefundDelete() {
+        if (!activeJuhuoRefundDeleteRow || activeJuhuoRefundDeleteRow.dataset.refundStatus !== "未退款") {
+          closeJuhuoRefundDelete();
+          return;
+        }
+        var row = activeJuhuoRefundDeleteRow;
+        closeJuhuoRefundDelete();
+        row.remove();
+        updateJuhuoRefundStatusTabs();
+        filterJuhuoRefundRows();
+        showToast("退款申请已删除");
+      }
+
+      function openJuhuoRefundRevoke(row) {
+        if (!row || row.dataset.refundStatus !== "待确认收款") {
+          return;
+        }
+        activeJuhuoRefundRevokeRow = row;
+        var refundNo = row.dataset.refundNo || row.cells[0].textContent.trim();
+        document.getElementById("juhuoRefundRevokeMessage").textContent = "确认撤销退款申请 “" + refundNo + "” 吗？";
+        juhuoRefundRevokeMask.classList.remove("hidden");
+        window.setTimeout(function () { document.getElementById("juhuoRefundRevokeConfirm").focus(); }, 0);
+      }
+
+      function closeJuhuoRefundRevoke() {
+        juhuoRefundRevokeMask.classList.add("hidden");
+        activeJuhuoRefundRevokeRow = null;
+      }
+
+      function confirmJuhuoRefundRevoke() {
+        if (!activeJuhuoRefundRevokeRow || activeJuhuoRefundRevokeRow.dataset.refundStatus !== "待确认收款") {
+          closeJuhuoRefundRevoke();
+          return;
+        }
+        var row = activeJuhuoRefundRevokeRow;
+        closeJuhuoRefundRevoke();
+        revokeJuhuoRefund(row);
+      }
+
+
+      function revokeJuhuoRefund(row) {
+        var revokedAt = formatDateTimeValue(new Date());
+        row.dataset.refundStatus = "已撤销退款";
+        row.dataset.refundRevokedAt = revokedAt;
+        var statusCell = row.querySelector(".juhuo-refund-status-cell");
+        var actionCell = row.querySelector(".juhuo-refund-action-cell");
+        if (statusCell) {
+          statusCell.innerHTML = '<span class="status-pill refund-revoked" tabindex="0" data-refund-revoked-at="' + revokedAt + '" aria-describedby="juhuoRefundRevokedPopover">已撤销退款</span>';
+        }
+        if (actionCell) {
+          actionCell.textContent = "—";
+        }
+        closeJuhuoRefundRevokedPopover();
+        updateJuhuoRefundStatusTabs();
+        filterJuhuoRefundRows();
+        showToast("退款已撤销");
+      }
+
       function showPage(page) {
         var requestedPage = page;
         var targetView = null;
@@ -4672,6 +6167,9 @@
           event.stopPropagation();
           input.value = "";
           updateFilterInputClear(input);
+          if (field.classList.contains("bill-fuzzy-field")) {
+            closeBillFuzzyField(field);
+          }
           if (input.id === "merchantTradeTimeQuery") {
             updateMerchantComplaintMetrics();
           }
@@ -4680,6 +6178,7 @@
       });
 
       initializeBillFuzzySearch();
+      initializeJuhuoRefundFuzzySearch();
 
       document.addEventListener("click", function (event) {
         if (!event.target.closest(".bill-fuzzy-field")) {
@@ -4848,6 +6347,12 @@
       });
 
       document.addEventListener("click", function (event) {
+        if (event.target.closest("[data-view-juhuo-payment-screenshot]")) {
+          openJuhuoPaymentScreenshot();
+        }
+      });
+
+      document.addEventListener("click", function (event) {
         var button = event.target.closest("[data-refresh-balance]");
 
         if (!button) {
@@ -4886,6 +6391,171 @@
       document.getElementById("merchantConfigClose").addEventListener("click", closeMerchantConfig);
       document.getElementById("merchantConfigCancel").addEventListener("click", closeMerchantConfig);
       document.getElementById("merchantConfigSave").addEventListener("click", saveMerchantConfig);
+
+      document.querySelectorAll(".juhuo-refund-status-tab").forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          tab.parentElement.querySelectorAll(".juhuo-refund-status-tab").forEach(function (item) {
+            item.classList.remove("active");
+            item.setAttribute("aria-pressed", "false");
+          });
+          tab.classList.add("active");
+          tab.setAttribute("aria-pressed", "true");
+          filterJuhuoRefundRows();
+        });
+      });
+
+      updateJuhuoRefundStatusTabs();
+      filterJuhuoRefundRows();
+
+      document.getElementById("juhuoRefundQueryButton").addEventListener("click", function () {
+        filterJuhuoRefundRows();
+        showToast("查询完成");
+      });
+
+      document.getElementById("juhuoRefundResetButton").addEventListener("click", function () {
+        resetJuhuoRefundFilters();
+        showToast("筛选已重置");
+      });
+
+      document.addEventListener("click", function (event) {
+        var processButton = event.target.closest("[data-process-juhuo-refund]");
+        var revokeButton = event.target.closest("[data-revoke-juhuo-refund]");
+        var deleteButton = event.target.closest("[data-delete-juhuo-refund]");
+        var button = processButton || revokeButton || deleteButton;
+        if (!button) {
+          return;
+        }
+        var row = button.closest("[data-juhuo-refund-row]");
+        if (processButton && canProcessJuhuoRefund(row)) {
+          openJuhuoRefundProcess(row);
+        } else if (revokeButton && row && row.dataset.refundStatus === "待确认收款") {
+          openJuhuoRefundRevoke(row);
+        } else if (deleteButton && row && row.dataset.refundStatus === "未退款") {
+          openJuhuoRefundDelete(row);
+        }
+      });
+
+
+      document.addEventListener("mouseover", function (event) {
+        var trigger = event.target.closest("[data-refund-revoked-at]");
+        if (trigger) {
+          positionJuhuoRefundRevokedPopover(trigger);
+        }
+      });
+
+      document.addEventListener("mouseout", function (event) {
+        var trigger = event.target.closest("[data-refund-revoked-at]");
+        if (trigger && !trigger.contains(event.relatedTarget)) {
+          closeJuhuoRefundRevokedPopover();
+        }
+      });
+
+      document.addEventListener("focusin", function (event) {
+        var trigger = event.target.closest("[data-refund-revoked-at]");
+        if (trigger) {
+          positionJuhuoRefundRevokedPopover(trigger);
+        }
+      });
+
+      document.addEventListener("focusout", function (event) {
+        if (event.target.closest("[data-refund-revoked-at]")) {
+          closeJuhuoRefundRevokedPopover();
+        }
+      });
+
+      window.addEventListener("resize", closeJuhuoRefundRevokedPopover);
+      document.addEventListener("scroll", closeJuhuoRefundRevokedPopover, true);
+
+
+      document.getElementById("juhuoRefundAmountInput").addEventListener("input", function (event) {
+        var input = event.target;
+        var value = sanitizeDecimal(input.value);
+        var parts = value.split(".");
+        if (parts.length === 2) {
+          value = parts[0] + "." + parts[1].slice(0, 2);
+        }
+        input.value = value;
+        updateJuhuoRefundAmountPrefix();
+        updateJuhuoRefundProcessSubmitState();
+      });
+
+      document.getElementById("juhuoRefundProcessMerchantOrder").addEventListener("input", function (event) {
+        var input = event.target;
+        input.value = input.value.replace(/\s/g, "").toUpperCase();
+        queryJuhuoRefundOrder(input.value);
+      });
+
+      document.getElementById("juhuoRefundProcessClose").addEventListener("click", closeJuhuoRefundProcess);
+      document.getElementById("juhuoRefundProcessCancel").addEventListener("click", closeJuhuoRefundProcess);
+      document.getElementById("juhuoRefundProcessSubmit").addEventListener("click", submitJuhuoRefundProcess);
+      document.getElementById("juhuoRefundProcessScreenshot").addEventListener("click", openJuhuoPaymentScreenshot);
+
+      juhuoRefundProcessMask.addEventListener("click", function (event) {
+        if (event.target === juhuoRefundProcessMask) {
+          closeJuhuoRefundProcess();
+        }
+      });
+
+      document.getElementById("juhuoPaymentScreenshotClose").addEventListener("click", closeJuhuoPaymentScreenshot);
+
+      juhuoPaymentScreenshotMask.addEventListener("click", function (event) {
+        if (event.target === juhuoPaymentScreenshotMask) {
+          closeJuhuoPaymentScreenshot();
+        }
+      });
+
+      document.getElementById("juhuoRefundDeleteClose").addEventListener("click", closeJuhuoRefundDelete);
+      document.getElementById("juhuoRefundDeleteCancel").addEventListener("click", closeJuhuoRefundDelete);
+      document.getElementById("juhuoRefundDeleteConfirm").addEventListener("click", confirmJuhuoRefundDelete);
+
+      juhuoRefundDeleteMask.addEventListener("click", function (event) {
+        if (event.target === juhuoRefundDeleteMask) {
+          closeJuhuoRefundDelete();
+        }
+      });
+
+      document.getElementById("juhuoRefundRevokeClose").addEventListener("click", closeJuhuoRefundRevoke);
+      document.getElementById("juhuoRefundRevokeCancel").addEventListener("click", closeJuhuoRefundRevoke);
+      document.getElementById("juhuoRefundRevokeConfirm").addEventListener("click", confirmJuhuoRefundRevoke);
+
+      juhuoRefundRevokeMask.addEventListener("click", function (event) {
+        if (event.target === juhuoRefundRevokeMask) {
+          closeJuhuoRefundRevoke();
+        }
+      });
+
+      document.getElementById("juhuoRefundPasswordInput").addEventListener("input", function (event) {
+        var input = event.target;
+        input.value = input.value.replace(/\D/g, "").slice(0, 6);
+        document.getElementById("juhuoRefundPasswordConfirm").disabled = input.value.length !== 6;
+      });
+
+      document.getElementById("juhuoRefundPasswordClose").addEventListener("click", closeJuhuoRefundPassword);
+      document.getElementById("juhuoRefundPasswordCancel").addEventListener("click", closeJuhuoRefundPassword);
+      document.getElementById("juhuoRefundPasswordConfirm").addEventListener("click", confirmJuhuoRefund);
+
+      juhuoRefundPasswordMask.addEventListener("click", function (event) {
+        if (event.target === juhuoRefundPasswordMask) {
+          closeJuhuoRefundPassword();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key !== "Escape") {
+          return;
+        }
+        if (!juhuoPaymentScreenshotMask.classList.contains("hidden")) {
+          closeJuhuoPaymentScreenshot();
+        } else if (!juhuoRefundDeleteMask.classList.contains("hidden")) {
+          closeJuhuoRefundDelete();
+        } else if (!juhuoRefundRevokeMask.classList.contains("hidden")) {
+          closeJuhuoRefundRevoke();
+        } else if (!juhuoRefundPasswordMask.classList.contains("hidden")) {
+          closeJuhuoRefundPassword();
+        } else if (!juhuoRefundProcessMask.classList.contains("hidden")) {
+          closeJuhuoRefundProcess();
+        }
+      });
 
       merchantConfigMask.addEventListener("click", function (event) {
         if (event.target === merchantConfigMask) {
