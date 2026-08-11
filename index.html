@@ -3555,6 +3555,7 @@
               <button class="juhuo-refund-status-tab" type="button" data-status="待确认收款" aria-pressed="false">待确认收款 0</button>
               <button class="juhuo-refund-status-tab" type="button" data-status="已退款" aria-pressed="false">已退款 0</button>
               <button class="juhuo-refund-status-tab" type="button" data-status="退款失败" aria-pressed="false">退款失败 0</button>
+              <button class="juhuo-refund-status-tab" type="button" data-status="已撤销退款" aria-pressed="false">已撤销退款 0</button>
               <button class="juhuo-refund-status-tab" type="button" data-status="全部" aria-pressed="false">全部 0</button>
             </div>
 
@@ -3628,7 +3629,7 @@
                     <td>2026-08-05 09:58:43</td>
                     <td class="juhuo-refund-process-time-cell">2026-08-05 10:03:26</td>
                     <td class="juhuo-refund-complete-time-cell">2026-08-05 10:04:11</td>
-                    <td class="juhuo-refund-action-cell">—</td>
+                    <td class="juhuo-refund-action-cell"><button class="link" type="button" data-download-juhuo-refund-receipt>下载回单</button></td>
                   </tr>
                   <tr data-juhuo-refund-row data-refund-no="TK202608050002" data-refund-status="未退款" data-wechat-order="" data-merchant-order="" data-product-description="" data-payment-amount="" data-requested-refund-amount="298.00" data-payment-completed-at="" data-payment-screenshot="已上传" data-refund-reason="" data-refund-merchant="" data-open-id="openid_4fc81d92ab" data-app-id="wx8d732f95ab604ce1" data-recipient-name="李佳" data-recipient-phone="13900139002" data-submitted-at="2026-08-05 10:25:09" data-process-time="" data-refund-completed-time="">
                     <td>TK202608050002</td>
@@ -5912,6 +5913,54 @@
         showToast("退款已撤销");
       }
 
+      function downloadJuhuoRefundReceipt(row) {
+        if (!row || row.dataset.refundStatus !== "已退款") {
+          return;
+        }
+        var cells = row.cells;
+        var refundNo = row.dataset.refundNo || cells[0].textContent.trim();
+        var receiptFields = [
+          ["退款申请单号", refundNo],
+          ["退款状态", row.dataset.refundStatus],
+          ["商户订单号", cells[2].textContent.trim()],
+          ["微信支付订单号", cells[3].textContent.trim()],
+          ["商品描述", cells[4].textContent.trim()],
+          ["支付金额", cells[5].textContent.trim()],
+          ["支付完成时间", cells[6].textContent.trim()],
+          ["收款人姓名", cells[7].textContent.trim()],
+          ["收款人电话号码", cells[8].textContent.trim()],
+          ["申请退款金额（元）", cells[10].textContent.trim()],
+          ["退款原因", cells[11].textContent.trim()],
+          ["退款商户号", cells[12].textContent.trim()],
+          ["收款AppID", cells[13].textContent.trim()],
+          ["收款用户open ID", cells[14].textContent.trim()],
+          ["退款申请提交时间", cells[15].textContent.trim()],
+          ["处理退款时间", cells[16].textContent.trim()],
+          ["退款完成时间", cells[17].textContent.trim()]
+        ];
+        var escapeReceiptValue = function (value) {
+          return String(value || "—").replace(/[&<>"']/g, function (character) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[character];
+          });
+        };
+        var receiptRows = receiptFields.map(function (field) {
+          return '<div class="receipt-row"><span>' + escapeReceiptValue(field[0]) + '</span><strong>' + escapeReceiptValue(field[1]) + '</strong></div>';
+        }).join("");
+        var receiptHtml = '<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><title>聚火退款回单-' + escapeReceiptValue(refundNo) + '</title><style>' +
+          'body{margin:0;background:#f5f7fa;color:#1f2937;font-family:PingFang SC,Microsoft YaHei,sans-serif}.receipt{box-sizing:border-box;width:760px;margin:40px auto;padding:40px 48px;background:#fff;border:1px solid #e2e8f0}.receipt-head{padding-bottom:24px;border-bottom:2px solid #1677ff;text-align:center}.receipt-head h1{margin:0 0 8px;font-size:26px}.receipt-head p{margin:0;color:#64748b;font-size:14px}.receipt-body{padding-top:16px}.receipt-row{display:grid;grid-template-columns:180px 1fr;gap:24px;padding:12px 0;border-bottom:1px solid #eef2f7;font-size:14px}.receipt-row span{color:#64748b}.receipt-row strong{font-weight:500;word-break:break-all}.receipt-foot{margin-top:28px;color:#94a3b8;font-size:12px;text-align:center}@media print{body{background:#fff}.receipt{margin:0;border:0}}</style></head><body><main class="receipt"><header class="receipt-head"><h1>聚火退款回单</h1><p>退款处理结果凭证</p></header><section class="receipt-body">' + receiptRows + '</section><footer class="receipt-foot">本回单由聚火退款管理平台生成</footer></main></body></html>';
+        var receiptBlob = new Blob([receiptHtml], { type: "text/html;charset=utf-8" });
+        var receiptUrl = URL.createObjectURL(receiptBlob);
+        var downloadLink = document.createElement("a");
+        downloadLink.href = receiptUrl;
+        downloadLink.download = "聚火退款回单-" + refundNo + ".html";
+        downloadLink.hidden = true;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        downloadLink.remove();
+        window.setTimeout(function () { URL.revokeObjectURL(receiptUrl); }, 0);
+        showToast("退款回单下载成功");
+      }
+
       function showPage(page) {
         var requestedPage = page;
         var targetView = null;
@@ -6430,15 +6479,18 @@
       });
 
       document.addEventListener("click", function (event) {
+        var downloadReceiptButton = event.target.closest("[data-download-juhuo-refund-receipt]");
         var processButton = event.target.closest("[data-process-juhuo-refund]");
         var revokeButton = event.target.closest("[data-revoke-juhuo-refund]");
         var deleteButton = event.target.closest("[data-delete-juhuo-refund]");
-        var button = processButton || revokeButton || deleteButton;
+        var button = downloadReceiptButton || processButton || revokeButton || deleteButton;
         if (!button) {
           return;
         }
         var row = button.closest("[data-juhuo-refund-row]");
-        if (processButton && canProcessJuhuoRefund(row)) {
+        if (downloadReceiptButton && row && row.dataset.refundStatus === "已退款") {
+          downloadJuhuoRefundReceipt(row);
+        } else if (processButton && canProcessJuhuoRefund(row)) {
           openJuhuoRefundProcess(row);
         } else if (revokeButton && row && row.dataset.refundStatus === "待确认收款") {
           openJuhuoRefundRevoke(row);
