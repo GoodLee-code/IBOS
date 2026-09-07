@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IBOS 运营管理平台</title>
+  <link rel="stylesheet" href="assets/page-documentation.css">
   <style>
     :root {
       --blue: #1687e8;
@@ -2000,6 +2001,15 @@
       grid-column: 1 / -1;
     }
 
+    .refund-process-amount {
+      grid-column: 1 / -1;
+    }
+
+    .refund-process-amount .refund-amount-input-wrap {
+      display: block;
+      width: calc((100% - 28px) / 2);
+    }
+
     .refund-process-merchant-order {
       grid-column: 1 / -1;
       width: calc((100% - 28px) / 2);
@@ -2062,6 +2072,7 @@
       margin-top: 7px;
       color: #94a3b8;
       font-size: 12px;
+      white-space: nowrap;
     }
 
     .payment-screenshot-button {
@@ -2512,6 +2523,10 @@
         width: 100%;
       }
 
+      .refund-process-amount .refund-amount-input-wrap {
+        width: 100%;
+      }
+
       .refund-order-detail-grid {
         grid-template-columns: 1fr;
       }
@@ -2571,7 +2586,7 @@
         </button>
         <div class="submenu">
           <button class="submenu-btn" type="button" data-page="商户号投诉管理">商户号投诉管理</button>
-          <button class="submenu-btn" type="button" data-page="聚火退款管理">聚火退款管理</button>
+          <button class="submenu-btn" type="button" data-page="退款管理">退款管理</button>
         </div>
       </div>
     </aside>
@@ -2586,16 +2601,16 @@
           <div class="page-view active" data-view="商户号管理">
             <section class="filters">
               <div class="filter-grid">
-                <label>
+                <label data-doc-field="merchant.enterpriseName">
                   <input class="text-input" type="text" placeholder="请输入企业名称" aria-label="企业名称">
                 </label>
-                <label>
+                <label data-doc-field="merchant.merchantName">
                   <input class="text-input" type="text" placeholder="请输入商户名称" aria-label="商户名称">
                 </label>
-                <label>
+                <label data-doc-field="merchant.merchantId">
                   <input class="text-input" type="text" placeholder="请输入商户号ID" aria-label="商户号ID">
                 </label>
-                <label class="date-range-field" data-date-range-picker data-on-range-change="merchantMetrics" data-start-placeholder="交易开始日期" data-end-placeholder="交易结束日期">
+                <label class="date-range-field" data-doc-field="merchant.tradeTime" data-date-range-picker data-on-range-change="merchantMetrics" data-start-placeholder="交易开始日期" data-end-placeholder="交易结束日期">
                   <input id="merchantTradeTimeQuery" type="hidden" value="">
                   <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="交易时间" aria-expanded="false">
                     <span class="date-range-icon" aria-hidden="true"></span>
@@ -2606,7 +2621,7 @@
                   <button class="date-range-clear" type="button" aria-label="清除交易时间">×</button>
                   <div class="date-range-panel" data-date-range-panel></div>
                 </label>
-                <label>
+                <label data-doc-field="merchant.merchantType">
                   <span class="select" data-select data-multiple-select data-placeholder="请选择商户类型">
                     <button class="select-trigger" type="button" aria-label="商户类型">请选择商户类型</button>
                     <button class="select-clear" type="button" aria-label="清除商户类型">×</button>
@@ -2617,7 +2632,7 @@
                     </span>
                   </span>
                 </label>
-                <label>
+                <label data-doc-field="merchant.transferScene">
                   <span class="select" data-select data-placeholder="请选择转账场景">
                     <button class="select-trigger" type="button" aria-label="转账场景">请选择转账场景</button>
                     <button class="select-clear" type="button" aria-label="清除转账场景">×</button>
@@ -2650,10 +2665,10 @@
                     <th style="width: 150px;">商户号ID</th>
                     <th style="width: 110px;">投诉总数</th>
                     <th style="width: 120px;">订单支付成功数</th>
-                    <th style="width: 110px;"><span class="table-head-help">投诉率<button class="table-help-trigger" id="complaintRateHelp" type="button" aria-label="查看投诉率计算公式" aria-expanded="false" aria-describedby="complaintRatePopover" title="投诉率计算公式">i</button></span></th>
+                    <th style="width: 110px;" data-doc-field="merchant.complaintRate"><span class="table-head-help">投诉率<button class="table-help-trigger" id="complaintRateHelp" type="button" aria-label="查看投诉率计算公式" aria-expanded="false" aria-describedby="complaintRatePopover" title="投诉率计算公式">i</button></span></th>
                     <th style="width: 120px;">商户类型</th>
                     <th style="width: 150px;">转账场景</th>
-                    <th style="width: 150px;">商户余额（元）</th>
+                    <th style="width: 150px;" data-doc-field="merchant.balance">商户余额（元）</th>
                     <th style="width: 170px;">每日可转账金额上限（元）</th>
                     <th style="width: 150px;">今日已转账金额（元）</th>
                     <th style="width: 170px;">单笔转账金额上限（元）</th>
@@ -2773,7 +2788,7 @@
 
 
           <div class="page-view" data-view="微信交易账单">
-            <div class="inner-tabs bill-detail-tabs" role="tablist" aria-label="微信交易账单类型">
+            <div class="inner-tabs bill-detail-tabs" role="tablist" aria-label="微信交易账单类型" data-doc-field="bill.billType">
               <button class="inner-tab active" type="button" role="tab" aria-selected="true" data-bill-detail-tab="all">所有交易账单</button>
               <button class="inner-tab" type="button" role="tab" aria-selected="false" data-bill-detail-tab="refund">退款账单</button>
               <button class="inner-tab" type="button" role="tab" aria-selected="false" data-bill-detail-tab="payment">支付账单</button>
@@ -2782,7 +2797,7 @@
               <div class="bill-detail-pane active" data-bill-detail-pane="all">
                 <section class="filters bill-detail-filters">
                   <div class="filter-grid">
-                    <label class="date-range-field" data-date-range-picker data-start-placeholder="交易开始时间" data-end-placeholder="交易结束时间">
+                    <label class="date-range-field" data-doc-field="bill.tradeTime" data-date-range-picker data-start-placeholder="交易开始时间" data-end-placeholder="交易结束时间">
                       <input id="billDetailTradeTimeQuery" type="hidden" value="">
                       <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="交易时间" aria-expanded="false">
                         <span class="date-range-icon" aria-hidden="true"></span>
@@ -2793,16 +2808,16 @@
                       <button class="date-range-clear" type="button" aria-label="清除交易时间">×</button>
                       <div class="date-range-panel" data-date-range-panel></div>
                     </label>
-                    <label>
+                    <label data-doc-field="bill.merchantId">
                       <input class="text-input" type="text" placeholder="请输入商户号" aria-label="商户号">
                     </label>
-                    <label>
+                    <label data-doc-field="bill.deviceId">
                       <input class="text-input" type="text" placeholder="请输入设备号" aria-label="设备号">
                     </label>
-                    <label>
+                    <label data-doc-field="bill.wechatOrderId">
                       <input class="text-input" type="text" placeholder="请输入微信订单号" aria-label="微信订单号">
                     </label>
-                    <label>
+                    <label data-doc-field="bill.merchantOrderId">
                       <input class="text-input" type="text" placeholder="请输入商户订单号" aria-label="商户订单号">
                     </label>
                     <label>
@@ -2866,7 +2881,7 @@
 
                 <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>平台每日上午10:15开始同步前一天数据，建议在上午10:30后查询，当前数据更新至 2026-08-01</span></div>
 
-                <section class="bill-summary" data-bill-summary aria-label="所有交易账单统计">
+                <section class="bill-summary" data-bill-summary aria-label="所有交易账单统计" data-doc-field="bill.summary">
                   <div class="bill-summary-heading">账单统计</div>
                   <div class="bill-summary-grid" aria-live="polite">
                     <div class="bill-summary-item"><span class="bill-summary-label">交易订单数</span><strong class="bill-summary-value" data-bill-summary-value="orderCount">128</strong></div>
@@ -2991,7 +3006,7 @@
               <div class="bill-detail-pane" data-bill-detail-pane="refund">
                 <section class="filters bill-detail-filters">
                   <div class="filter-grid">
-                    <label class="date-range-field" data-date-range-picker data-start-placeholder="交易开始时间" data-end-placeholder="交易结束时间">
+                    <label class="date-range-field" data-doc-field="bill.tradeTime" data-date-range-picker data-start-placeholder="交易开始时间" data-end-placeholder="交易结束时间">
                       <input id="refundBillTradeTimeQuery" type="hidden" value="">
                       <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="交易时间" aria-expanded="false">
                         <span class="date-range-icon" aria-hidden="true"></span>
@@ -3002,16 +3017,16 @@
                       <button class="date-range-clear" type="button" aria-label="清除交易时间">×</button>
                       <div class="date-range-panel" data-date-range-panel></div>
                     </label>
-                    <label>
+                    <label data-doc-field="bill.merchantId">
                       <input class="text-input" type="text" placeholder="请输入商户号" aria-label="商户号">
                     </label>
-                    <label>
+                    <label data-doc-field="bill.deviceId">
                       <input class="text-input" type="text" placeholder="请输入设备号" aria-label="设备号">
                     </label>
-                    <label>
+                    <label data-doc-field="bill.wechatOrderId">
                       <input class="text-input" type="text" placeholder="请输入微信订单号" aria-label="微信订单号">
                     </label>
-                    <label>
+                    <label data-doc-field="bill.merchantOrderId">
                       <input class="text-input" type="text" placeholder="请输入商户订单号" aria-label="商户订单号">
                     </label>
                     <label class="date-range-field" data-date-range-picker data-start-placeholder="退款申请开始时间" data-end-placeholder="退款申请结束时间">
@@ -3057,7 +3072,7 @@
 
                 <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>平台每日上午10:15开始同步前一天数据，建议在上午10:30后查询，当前数据更新至 2026-08-01</span></div>
 
-                <section class="bill-summary" data-bill-summary aria-label="退款账单统计">
+                <section class="bill-summary" data-bill-summary aria-label="退款账单统计" data-doc-field="bill.summary">
                   <div class="bill-summary-heading">账单统计</div>
                   <div class="bill-summary-grid" aria-live="polite">
                     <div class="bill-summary-item"><span class="bill-summary-label">交易订单数</span><strong class="bill-summary-value" data-bill-summary-value="orderCount">36</strong></div>
@@ -3188,7 +3203,7 @@
               <div class="bill-detail-pane" data-bill-detail-pane="payment">
                 <section class="filters bill-detail-filters">
                   <div class="filter-grid">
-                    <label class="date-range-field" data-date-range-picker data-start-placeholder="交易开始时间" data-end-placeholder="交易结束时间">
+                    <label class="date-range-field" data-doc-field="bill.tradeTime" data-date-range-picker data-start-placeholder="交易开始时间" data-end-placeholder="交易结束时间">
                       <input id="paymentBillTradeTimeQuery" type="hidden" value="">
                       <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="交易时间" aria-expanded="false">
                         <span class="date-range-icon" aria-hidden="true"></span>
@@ -3199,16 +3214,16 @@
                       <button class="date-range-clear" type="button" aria-label="清除交易时间">×</button>
                       <div class="date-range-panel" data-date-range-panel></div>
                     </label>
-                    <label>
+                    <label data-doc-field="bill.merchantId">
                       <input class="text-input" type="text" placeholder="请输入商户号" aria-label="商户号">
                     </label>
-                    <label>
+                    <label data-doc-field="bill.deviceId">
                       <input class="text-input" type="text" placeholder="请输入设备号" aria-label="设备号">
                     </label>
-                    <label>
+                    <label data-doc-field="bill.wechatOrderId">
                       <input class="text-input" type="text" placeholder="请输入微信订单号" aria-label="微信订单号">
                     </label>
-                    <label>
+                    <label data-doc-field="bill.merchantOrderId">
                       <input class="text-input" type="text" placeholder="请输入商户订单号" aria-label="商户订单号">
                     </label>
                   </div>
@@ -3226,7 +3241,7 @@
 
                 <div class="bill-detail-update-tip"><span class="bill-clock" aria-hidden="true"></span><span>平台每日上午10:15开始同步前一天数据，建议在上午10:30后查询，当前数据更新至 2026-08-01</span></div>
 
-                <section class="bill-summary" data-bill-summary aria-label="支付账单统计">
+                <section class="bill-summary" data-bill-summary aria-label="支付账单统计" data-doc-field="bill.summary">
                   <div class="bill-summary-heading">账单统计</div>
                   <div class="bill-summary-grid is-compact" aria-live="polite">
                     <div class="bill-summary-item"><span class="bill-summary-label">交易订单数</span><strong class="bill-summary-value" data-bill-summary-value="orderCount">92</strong></div>
@@ -3329,19 +3344,19 @@
           <div class="page-view" data-view="商户号投诉管理">
             <section class="filters">
               <div class="filter-grid">
-                <label>
+                <label data-doc-field="complaint.handler">
                   <input class="text-input" type="text" placeholder="请输入处理人" aria-label="处理人">
                 </label>
-                <label>
+                <label data-doc-field="complaint.merchantId">
                   <input class="text-input" id="complaintMerchantIdQuery" type="text" placeholder="请输入商户号" aria-label="商户号">
                 </label>
-                <label>
+                <label data-doc-field="complaint.phone">
                   <input class="text-input" type="text" placeholder="请输入投诉人电话号码" aria-label="投诉人电话号码">
                 </label>
-                <label>
+                <label data-doc-field="complaint.orderId">
                   <input class="text-input" type="text" placeholder="请输入订单号" aria-label="订单号">
                 </label>
-                <label>
+                <label data-doc-field="complaint.issueType">
                   <span class="select" data-select data-placeholder="请选择问题类型">
                     <button class="select-trigger" type="button" aria-label="问题类型">请选择问题类型</button>
                     <button class="select-clear" type="button" aria-label="清除问题类型">×</button>
@@ -3366,7 +3381,7 @@
                     </span>
                   </span>
                 </label>
-                <label>
+                <label data-doc-field="complaint.refunded">
                   <span class="select" data-select data-placeholder="请选择是否已全额退款">
                     <button class="select-trigger" type="button" aria-label="是否已全额退款">请选择是否已全额退款</button>
                     <button class="select-clear" type="button" aria-label="清除是否已全额退款">×</button>
@@ -3393,7 +3408,7 @@
               </div>
             </div>
 
-            <div class="complaint-status-bar" aria-label="投诉单状态">
+            <div class="complaint-status-bar" aria-label="投诉单状态" data-doc-field="complaint.status">
               <button class="complaint-status-tab active" type="button" data-status="全部" data-total="128" aria-pressed="true">全部 128</button>
               <button class="complaint-status-tab" type="button" data-status="待处理" data-total="18" aria-pressed="false">待处理 18</button>
               <button class="complaint-status-tab" type="button" data-status="处理中" data-total="37" aria-pressed="false">处理中 37</button>
@@ -3414,7 +3429,7 @@
                     <th style="width: 260px;">投诉信息</th>
                     <th style="width: 220px;">投诉内容</th>
                     <th style="width: 150px;">投诉时间</th>
-                    <th style="width: 220px;">处理信息</th>
+                    <th style="width: 220px;" data-doc-field="complaint.handlerInfo">处理信息</th>
                     <th style="width: 180px;">操作</th>
                   </tr>
                 </thead>
@@ -3497,20 +3512,20 @@
           </div>
 
 
-          <div class="page-view" data-view="聚火退款管理">
+          <div class="page-view" data-view="退款管理">
             <section class="filters" id="juhuoRefundFilters">
               <div class="filter-grid">
-                <label>
+                <label data-doc-field="refund.merchantOrderId">
                   <input class="text-input" id="juhuoRefundOrderQuery" type="text" placeholder="请输入商户订单号" aria-label="商户订单号">
                 </label>
-                <label>
+                <label data-doc-field="refund.recipientName">
                   <input class="text-input" id="juhuoRefundRecipientNameQuery" type="text" placeholder="请输入收款人姓名" aria-label="收款人姓名">
                 </label>
-                <label>
+                <label data-doc-field="refund.recipientPhone">
                   <input class="text-input" id="juhuoRefundRecipientPhoneQuery" type="text" inputmode="tel" placeholder="请输入收款人电话号码" aria-label="收款人电话号码">
                 </label>
 
-                <label class="date-range-field" id="juhuoRefundSubmittedTimePicker" data-date-range-picker data-month-base="2026-07-01" data-max-date="2026-08-07" data-shortcuts="week,month,quarter,lastMonth,currentMonth" data-start-placeholder="退款申请提交开始时间" data-end-placeholder="退款申请提交结束时间">
+                <label class="date-range-field" id="juhuoRefundSubmittedTimePicker" data-doc-field="refund.submittedAt" data-date-range-picker data-month-base="2026-07-01" data-max-date="2026-08-07" data-shortcuts="week,month,quarter,lastMonth,currentMonth" data-start-placeholder="退款申请提交开始时间" data-end-placeholder="退款申请提交结束时间">
                   <input type="hidden" value="">
                   <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="退款申请提交时间" aria-expanded="false">
                     <span class="date-range-icon" aria-hidden="true"></span>
@@ -3521,7 +3536,7 @@
                   <button class="date-range-clear" type="button" aria-label="清除退款申请提交时间">×</button>
                   <div class="date-range-panel" data-date-range-panel></div>
                 </label>
-                <label class="date-range-field" id="juhuoRefundProcessTimePicker" data-date-range-picker data-month-base="2026-07-01" data-max-date="2026-08-07" data-shortcuts="week,month,quarter,lastMonth,currentMonth" data-start-placeholder="处理退款开始时间" data-end-placeholder="处理退款结束时间">
+                <label class="date-range-field" id="juhuoRefundProcessTimePicker" data-doc-field="refund.processedAt" data-date-range-picker data-month-base="2026-07-01" data-max-date="2026-08-07" data-shortcuts="week,month,quarter,lastMonth,currentMonth" data-start-placeholder="处理退款开始时间" data-end-placeholder="处理退款结束时间">
                   <input type="hidden" value="">
                   <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="处理退款时间" aria-expanded="false">
                     <span class="date-range-icon" aria-hidden="true"></span>
@@ -3532,7 +3547,7 @@
                   <button class="date-range-clear" type="button" aria-label="清除处理退款时间">×</button>
                   <div class="date-range-panel" data-date-range-panel></div>
                 </label>
-                <label class="date-range-field" id="juhuoRefundCompletedTimePicker" data-date-range-picker data-month-base="2026-07-01" data-max-date="2026-08-07" data-shortcuts="week,month,quarter,lastMonth,currentMonth" data-start-placeholder="退款完成开始时间" data-end-placeholder="退款完成结束时间">
+                <label class="date-range-field" id="juhuoRefundCompletedTimePicker" data-doc-field="refund.completedAt" data-date-range-picker data-month-base="2026-07-01" data-max-date="2026-08-07" data-shortcuts="week,month,quarter,lastMonth,currentMonth" data-start-placeholder="退款完成开始时间" data-end-placeholder="退款完成结束时间">
                   <input type="hidden" value="">
                   <button class="date-range-trigger" type="button" data-date-range-trigger aria-label="退款完成时间" aria-expanded="false">
                     <span class="date-range-icon" aria-hidden="true"></span>
@@ -3550,7 +3565,7 @@
               </div>
             </section>
 
-            <div class="juhuo-refund-status-bar" aria-label="退款状态">
+            <div class="juhuo-refund-status-bar" aria-label="退款状态" data-doc-field="refund.status">
               <button class="juhuo-refund-status-tab active" type="button" data-status="未退款" aria-pressed="true">未退款 0</button>
               <button class="juhuo-refund-status-tab" type="button" data-status="待确认收款" aria-pressed="false">待确认收款 0</button>
               <button class="juhuo-refund-status-tab" type="button" data-status="已退款" aria-pressed="false">已退款 0</button>
@@ -3594,7 +3609,7 @@
                     <th>收款人姓名</th>
                     <th>收款人电话号码</th>
                     <th>订单支付截图</th>
-                    <th>申请退款金额（元）</th>
+                    <th data-doc-field="refund.requestedAmount">申请退款金额（元）</th>
                     <th>退款原因</th>
                     <th>退款商户号</th>
                     <th>收款AppID</th>
@@ -4037,13 +4052,13 @@
                 </label>
               </div>
             </div>
-            <label class="config-field">
+            <label class="config-field refund-process-amount">
               <span class="field-label required">退款金额（元）</span>
               <span class="refund-amount-input-wrap" id="juhuoRefundAmountField">
                 <span class="refund-amount-prefix" aria-hidden="true">¥</span>
                 <input class="text-input" id="juhuoRefundAmountInput" type="text" inputmode="decimal" data-decimal-input placeholder="请输入退款金额" aria-label="退款金额">
               </span>
-              <span class="refund-amount-hint" id="juhuoRefundAmountHint">退款金额不得大于支付金额</span>
+              <span class="refund-amount-hint" id="juhuoRefundAmountHint" aria-live="polite">请先查询订单</span>
             </label>
             <label class="config-field refund-process-note">
               <span class="field-label">备注</span>
@@ -4531,7 +4546,7 @@
 
 
       function initializeJuhuoRefundFuzzySearch() {
-        var page = document.querySelector('.page-view[data-view="聚火退款管理"]');
+        var page = document.querySelector('.page-view[data-view="退款管理"]');
         if (!page) {
           return;
         }
@@ -5642,12 +5657,72 @@
         }) : "—";
       }
 
+      function formatJuhuoRefundAmountValue(value) {
+        var amount = Number(value);
+        return (isFinite(amount) ? amount : 0).toLocaleString("zh-CN", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+      }
+
+      function getJuhuoRefundOrderAmounts(order, merchantOrder) {
+        var paymentAmount = Number(order && order.paymentAmount);
+        var pendingAmount = 0;
+        var refundedAmount = 0;
+
+        document.querySelectorAll("[data-juhuo-refund-row]").forEach(function (row) {
+          if (String(row.dataset.merchantOrder || "").trim().toUpperCase() !== merchantOrder) {
+            return;
+          }
+          var refundAmount = Number(row.dataset.refundAmount || row.dataset.requestedRefundAmount || 0);
+          if (!isFinite(refundAmount) || refundAmount <= 0) {
+            return;
+          }
+          if (row.dataset.refundStatus === "待确认收款") {
+            pendingAmount += refundAmount;
+          } else if (row.dataset.refundStatus === "已退款") {
+            refundedAmount += refundAmount;
+          }
+        });
+
+        return {
+          pendingAmount: pendingAmount,
+          refundedAmount: refundedAmount,
+          remainingAmount: Math.max(0, (isFinite(paymentAmount) ? paymentAmount : 0) - pendingAmount - refundedAmount)
+        };
+      }
+
+      function updateJuhuoRefundAmountHint(order, merchantOrder) {
+        var hint = document.getElementById("juhuoRefundAmountHint");
+        if (!order) {
+          hint.textContent = "请先查询订单";
+          return;
+        }
+        var amounts = getJuhuoRefundOrderAmounts(order, merchantOrder);
+        hint.textContent = "该订单下存在待收款金额" + formatJuhuoRefundAmountValue(amounts.pendingAmount) + "元，已退款金额" + formatJuhuoRefundAmountValue(amounts.refundedAmount) + "元，剩余可退款金额" + formatJuhuoRefundAmountValue(amounts.remainingAmount) + "元。";
+      }
+
+      function clampJuhuoRefundAmountToRemaining() {
+        var input = document.getElementById("juhuoRefundAmountInput");
+        var value = String(input.value || "").trim();
+        if (!activeJuhuoRefundOrder || !value || !isFinite(Number(value))) {
+          return;
+        }
+        var merchantOrder = document.getElementById("juhuoRefundProcessMerchantOrder").value.trim().toUpperCase();
+        var remainingAmount = getJuhuoRefundOrderAmounts(activeJuhuoRefundOrder, merchantOrder).remainingAmount;
+        if (Number(value) > remainingAmount) {
+          input.value = remainingAmount.toFixed(2);
+        }
+      }
+
       function isValidJuhuoRefundAmount(value, row) {
         var paymentAmountValue = activeJuhuoRefundOrder ? String(activeJuhuoRefundOrder.paymentAmount || "").trim() : "";
         var paymentAmount = Number(paymentAmountValue);
         var refundAmount = Number(value);
         var hasPaymentAmount = Boolean(paymentAmountValue) && isFinite(paymentAmount) && paymentAmount > 0;
-        return Boolean(row && activeJuhuoRefundOrder) && /^\d+(\.\d{1,2})?$/.test(value) && isFinite(refundAmount) && refundAmount > 0 && hasPaymentAmount && refundAmount <= paymentAmount;
+        var merchantOrder = document.getElementById("juhuoRefundProcessMerchantOrder").value.trim().toUpperCase();
+        var remainingAmount = activeJuhuoRefundOrder ? getJuhuoRefundOrderAmounts(activeJuhuoRefundOrder, merchantOrder).remainingAmount : 0;
+        return Boolean(row && activeJuhuoRefundOrder) && /^\d+(\.\d{1,2})?$/.test(value) && isFinite(refundAmount) && refundAmount > 0 && hasPaymentAmount && refundAmount <= remainingAmount;
       }
 
       function updateJuhuoRefundProcessSubmitState() {
@@ -5676,7 +5751,7 @@
         statusText.textContent = status || "—";
       }
 
-      function renderJuhuoRefundOrder(order) {
+      function renderJuhuoRefundOrder(order, merchantOrder) {
         var orderFields = {
           juhuoRefundProcessOrder: order && order.wechatOrder,
           juhuoRefundProcessProductDescription: order && order.productDescription,
@@ -5688,14 +5763,16 @@
           document.getElementById(fieldId).value = orderFields[fieldId] || "—";
         });
         document.getElementById("juhuoRefundProcessRefundMerchant").value = "1708358679";
-        document.getElementById("juhuoRefundAmountHint").textContent = order ? "退款金额不得大于支付金额" : "请先查询订单；退款金额不得大于支付金额";
+        updateJuhuoRefundAmountHint(order, merchantOrder);
+        clampJuhuoRefundAmountToRemaining();
+        updateJuhuoRefundAmountPrefix();
         updateJuhuoRefundProcessSubmitState();
       }
 
       function queryJuhuoRefundOrder(value) {
         var merchantOrder = String(value || "").trim().toUpperCase();
         activeJuhuoRefundOrder = juhuoRefundOrderCatalog[merchantOrder] || null;
-        renderJuhuoRefundOrder(activeJuhuoRefundOrder);
+        renderJuhuoRefundOrder(activeJuhuoRefundOrder, merchantOrder);
       }
 
       function canProcessJuhuoRefund(row) {
@@ -5751,7 +5828,7 @@
       function submitJuhuoRefundProcess() {
         var input = document.getElementById("juhuoRefundAmountInput");
         if (!activeJuhuoRefundRow || !isValidJuhuoRefundAmount(input.value, activeJuhuoRefundRow)) {
-          showToast(activeJuhuoRefundOrder ? "请输入不超过支付金额的有效退款金额" : "请先输入有效的商户订单号");
+          showToast(activeJuhuoRefundOrder ? "请输入不超过剩余可退款金额的有效退款金额" : "请先输入有效的商户订单号");
           input.focus();
           return;
         }
@@ -5947,7 +6024,7 @@
           return '<div class="receipt-row"><span>' + escapeReceiptValue(field[0]) + '</span><strong>' + escapeReceiptValue(field[1]) + '</strong></div>';
         }).join("");
         var receiptHtml = '<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><title>聚火退款回单-' + escapeReceiptValue(refundNo) + '</title><style>' +
-          'body{margin:0;background:#f5f7fa;color:#1f2937;font-family:PingFang SC,Microsoft YaHei,sans-serif}.receipt{box-sizing:border-box;width:760px;margin:40px auto;padding:40px 48px;background:#fff;border:1px solid #e2e8f0}.receipt-head{padding-bottom:24px;border-bottom:2px solid #1677ff;text-align:center}.receipt-head h1{margin:0 0 8px;font-size:26px}.receipt-head p{margin:0;color:#64748b;font-size:14px}.receipt-body{padding-top:16px}.receipt-row{display:grid;grid-template-columns:180px 1fr;gap:24px;padding:12px 0;border-bottom:1px solid #eef2f7;font-size:14px}.receipt-row span{color:#64748b}.receipt-row strong{font-weight:500;word-break:break-all}.receipt-foot{margin-top:28px;color:#94a3b8;font-size:12px;text-align:center}@media print{body{background:#fff}.receipt{margin:0;border:0}}</style></head><body><main class="receipt"><header class="receipt-head"><h1>聚火退款回单</h1><p>退款处理结果凭证</p></header><section class="receipt-body">' + receiptRows + '</section><footer class="receipt-foot">本回单由聚火退款管理平台生成</footer></main></body></html>';
+          'body{margin:0;background:#f5f7fa;color:#1f2937;font-family:PingFang SC,Microsoft YaHei,sans-serif}.receipt{box-sizing:border-box;width:760px;margin:40px auto;padding:40px 48px;background:#fff;border:1px solid #e2e8f0}.receipt-head{padding-bottom:24px;border-bottom:2px solid #1677ff;text-align:center}.receipt-head h1{margin:0 0 8px;font-size:26px}.receipt-head p{margin:0;color:#64748b;font-size:14px}.receipt-body{padding-top:16px}.receipt-row{display:grid;grid-template-columns:180px 1fr;gap:24px;padding:12px 0;border-bottom:1px solid #eef2f7;font-size:14px}.receipt-row span{color:#64748b}.receipt-row strong{font-weight:500;word-break:break-all}.receipt-foot{margin-top:28px;color:#94a3b8;font-size:12px;text-align:center}@media print{body{background:#fff}.receipt{margin:0;border:0}}</style></head><body><main class="receipt"><header class="receipt-head"><h1>聚火退款回单</h1><p>退款处理结果凭证</p></header><section class="receipt-body">' + receiptRows + '</section><footer class="receipt-foot">本回单由退款管理平台生成</footer></main></body></html>';
         var receiptBlob = new Blob([receiptHtml], { type: "text/html;charset=utf-8" });
         var receiptUrl = URL.createObjectURL(receiptBlob);
         var downloadLink = document.createElement("a");
@@ -6539,6 +6616,7 @@
           value = parts[0] + "." + parts[1].slice(0, 2);
         }
         input.value = value;
+        clampJuhuoRefundAmountToRemaining();
         updateJuhuoRefundAmountPrefix();
         updateJuhuoRefundProcessSubmitState();
       });
@@ -6634,5 +6712,7 @@
       });
     })();
   </script>
+  <script src="assets/page-documentation.config.js"></script>
+  <script src="assets/page-documentation.js"></script>
 </body>
 </html>
