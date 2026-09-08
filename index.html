@@ -2070,6 +2070,10 @@
       grid-column: 2;
     }
 
+    .refund-process-amount .refund-amount-error {
+      grid-column: 2;
+    }
+
     .refund-process-note .textarea-input {
       grid-column: 2;
     }
@@ -2143,6 +2147,23 @@
       display: block;
       color: #315b89;
       white-space: normal;
+    }
+
+    .refund-amount-error {
+      display: block;
+      margin-top: 6px;
+      color: #f04438;
+      font-size: 12px;
+      line-height: 18px;
+    }
+
+    .refund-amount-error.hidden {
+      display: none;
+    }
+
+    .refund-amount-input-wrap.has-error .text-input {
+      border-color: #f04438;
+      box-shadow: 0 0 0 2px rgba(240, 68, 56, 0.08);
     }
 
     .refund-split-tip {
@@ -4231,6 +4252,10 @@
                   <span class="refund-readonly-value" id="juhuoRefundProcessOrder">—</span>
                 </label>
                 <label class="config-field">
+                  <span class="field-label">收款商户号</span>
+                  <span class="refund-readonly-value" id="juhuoRefundProcessReceiveMerchant">—</span>
+                </label>
+                <label class="config-field">
                   <span class="field-label">支付金额</span>
                   <span class="refund-readonly-value" id="juhuoRefundProcessPaymentAmount">—</span>
                 </label>
@@ -4246,6 +4271,7 @@
                 <span class="refund-amount-prefix" aria-hidden="true">¥</span>
                 <input class="text-input" id="juhuoRefundAmountInput" type="text" inputmode="decimal" data-decimal-input placeholder="请输入退款金额" aria-label="退款金额">
               </span>
+              <span class="refund-amount-error hidden" id="juhuoRefundAmountError" aria-live="polite">退款金额不能超过剩余可退款金额</span>
               <span class="refund-amount-notice" role="note">
                 <span class="refund-amount-hint" id="juhuoRefundAmountHint" aria-live="polite">请先查询订单</span>
                 <span class="refund-split-tip hidden" id="juhuoRefundSplitTip" aria-live="polite"></span>
@@ -5957,7 +5983,12 @@
           return;
         }
         var parts = getJuhuoRefundSplitAmounts(input.value);
+        var amount = Number(input.value);
         tip.textContent = "";
+        if (!activeJuhuoRefundOrder || !input.value || !isFinite(amount) || amount > getJuhuoRefundRemainingAmount()) {
+          tip.classList.add("hidden");
+          return;
+        }
         tip.classList.toggle("hidden", parts.length <= 1);
         if (parts.length <= 1) {
           return;
@@ -6314,16 +6345,49 @@
         hint.textContent = "该订单下存在待收款金额" + formatJuhuoRefundAmountValue(amounts.pendingAmount) + "元，已退款金额" + formatJuhuoRefundAmountValue(amounts.refundedAmount) + "元，剩余可退款金额" + formatJuhuoRefundAmountValue(amounts.remainingAmount) + "元。";
       }
 
-      function clampJuhuoRefundAmountToRemaining() {
+      function getJuhuoRefundRemainingAmount() {
+        if (!activeJuhuoRefundOrder) {
+          return 0;
+        }
+        var merchantOrder = document.getElementById("juhuoRefundProcessMerchantOrder").value.trim().toUpperCase();
+        return getJuhuoRefundOrderAmounts(activeJuhuoRefundOrder, merchantOrder).remainingAmount;
+      }
+
+      function clearJuhuoRefundAmountError() {
+        var field = document.getElementById("juhuoRefundAmountField");
+        var error = document.getElementById("juhuoRefundAmountError");
+        if (field) {
+          field.classList.remove("has-error");
+        }
+        if (error) {
+          error.classList.add("hidden");
+        }
+      }
+
+      function showJuhuoRefundAmountError(message) {
+        var field = document.getElementById("juhuoRefundAmountField");
+        var error = document.getElementById("juhuoRefundAmountError");
+        if (field) {
+          field.classList.add("has-error");
+        }
+        if (error) {
+          error.textContent = message || "退款金额不能超过剩余可退款金额";
+          error.classList.remove("hidden");
+        }
+      }
+
+      function validateJuhuoRefundAmountOnBlur() {
         var input = document.getElementById("juhuoRefundAmountInput");
         var value = String(input.value || "").trim();
         if (!activeJuhuoRefundOrder || !value || !isFinite(Number(value))) {
+          clearJuhuoRefundAmountError();
           return;
         }
-        var merchantOrder = document.getElementById("juhuoRefundProcessMerchantOrder").value.trim().toUpperCase();
-        var remainingAmount = getJuhuoRefundOrderAmounts(activeJuhuoRefundOrder, merchantOrder).remainingAmount;
+        var remainingAmount = getJuhuoRefundRemainingAmount();
         if (Number(value) > remainingAmount) {
-          input.value = remainingAmount.toFixed(2);
+          showJuhuoRefundAmountError("退款金额不能超过剩余可退款金额");
+        } else {
+          clearJuhuoRefundAmountError();
         }
       }
 
@@ -6332,8 +6396,7 @@
         var paymentAmount = Number(paymentAmountValue);
         var refundAmount = Number(value);
         var hasPaymentAmount = Boolean(paymentAmountValue) && isFinite(paymentAmount) && paymentAmount > 0;
-        var merchantOrder = document.getElementById("juhuoRefundProcessMerchantOrder").value.trim().toUpperCase();
-        var remainingAmount = activeJuhuoRefundOrder ? getJuhuoRefundOrderAmounts(activeJuhuoRefundOrder, merchantOrder).remainingAmount : 0;
+        var remainingAmount = getJuhuoRefundRemainingAmount();
         return Boolean(row && activeJuhuoRefundOrder) && /^\d+(\.\d{1,2})?$/.test(value) && isFinite(refundAmount) && refundAmount > 0 && hasPaymentAmount && refundAmount <= remainingAmount;
       }
 
@@ -6382,6 +6445,7 @@
       function renderJuhuoRefundOrder(order, merchantOrder) {
         var orderFields = {
           juhuoRefundProcessOrder: order && order.wechatOrder,
+          juhuoRefundProcessReceiveMerchant: order && order.refundMerchant,
           juhuoRefundProcessPaymentAmount: order && formatJuhuoRefundAmount(order.paymentAmount),
           juhuoRefundProcessCompletedAt: order && order.paymentCompletedAt
         };
@@ -6391,7 +6455,7 @@
         });
         setJuhuoRefundProcessFieldValue("juhuoRefundProcessRefundMerchant", "1708358679");
         updateJuhuoRefundAmountHint(order, merchantOrder);
-        clampJuhuoRefundAmountToRemaining();
+        clearJuhuoRefundAmountError();
         updateJuhuoRefundSplitTip();
         updateJuhuoRefundAmountPrefix();
         updateJuhuoRefundProcessSubmitState();
@@ -6434,6 +6498,7 @@
         merchantOrderInput.value = row.dataset.merchantOrder || "";
         queryJuhuoRefundOrder(merchantOrderInput.value);
         document.getElementById("juhuoRefundAmountInput").value = "";
+        clearJuhuoRefundAmountError();
         updateJuhuoRefundSplitTip();
         updateJuhuoRefundAmountPrefix();
         document.getElementById("juhuoRefundProcessNote").value = row.dataset.refundNote || "";
@@ -6445,6 +6510,7 @@
       function closeJuhuoRefundProcess() {
         juhuoRefundProcessMask.classList.add("hidden");
         document.getElementById("juhuoRefundAmountInput").value = "";
+        clearJuhuoRefundAmountError();
         updateJuhuoRefundSplitTip();
         updateJuhuoRefundAmountPrefix();
         document.getElementById("juhuoRefundProcessNote").value = "";
@@ -6458,6 +6524,7 @@
       function submitJuhuoRefundProcess() {
         var input = document.getElementById("juhuoRefundAmountInput");
         if (!activeJuhuoRefundRow || !isValidJuhuoRefundAmount(input.value, activeJuhuoRefundRow)) {
+          validateJuhuoRefundAmountOnBlur();
           showToast(activeJuhuoRefundOrder ? "请输入不超过剩余可退款金额的有效退款金额" : "请先输入有效的商户订单号");
           input.focus();
           return;
@@ -7300,9 +7367,14 @@
           value = parts[0] + "." + parts[1].slice(0, 2);
         }
         input.value = value;
-        clampJuhuoRefundAmountToRemaining();
+        clearJuhuoRefundAmountError();
         updateJuhuoRefundSplitTip();
         updateJuhuoRefundAmountPrefix();
+        updateJuhuoRefundProcessSubmitState();
+      });
+
+      document.getElementById("juhuoRefundAmountInput").addEventListener("blur", function () {
+        validateJuhuoRefundAmountOnBlur();
         updateJuhuoRefundProcessSubmitState();
       });
 
