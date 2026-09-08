@@ -2043,11 +2043,6 @@
       width: 100%;
     }
 
-    .refund-process-merchant-order {
-      grid-column: 1 / -1;
-      width: calc((100% - 28px) / 2);
-    }
-
     .refund-order-detail-panel {
       grid-column: 1 / -1;
       padding: 16px;
@@ -2714,10 +2709,6 @@
 
       .config-grid.refund-process-grid {
         grid-template-columns: 1fr;
-      }
-
-      .refund-process-merchant-order {
-        width: 100%;
       }
 
       .refund-process-amount .refund-amount-input-wrap {
@@ -4245,15 +4236,15 @@
               <span class="field-label required">商户订单号</span>
               <input class="text-input" id="juhuoRefundProcessMerchantOrder" type="text" autocomplete="off" placeholder="请输入商户订单号" required aria-required="true">
             </label>
+            <label class="config-field refund-process-receive-merchant">
+              <span class="field-label">收款商户号</span>
+              <input class="text-input" id="juhuoRefundProcessReceiveMerchant" type="text" autocomplete="off" placeholder="请输入收款商户号">
+            </label>
             <div class="refund-order-detail-panel" role="group" aria-label="订单详情">
               <div class="refund-order-detail-grid">
                 <label class="config-field">
                   <span class="field-label">微信支付订单号</span>
                   <span class="refund-readonly-value" id="juhuoRefundProcessOrder">—</span>
-                </label>
-                <label class="config-field">
-                  <span class="field-label">收款商户号</span>
-                  <span class="refund-readonly-value" id="juhuoRefundProcessReceiveMerchant">—</span>
                 </label>
                 <label class="config-field">
                   <span class="field-label">支付金额</span>
@@ -6574,7 +6565,8 @@
         activeJuhuoRefundRow.dataset.productDescription = activeJuhuoRefundOrder.productDescription;
         activeJuhuoRefundRow.dataset.paymentAmount = activeJuhuoRefundOrder.paymentAmount;
         activeJuhuoRefundRow.dataset.paymentCompletedAt = activeJuhuoRefundOrder.paymentCompletedAt;
-        activeJuhuoRefundRow.dataset.refundMerchant = "1708358679";
+        var receiveMerchantValue = document.getElementById("juhuoRefundProcessReceiveMerchant").value.trim();
+        activeJuhuoRefundRow.dataset.refundMerchant = receiveMerchantValue && receiveMerchantValue !== "—" ? receiveMerchantValue : activeJuhuoRefundOrder.refundMerchant;
         activeJuhuoRefundRow.dataset.appId = activeJuhuoRefundOrder.appId;
         activeJuhuoRefundRow.dataset.openId = activeJuhuoRefundOrder.openId;
         var processTimeCell = activeJuhuoRefundRow.querySelector(".juhuo-refund-process-time-cell");
