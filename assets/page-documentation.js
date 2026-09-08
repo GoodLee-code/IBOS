@@ -2,7 +2,6 @@
   "use strict";
 
   var documentation = window.pageDocumentation || {};
-  var documentationNote = window.pageDocumentationNote;
   var layout = document.querySelector(".layout");
   var activeField = null;
   var highlightTimer = null;
@@ -127,19 +126,19 @@
     return section;
   }
 
-  function renderDocumentationNote() {
-    if (!documentationNote || (!documentationNote.text && !documentationNote.code)) {
+  function renderDocumentationNote(noteConfig) {
+    if (!noteConfig || (!noteConfig.text && !noteConfig.code)) {
       return;
     }
     var note = createElement("div", "page-doc-note");
-    if (documentationNote.label) {
-      note.appendChild(createElement("span", "page-doc-note-label", documentationNote.label + "："));
+    if (noteConfig.label) {
+      note.appendChild(createElement("span", "page-doc-note-label", noteConfig.label + "："));
     }
-    if (documentationNote.text) {
-      note.appendChild(createElement("span", "page-doc-note-text", documentationNote.text));
+    if (noteConfig.text) {
+      note.appendChild(createElement("span", "page-doc-note-text", noteConfig.text));
     }
-    if (documentationNote.code) {
-      note.appendChild(createElement("code", "page-doc-note-code", documentationNote.code));
+    if (noteConfig.code) {
+      note.appendChild(createElement("code", "page-doc-note-code", noteConfig.code));
     }
     body.appendChild(note);
   }
@@ -163,7 +162,7 @@
     body.textContent = "";
     message.textContent = "";
 
-    renderDocumentationNote();
+    renderDocumentationNote(config.note);
 
     if (pageConfig.description) {
       var pageSection = appendSection("页面说明");

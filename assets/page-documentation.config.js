@@ -1,12 +1,6 @@
 (function (window) {
   "use strict";
 
-  window.pageDocumentationNote = {
-    label: "备注",
-    text: "测试用商户订单号",
-    code: "JH202608050002"
-  };
-
   window.pageDocumentation = {
     "商户号管理": {
       page: {
@@ -39,8 +33,22 @@
       page: {
         title: "退款管理"
       },
+      note: {
+        label: "备注",
+        text: "测试用商户订单号",
+        code: "JH202608050002"
+      },
       fields: [],
-      functions: [],
+      functions: [
+        {
+          title: "状态数量统计",
+          description: "未退款状态 Tab 栏中数量为退款申请单号数量，其余独立状态为退款单号数量。"
+        },
+        {
+          title: "撤销退款",
+          description: "操作撤销退款时，该退款申请单下非已退款状态的退款都撤销退款。"
+        }
+      ],
       businessRules: [
         {
           title: "退款申请限制",
